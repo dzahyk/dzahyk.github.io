@@ -32,43 +32,23 @@
       <div class="case-image-wrap"><img src="assets/projects/retentionos.webp" width="1600" height="1000" alt="RetentionOS guide page: the name RetentionOS set very large behind a miniature town of business buildings linked by green fiber cables, with one warehouse cable turning amber inside a warning ring" decoding="async" fetchpriority="high"></div>
       <figcaption><span>Guide page — the product name stands behind a miniature town; the tallest roofs cover its base. Below it: “Know earlier which customers may leave, and what to do about it.” Figures are synthetic.</span><span data-case-position>02 / 04</span></figcaption>
     </figure>
-    <section class="case-story page-width" aria-labelledby="problemTitle"><span class="case-section-label">01 / THE PROBLEM</span><div>
+    <section class="case-story page-width" aria-labelledby="problemTitle"><span class="case-section-label">WHERE IT STARTED</span><div>
       <h2 id="problemTitle">A retention spec that could not survive its own numbers.</h2>
       <p>RetentionOS started as my own product spec for fixed-broadband business customers. Before building it, I reviewed the spec and found 39 gaps — 11 of them critical — including no churn label, churn probability stored as an input, and an ROI formula that rewarded discounting everyone.</p>
       <p>The rebuilt version answers three daily questions for a retention team: who is likely to leave in the next 60 days, why, and whether a discount or upgrade is worth its cost.</p>
       <blockquote class="case-quote"><span class="case-quote-label">From the gap analysis</span><p>The mockup’s “net saved Rp840 million” for an account paying Rp45 million a month is impossible; the upper bound is about Rp396 million.</p></blockquote>
     </div></section>
-    <section class="case-story page-width" aria-labelledby="usersTitle"><span class="case-section-label">02 / WHO IT IS FOR</span><div>
-      <h2 id="usersTitle">Two roles, one queue.</h2>
-      <div class="case-table-wrap"><table class="case-table">
-        <thead><tr><th scope="col">User</th><th scope="col">Main question</th></tr></thead>
-        <tbody>
-          <tr><td>Account manager</td><td>Which of my accounts should I call first, and what should I offer?</td></tr>
-          <tr><td>Retention manager</td><td>Is this incentive worth its cost, and should I approve it?</td></tr>
-        </tbody>
-      </table></div>
-    </div></section>
     <section class="case-decision-band" aria-labelledby="decisionsTitle"><div class="page-width">
-      <div class="case-decision-heading"><div><span class="case-section-label">03 / KEY DECISIONS</span><h2 id="decisionsTitle">Choices with a reason.</h2></div><p>Each decision closes a gap found in the first spec.</p></div>
+      <div class="case-decision-heading"><div><span class="case-section-label">WHAT I CHANGED</span><h2 id="decisionsTitle">Four fixes to my own spec.</h2></div><p>Each one closes a gap from that review.</p></div>
       <ol class="case-decisions">
-        <li><span>01 / DECISION</span><h3>Protected value, not full CLV</h3><p>An offer is worth the drop in churn probability times customer value, and the discount is paid by everyone who stays — so blind discounting loses money on paper.</p></li>
-        <li><span>02 / DECISION</span><h3>Evaluation in the open</h3><p>Holdout by account and time, grouped cross-validation, confidence intervals, a naive-rule baseline, and calibration are all shown, not a single accuracy number.</p></li>
-        <li><span>03 / DECISION</span><h3>Four-eyes approval</h3><p>Large or unrecommended offers wait for a retention manager. Requesters cannot approve their own offers, and a rejection needs a reason.</p></li>
-        <li><span>04 / DECISION</span><h3>Nothing goes to the customer</h3><p>The system only drafts messages. The original spec’s “apply offer &amp; email” button had no control, so it was removed.</p></li>
+        <li><span>01</span><h3>Protected value, not full CLV</h3><p>An offer is worth the drop in churn probability times customer value, and the discount is paid by everyone who stays — so blind discounting loses money on paper.</p></li>
+        <li><span>02</span><h3>Evaluation in the open</h3><p>Holdout by account and time, grouped cross-validation, confidence intervals, a naive-rule baseline, and calibration are all shown, not a single accuracy number.</p></li>
+        <li><span>03</span><h3>Four-eyes approval</h3><p>Large or unrecommended offers wait for a retention manager. Requesters cannot approve their own offers, and a rejection needs a reason.</p></li>
+        <li><span>04</span><h3>Nothing goes to the customer</h3><p>The system only drafts messages. The original spec’s “apply offer &amp; email” button had no control, so it was removed.</p></li>
       </ol>
     </div></section>
-    <section class="case-story page-width" aria-labelledby="builtTitle"><span class="case-section-label">04 / WHAT WAS BUILT</span><div>
-      <h2 id="builtTitle">Four views around one queue.</h2>
-      <p>A radar with a work queue ranked by revenue at risk, an account panel (summary, evidence, simulation, message), cohort survival and RFM migration, an accuracy page, and an approval log. The guide page opens on the product name set behind a cut-out miniature town; as you scroll the town rises over the name, and all motion switches off when the device asks for reduced motion.</p>
-      <div class="case-gallery">
-        <figure><img src="assets/projects/retentionos-overview.webp" width="1600" height="1000" alt="RetentionOS radar: four headline metrics and a customer queue ranked by revenue at risk" loading="lazy" decoding="async"><figcaption>Radar: headline metrics and a work queue ranked by churn probability × monthly revenue.</figcaption></figure>
-        <figure><img src="assets/projects/retentionos-simulation.webp" width="1600" height="1000" alt="Offer simulation comparing discount, upgrade, and SLA credit" loading="lazy" decoding="async"><figcaption>Offer simulation: expected net value of a discount, an upgrade, or an SLA credit.</figcaption></figure>
-        <figure><img src="assets/projects/retentionos-reliability.webp" width="1600" height="1000" alt="Accuracy page with a plain-language summary" loading="lazy" decoding="async"><figcaption>“How accurate?”: a plain-language summary, with technical detail for analysts.</figcaption></figure>
-        <figure class="case-shot--portrait"><img src="assets/projects/retentionos-mobile.webp" width="647" height="1400" alt="RetentionOS account panel on a phone" loading="lazy" decoding="async"><figcaption>The account panel on a phone.</figcaption></figure>
-      </div>
-    </div></section>
-    <section class="case-story page-width" aria-labelledby="resultsTitle"><span class="case-section-label">05 / RESULTS ON DEMO DATA</span><div>
-      <h2 id="resultsTitle">What the demo dataset shows.</h2>
+    <section class="case-story page-width" aria-labelledby="resultsTitle"><span class="case-section-label">ON THE DEMO DATA</span><div>
+      <h2 id="resultsTitle">Calling the top 20% catches about 69% of churners.</h2>
       <div class="case-table-wrap"><table class="case-table">
         <thead><tr><th scope="col">Finding</th><th scope="col" class="num">Value</th></tr></thead>
         <tbody>
@@ -82,10 +62,29 @@
       </table></div>
       <p class="case-table-note">Synthetic accounts generated with a fixed seed. Offer-response parameters are assumptions, not A/B results; the model measures patterns planted by the generator.</p>
     </div></section>
-    <section class="case-check page-width" aria-labelledby="checkTitle"><div><span class="case-section-label">06 / VALIDATION &amp; LIMITS</span><h2 id="checkTitle">85 tests, and an honest accuracy page.</h2></div><div>
+    <section class="case-story page-width" aria-labelledby="builtTitle"><span class="case-section-label">THE APP</span><div>
+      <h2 id="builtTitle">Four views around one call queue.</h2>
+      <p>A radar with a work queue ranked by revenue at risk, an account panel (summary, evidence, simulation, message), cohort survival and RFM migration, an accuracy page, and an approval log. The guide page opens on the product name set behind a cut-out miniature town; as you scroll the town rises over the name, and all motion switches off when the device asks for reduced motion.</p>
+      <div class="case-gallery">
+        <figure><img src="assets/projects/retentionos-overview.webp" width="1600" height="1000" alt="RetentionOS radar: four headline metrics and a customer queue ranked by revenue at risk" loading="lazy" decoding="async"><figcaption>Radar: headline metrics and a work queue ranked by churn probability × monthly revenue.</figcaption></figure>
+        <figure><img src="assets/projects/retentionos-simulation.webp" width="1600" height="1000" alt="Offer simulation comparing discount, upgrade, and SLA credit" loading="lazy" decoding="async"><figcaption>Offer simulation: expected net value of a discount, an upgrade, or an SLA credit.</figcaption></figure>
+        <figure><img src="assets/projects/retentionos-reliability.webp" width="1600" height="1000" alt="Accuracy page with a plain-language summary" loading="lazy" decoding="async"><figcaption>“How accurate?”: a plain-language summary, with technical detail for analysts.</figcaption></figure>
+        <figure class="case-shot--portrait"><img src="assets/projects/retentionos-mobile.webp" width="647" height="1400" alt="RetentionOS account panel on a phone" loading="lazy" decoding="async"><figcaption>The account panel on a phone.</figcaption></figure>
+      </div>
+    
+      <p>Two people work from the queue:</p>
+      <div class="case-table-wrap"><table class="case-table">
+        <thead><tr><th scope="col">User</th><th scope="col">Main question</th></tr></thead>
+        <tbody>
+          <tr><td>Account manager</td><td>Which of my accounts should I call first, and what should I offer?</td></tr>
+          <tr><td>Retention manager</td><td>Is this incentive worth its cost, and should I approve it?</td></tr>
+        </tbody>
+      </table></div>
+    </div></section>
+    <section class="case-check page-width" aria-labelledby="checkTitle"><div><span class="case-section-label">TESTS &amp; LIMITS</span><h2 id="checkTitle">85 tests, and only 16 churn events to test against.</h2></div><div>
       <p>85 tests cover data and model, analytics and ROI, API contracts and security hardening, approval rules, and the factual accuracy of drafted messages — for example, that “no open tickets” is never written when ticket data is missing.</p>
       <ul><li><strong>Not yet:</strong> an A/B test of real offer effects, or accuracy on real customer data.</li><li>Only 16 churn events in the test set, so confidence intervals are wide. There is no authentication: the role picker is a demo mode.</li></ul>
-      <span class="case-honesty">Prototype on synthetic data. No real customers, operator, or measured business result is claimed.</span>
+      <span class="case-honesty">Accounts are generated with a fixed seed; no real customer or operator data is used.</span>
     </div></section>
   </main>
   <footer class="case-bottom"><div class="page-width case-bottom-inner"><div><span class="case-section-label">HIRING / NEXT</span><h2>Looking for<br>a data analyst?</h2><a href="contact.html">Get in touch ↗</a></div><div class="case-bottom-next"><span class="case-next-index">NEXT PROJECT</span><a data-case-next href="case-vera.html">Vera ↗</a></div></div></footer>

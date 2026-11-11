@@ -24,7 +24,7 @@
   <main id="caseMain" tabindex="-1">
     <section class="case-hero page-width" aria-labelledby="caseTitle">
       <span class="case-kicker">Procurement analytics / prototype</span>
-      <div class="case-hero-row"><h1 id="caseTitle">Kinetix</h1><p>From purchase-order data to procurement decisions you can explain.</p></div>
+      <div class="case-hero-row"><h1 id="caseTitle">Kinetix</h1><p>Supplier scores you can take apart, and stock alerts that move with each supplier’s delays.</p></div>
       <div class="case-meta"><span class="case-chip" data-case-position>01 / 04</span><span class="case-chip">Procurement &amp; PPIC</span><span class="case-chip">Synthetic data</span></div>
       <dl class="case-facts"><div><dt>Role</dt><dd>Solo — domain research, data model, backend, UI, testing</dd></div><div><dt>Stack</dt><dd>Python standard library, vanilla JavaScript, Apache ECharts</dd></div><div><dt>Timeline</dt><dd>November 2026</dd></div><div><dt>Status</dt><dd>Prototype · 5 backend tests + 14 model checks</dd></div></dl>
     </section>
@@ -32,14 +32,13 @@
       <div class="case-image-wrap"><img src="assets/projects/kinetix.webp" width="1600" height="1000" alt="Kinetix landing page: the headline “Pengadaan tenang. Keputusan tajam.” beside a glass sculpture of stacked layers" decoding="async" fetchpriority="high"></div>
       <figcaption><span>Landing page — “Pengadaan tenang. Keputusan tajam.” means “Calm procurement. Sharp decisions.”</span><span data-case-position>01 / 04</span></figcaption>
     </figure>
-    <section class="case-story page-width" aria-labelledby="problemTitle"><span class="case-section-label">01 / THE PROBLEM</span><div>
+    <section class="case-story page-width" aria-labelledby="problemTitle"><span class="case-section-label">WHY IT EXISTS</span><div>
       <h2 id="problemTitle">Supplier risk shows up only when the warehouse runs low.</h2>
       <p>In many factories, supplier performance lives in a purchase-order spreadsheet while stock lives in another file. A supplier that is often late looks like a problem only once stock is already thin, and moving orders to another supplier is decided without numbers.</p>
       <p>The goal: one PO file in, and within minutes the user knows which supplier to review, which material will run out, and what a partial switch would change.</p>
       <blockquote class="case-quote"><span class="case-quote-label">From the product spec</span><p>Supplier performance and stock sit in different places, so risk becomes visible only after stock runs low.</p></blockquote>
-    </div></section>
-    <section class="case-story page-width" aria-labelledby="usersTitle"><span class="case-section-label">02 / WHO IT IS FOR</span><div>
-      <h2 id="usersTitle">Three roles, three questions.</h2>
+    
+      <p>Three people read the same file for different reasons:</p>
       <div class="case-table-wrap"><table class="case-table">
         <thead><tr><th scope="col">User</th><th scope="col">Main question</th></tr></thead>
         <tbody>
@@ -49,17 +48,8 @@
         </tbody>
       </table></div>
     </div></section>
-    <section class="case-decision-band" aria-labelledby="decisionsTitle"><div class="page-width">
-      <div class="case-decision-heading"><div><span class="case-section-label">03 / KEY DECISIONS</span><h2 id="decisionsTitle">Choices with a reason.</h2></div><p>Each decision trades a little cleverness for numbers people can check.</p></div>
-      <ol class="case-decisions">
-        <li><span>01 / DECISION</span><h3>A score you can take apart</h3><p>The composite score weights delivery 40%, quality 35%, and cost 25%, and every sub-score is on screen. Delivery weighs most because late material stops a line fastest.</p></li>
-        <li><span>02 / DECISION</span><h3>Safety stock that follows the supplier</h3><p>The reorder-point buffer grows with each supplier’s average delay and defect rate, instead of a fixed number of days.</p></li>
-        <li><span>03 / DECISION</span><h3>A simulator that refuses bad pairs</h3><p>Splits are allowed only between suppliers in the same category. An invalid pair hides the result instead of showing a misleading saving.</p></li>
-        <li><span>04 / DECISION</span><h3>“AI” that still works without AI</h3><p>Supplier letters come from a rule-based template by default; a language model is optional with the user’s own key, so no figure in a letter is invented.</p></li>
-      </ol>
-    </div></section>
-    <section class="case-story page-width" aria-labelledby="builtTitle"><span class="case-section-label">04 / WHAT WAS BUILT</span><div>
-      <h2 id="builtTitle">Six modules on one dataset.</h2>
+    <section class="case-story page-width" aria-labelledby="builtTitle"><span class="case-section-label">THE WORKSPACE</span><div>
+      <h2 id="builtTitle">Six modules, one purchase-order file.</h2>
       <p>Overview, allocation simulator, PPIC inventory, anomaly log, supplier-letter copilot, and decision tools — plus a CSV import that accepts Indonesian and English column names.</p>
       <div class="case-gallery">
         <figure><img src="assets/projects/kinetix-overview.webp" width="1600" height="1000" alt="Kinetix overview: four metrics, a supplier risk matrix, audit priorities, and the supplier ledger" loading="lazy" decoding="async"><figcaption>Overview: composite scores, a risk matrix, and the supplier ledger on 120 synthetic purchase orders.</figcaption></figure>
@@ -69,8 +59,17 @@
         <figure class="case-shot--portrait"><img src="assets/projects/kinetix-mobile.webp" width="647" height="1400" alt="Kinetix overview on a phone" loading="lazy" decoding="async"><figcaption>The workspace on a 390 px phone screen.</figcaption></figure>
       </div>
     </div></section>
-    <section class="case-story page-width" aria-labelledby="resultsTitle"><span class="case-section-label">05 / RESULTS ON DEMO DATA</span><div>
-      <h2 id="resultsTitle">What the demo dataset shows.</h2>
+    <section class="case-decision-band" aria-labelledby="decisionsTitle"><div class="page-width">
+      <div class="case-decision-heading"><div><span class="case-section-label">TRADE-OFFS</span><h2 id="decisionsTitle">Less clever, more checkable.</h2></div><p>Four places where I picked numbers people can check over a smarter-looking model.</p></div>
+      <ol class="case-decisions">
+        <li><span>01</span><h3>A score you can take apart</h3><p>The composite score weights delivery 40%, quality 35%, and cost 25%, and every sub-score is on screen. Delivery weighs most because late material stops a line fastest.</p></li>
+        <li><span>02</span><h3>Safety stock that follows the supplier</h3><p>The reorder-point buffer grows with each supplier’s average delay and defect rate, instead of a fixed number of days.</p></li>
+        <li><span>03</span><h3>A simulator that refuses bad pairs</h3><p>Splits are allowed only between suppliers in the same category. An invalid pair hides the result instead of showing a misleading saving.</p></li>
+        <li><span>04</span><h3>“AI” that still works without AI</h3><p>Supplier letters come from a rule-based template by default; a language model is optional with the user’s own key, so no figure in a letter is invented.</p></li>
+      </ol>
+    </div></section>
+    <section class="case-story page-width" aria-labelledby="resultsTitle"><span class="case-section-label">ON THE DEMO DATA</span><div>
+      <h2 id="resultsTitle">What 120 synthetic purchase orders show.</h2>
       <div class="case-table-wrap"><table class="case-table">
         <thead><tr><th scope="col">Finding</th><th scope="col" class="num">Value</th></tr></thead>
         <tbody>
@@ -84,10 +83,10 @@
       </table></div>
       <p class="case-table-note">Synthetic dataset: 120 purchase orders, 9 suppliers, 6 material categories. These figures show how the tool works, not real business impact.</p>
     </div></section>
-    <section class="case-check page-width" aria-labelledby="checkTitle"><div><span class="case-section-label">06 / VALIDATION &amp; LIMITS</span><h2 id="checkTitle">Checked against its own server.</h2></div><div>
+    <section class="case-check page-width" aria-labelledby="checkTitle"><div><span class="case-section-label">CHECKS &amp; GAPS</span><h2 id="checkTitle">The guide’s calculators match the server.</h2></div><div>
       <p>5 backend regression tests and 14 model checks cover invalid imports, invalid split pairs, letter tone, and the penalty and line-stop calculators. The formula calculators in the user guide match the server for all nine suppliers, and the main flow was checked by hand on desktop and a 390 px phone.</p>
       <ul><li><strong>Not yet:</strong> tested with procurement users, a live Gemini call, Safari or Firefox, or a full WCAG audit.</li><li>Stock is modelled per supplier, not per SKU; MOQ, freight, and supplier capacity are not in the simulation.</li></ul>
-      <span class="case-honesty">Prototype on synthetic data. No client, users, or measured business result is claimed.</span>
+      <span class="case-honesty">Every figure comes from a synthetic factory: 120 purchase orders, 9 suppliers.</span>
     </div></section>
   </main>
   <footer class="case-bottom"><div class="page-width case-bottom-inner"><div><span class="case-section-label">HIRING / NEXT</span><h2>Looking for<br>a data analyst?</h2><a href="contact.html">Get in touch ↗</a></div><div class="case-bottom-next"><span class="case-next-index">NEXT PROJECT</span><a data-case-next href="case-retentionos.html">RetentionOS ↗</a></div></div></footer>

@@ -24,7 +24,7 @@
   <main id="caseMain" tabindex="-1">
     <section class="case-hero page-width" aria-labelledby="caseTitle">
       <span class="case-kicker">Accounts payable / prototype</span>
-      <div class="case-hero-row"><h1 id="caseTitle">Vera</h1><p>Purchase order, delivery note, and invoice — checked against each other before anyone pays.</p></div>
+      <div class="case-hero-row"><h1 id="caseTitle">Vera</h1><p>Purchase order, delivery note and invoice, checked against each other before anyone pays.</p></div>
       <div class="case-meta"><span class="case-chip" data-case-position>03 / 04</span><span class="case-chip">Three-way match</span><span class="case-chip">Synthetic data</span></div>
       <dl class="case-facts"><div><dt>Role</dt><dd>Spec review, frontend build, QA</dd></div><div><dt>Stack</dt><dd>HTML, CSS, JavaScript, IndexedDB, service worker</dd></div><div><dt>Timeline</dt><dd>November 2026</dd></div><div><dt>Status</dt><dd>Frontend demo · 13 domain tests</dd></div></dl>
     </section>
@@ -32,13 +32,12 @@
       <div class="case-image-wrap"><img src="assets/projects/vera.webp" width="1600" height="1000" alt="Vera landing page: the headline “Verifikasi tagihan, dengan bukti yang jelas.” beside an illustration of a PO, delivery note and invoice, one mismatched row circled in amber and a green approval seal" decoding="async" fetchpriority="high"></div>
       <figcaption><span>Landing page — “Verifikasi tagihan, dengan bukti yang jelas.” means “Verify invoices, with clear evidence.” The live page scans the table, flags the mismatch, then stamps the approval.</span><span data-case-position>03 / 04</span></figcaption>
     </figure>
-    <section class="case-story page-width" aria-labelledby="problemTitle"><span class="case-section-label">01 / THE PROBLEM</span><div>
+    <section class="case-story page-width" aria-labelledby="problemTitle"><span class="case-section-label">THREE DOCUMENTS</span><div>
       <h2 id="problemTitle">Three documents, arriving on different days.</h2>
       <p>The order, the goods, and the bill rarely arrive together. Finance has to tell what was ordered, what actually arrived, and what is being charged — and decide before paying, with the evidence in view.</p>
       <blockquote class="case-quote"><span class="case-quote-label">From the product spec</span><p>Connect the purchase order, the physical receipt, and the invoice; show every mismatch with its evidence; prepare a decision that can be traced.</p></blockquote>
-    </div></section>
-    <section class="case-story page-width" aria-labelledby="usersTitle"><span class="case-section-label">02 / WHO IT IS FOR</span><div>
-      <h2 id="usersTitle">Three roles, three questions.</h2>
+    
+      <p>Each document matters to a different person:</p>
       <div class="case-table-wrap"><table class="case-table">
         <thead><tr><th scope="col">User</th><th scope="col">Main question</th></tr></thead>
         <tbody>
@@ -49,16 +48,16 @@
       </table></div>
     </div></section>
     <section class="case-decision-band" aria-labelledby="decisionsTitle"><div class="page-width">
-      <div class="case-decision-heading"><div><span class="case-section-label">03 / KEY DECISIONS</span><h2 id="decisionsTitle">Choices with a reason.</h2></div><p>Each decision keeps a number or a status from meaning more than it does.</p></div>
+      <div class="case-decision-heading"><div><span class="case-section-label">RULES I KEPT</span><h2 id="decisionsTitle">A status never means more than it does.</h2></div><p>Four places where the easy version would have overstated what happened.</p></div>
       <ol class="case-decisions">
-        <li><span>01 / DECISION</span><h3>A correction to the spec</h3><p>The spec’s example gave Rp42,500,000 after a 50-unit return. 1,000 units at Rp45,000 minus 50 returned is Rp42,750,000, so the app uses that and the difference is documented.</p></li>
-        <li><span>02 / DECISION</span><h3>Ready to pay is not paid</h3><p>Approval moves an invoice to Ready to pay. The CSV export is labelled internal review and never marks anything as paid.</p></li>
-        <li><span>03 / DECISION</span><h3>Roles decide actions</h3><p>Managers approve, AP admins draft, and warehouse staff never see prices. Duplicate invoices and missing signatures stay blocked for everyone.</p></li>
-        <li><span>04 / DECISION</span><h3>Offline that tells the truth</h3><p>Warehouse photos are stored on the device and labelled “saved on device”, never “sent”, until a server acknowledges them.</p></li>
+        <li><span>01</span><h3>A correction to the spec</h3><p>The spec’s example gave Rp42,500,000 after a 50-unit return. 1,000 units at Rp45,000 minus 50 returned is Rp42,750,000, so the app uses that and the difference is documented.</p></li>
+        <li><span>02</span><h3>Ready to pay is not paid</h3><p>Approval moves an invoice to Ready to pay. The CSV export is labelled internal review and never marks anything as paid.</p></li>
+        <li><span>03</span><h3>Roles decide actions</h3><p>Managers approve, AP admins draft, and warehouse staff never see prices. Duplicate invoices and missing signatures stay blocked for everyone.</p></li>
+        <li><span>04</span><h3>Offline that tells the truth</h3><p>Warehouse photos are stored on the device and labelled “saved on device”, never “sent”, until a server acknowledges them.</p></li>
       </ol>
     </div></section>
-    <section class="case-story page-width" aria-labelledby="builtTitle"><span class="case-section-label">04 / WHAT WAS BUILT</span><div>
-      <h2 id="builtTitle">One pipeline, three roles.</h2>
+    <section class="case-story page-width" aria-labelledby="builtTitle"><span class="case-section-label">THE FRONTEND</span><div>
+      <h2 id="builtTitle">Five menus and one case workspace.</h2>
       <p>Five lifecycle menus, a case workspace with an origin trail and evidence, printable debit notes, an internal-review CSV, purchase-order import, and a mobile warehouse flow with camera capture. The landing page animates the check itself: a scan line crosses the invoice table, the mismatched row is flagged, then the approval seal stamps — and the loop pauses when it is off screen.</p>
       <div class="case-gallery">
         <figure><img src="assets/projects/vera-overview.webp" width="1600" height="1000" alt="Vera pipeline: documents waiting for goods, waiting for invoices, needing a decision, and ready to pay" loading="lazy" decoding="async"><figcaption>Pipeline home: where every purchase order, receipt, and invoice stands.</figcaption></figure>
@@ -67,8 +66,8 @@
         <figure class="case-shot--portrait"><img src="assets/projects/vera-warehouse.webp" width="390" height="844" alt="Warehouse delivery schedule on a phone" loading="lazy" decoding="async"><figcaption>Warehouse role on a phone: schedule, photo, and condition.</figcaption></figure>
       </div>
     </div></section>
-    <section class="case-story page-width" aria-labelledby="resultsTitle"><span class="case-section-label">05 / VERIFICATION</span><div>
-      <h2 id="resultsTitle">What the checks showed.</h2>
+    <section class="case-story page-width" aria-labelledby="resultsTitle"><span class="case-section-label">THE ARITHMETIC</span><div>
+      <h2 id="resultsTitle">50 returned units, Rp2,250,000 off the bill.</h2>
       <div class="case-table-wrap"><table class="case-table">
         <thead><tr><th scope="col">Check</th><th scope="col" class="num">Result</th></tr></thead>
         <tbody>
@@ -81,7 +80,7 @@
       </table></div>
       <p class="case-table-note">Results from the local frontend with synthetic fixtures. No OCR accuracy or production readiness is claimed.</p>
     </div></section>
-    <section class="case-check page-width" aria-labelledby="checkTitle"><div><span class="case-section-label">06 / VALIDATION &amp; LIMITS</span><h2 id="checkTitle">A frontend, not a payment system.</h2></div><div>
+    <section class="case-check page-width" aria-labelledby="checkTitle"><div><span class="case-section-label">LIMITS</span><h2 id="checkTitle">A frontend, not a payment system.</h2></div><div>
       <p>Main flows were checked in the browser and with Playwright: approval with a checklist and reason, CSV download, persistence after reload, an offline reload, and rejection of an invalid CSV without a partial import.</p>
       <ul><li><strong>Not yet:</strong> OCR, a backend with server-side roles, or ERP, email, and bank connections.</li><li>The role picker is a demo, not security. Data lives in this browser and can be cleared by the browser.</li></ul>
       <span class="case-honesty">Prototype on synthetic fixtures. Company names in the screenshots are synthetic examples.</span>

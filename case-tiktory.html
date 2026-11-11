@@ -24,7 +24,7 @@
   <main id="caseMain" tabindex="-1">
     <section class="case-hero page-width" aria-labelledby="caseTitle">
       <span class="case-kicker">Network expansion / prototype</span>
-      <div class="case-hero-row"><h1 id="caseTitle">Tiktory</h1><p>From demand on a map to a decision in the field.</p></div>
+      <div class="case-hero-row"><h1 id="caseTitle">Tiktory</h1><p>An analyst, a surveyor and a manager deciding where the next network point goes, on one map.</p></div>
       <div class="case-meta"><span class="case-chip" data-case-position>04 / 04</span><span class="case-chip">Field expansion planning</span><span class="case-chip">Simulated data</span></div>
       <dl class="case-facts"><div><dt>Role</dt><dd>Full-stack — backend, map interface, QA</dd></div><div><dt>Stack</dt><dd>FastAPI, SQLite, Leaflet, vanilla JavaScript</dd></div><div><dt>Timeline</dt><dd>November 2026</dd></div><div><dt>Status</dt><dd>Local demo · 31 API tests</dd></div></dl>
     </section>
@@ -32,12 +32,11 @@
       <div class="case-image-wrap"><img src="assets/projects/tiktory.webp" width="1600" height="1000" alt="Tiktory landing page: an isometric neighbourhood with three hexagonal zones fills a framed window, with the name TIKTORY set large across the bottom" decoding="async" fetchpriority="high"></div>
       <figcaption><span>Landing page — the city fills a framed window that opens to the edges as you scroll; the headline “Titik yang tepat. Ekspansi yang terukur.” (“The right point. Measured expansion.”) follows below. The illustration is conceptual.</span><span data-case-position>04 / 04</span></figcaption>
     </figure>
-    <section class="case-story page-width" aria-labelledby="problemTitle"><span class="case-section-label">01 / THE PROBLEM</span><div>
+    <section class="case-story page-width" aria-labelledby="problemTitle"><span class="case-section-label">THE HAND-OFFS</span><div>
       <h2 id="problemTitle">Opening a new network point is a chain of hand-offs.</h2>
       <p>An analyst spots demand, a surveyor checks the street, and a manager approves the spend — usually across spreadsheets and chat. Tiktory keeps the map, the cost estimate, the survey evidence, and the decision in one trail.</p>
-    </div></section>
-    <section class="case-story page-width" aria-labelledby="usersTitle"><span class="case-section-label">02 / WHO IT IS FOR</span><div>
-      <h2 id="usersTitle">Three roles, one trail.</h2>
+    
+      <p>Each hand-off has its own question:</p>
       <div class="case-table-wrap"><table class="case-table">
         <thead><tr><th scope="col">User</th><th scope="col">Main question</th></tr></thead>
         <tbody>
@@ -47,16 +46,7 @@
         </tbody>
       </table></div>
     </div></section>
-    <section class="case-decision-band" aria-labelledby="decisionsTitle"><div class="page-width">
-      <div class="case-decision-heading"><div><span class="case-section-label">03 / KEY DECISIONS</span><h2 id="decisionsTitle">Choices with a reason.</h2></div><p>Each decision keeps a demo from looking more certain than it is.</p></div>
-      <ol class="case-decisions">
-        <li><span>01 / DECISION</span><h3>Server-side roles, even in a demo</h3><p>Signed HttpOnly session cookies and role checks on the backend: the wrong role is rejected and cross-origin POSTs are refused.</p></li>
-        <li><span>02 / DECISION</span><h3>Evidence labelled as simulated</h3><p>Demo GPS and sample photos are marked as simulations, never as verified presence, and distant coordinates are rejected.</p></li>
-        <li><span>03 / DECISION</span><h3>No duplicate proposals</h3><p>A proposal within 100 m, or overlapping an existing coverage circle by more than 30%, is rejected; a retry returns the saved result.</p></li>
-        <li><span>04 / DECISION</span><h3>Payback before operating cost</h3><p>The simulator offers conservative, base, and optimistic conversion, and labels payback as before operating cost.</p></li>
-      </ol>
-    </div></section>
-    <section class="case-story page-width" aria-labelledby="builtTitle"><span class="case-section-label">04 / WHAT WAS BUILT</span><div>
+    <section class="case-story page-width" aria-labelledby="builtTitle"><span class="case-section-label">THE APP</span><div>
       <h2 id="builtTitle">Map, survey, decision.</h2>
       <p>Demand hexagons and a cost simulator for the analyst, a mobile checklist with photo and GPS for the surveyor, and approve-or-defer with an audit history for the manager — plus a landing page that explains the limits of the demo. Its hero frames the illustrated city in a window that opens to the edges as you scroll, with zone labels that use the same words as the map legend in the app.</p>
       <div class="case-gallery">
@@ -65,8 +55,8 @@
         <figure class="case-shot--portrait"><img src="assets/projects/tiktory-approval.webp" width="390" height="1074" alt="Manager approval dialog on a phone" loading="lazy" decoding="async"><figcaption>Manager approval with an explicit confirmation.</figcaption></figure>
       </div>
     </div></section>
-    <section class="case-story page-width" aria-labelledby="resultsTitle"><span class="case-section-label">05 / SIMULATOR DEFAULTS</span><div>
-      <h2 id="resultsTitle">What the simulator says by default.</h2>
+    <section class="case-story page-width" aria-labelledby="resultsTitle"><span class="case-section-label">ONE DEFAULT POINT</span><div>
+      <h2 id="resultsTitle">64 ports, 500 metres, 4.1 months to pay back.</h2>
       <div class="case-table-wrap"><table class="case-table">
         <thead><tr><th scope="col">Default point: 64 ports, 500 m, base scenario</th><th scope="col" class="num">Value</th></tr></thead>
         <tbody>
@@ -78,7 +68,16 @@
       </table></div>
       <p class="case-table-note">Illustrative model: Rp20 million + Rp320 thousand per port + Rp16,040 per metre of radius. Cable routes, operating cost, tax, and churn are not included.</p>
     </div></section>
-    <section class="case-check page-width" aria-labelledby="checkTitle"><div><span class="case-section-label">06 / VALIDATION &amp; LIMITS</span><h2 id="checkTitle">31 API tests on a temporary database.</h2></div><div>
+    <section class="case-decision-band" aria-labelledby="decisionsTitle"><div class="page-width">
+      <div class="case-decision-heading"><div><span class="case-section-label">GUARDRAILS</span><h2 id="decisionsTitle">A demo that does not pretend.</h2></div><p>Each decision keeps a demo from looking more certain than it is.</p></div>
+      <ol class="case-decisions">
+        <li><span>01</span><h3>Server-side roles, even in a demo</h3><p>Signed HttpOnly session cookies and role checks on the backend: the wrong role is rejected and cross-origin POSTs are refused.</p></li>
+        <li><span>02</span><h3>Evidence labelled as simulated</h3><p>Demo GPS and sample photos are marked as simulations, never as verified presence, and distant coordinates are rejected.</p></li>
+        <li><span>03</span><h3>No duplicate proposals</h3><p>A proposal within 100 m, or overlapping an existing coverage circle by more than 30%, is rejected; a retry returns the saved result.</p></li>
+        <li><span>04</span><h3>Payback before operating cost</h3><p>The simulator offers conservative, base, and optimistic conversion, and labels payback as before operating cost.</p></li>
+      </ol>
+    </div></section>
+    <section class="case-check page-width" aria-labelledby="checkTitle"><div><span class="case-section-label">TESTS &amp; LIMITS</span><h2 id="checkTitle">31 API tests on a temporary database.</h2></div><div>
       <p>The tests cover session and role checks, cross-site origins, photo privacy, the required checklist, GPS distance and accuracy, approval confirmation, audit, retries, duplicates, coverage overlap, and the ROI model. The full flow was checked in the browser on desktop and a 390 px phone.</p>
       <ul><li><strong>Not yet:</strong> a physical camera and GPS in the field, offline sync, load testing, or organisation sign-in.</li><li>Hexagons approximate H3 resolution 8 and are not official boundaries. Basemap: Esri World Street Map.</li></ul>
       <span class="case-honesty">Prototype on simulated data. Not affiliated with any network operator; no real survey or build is claimed.</span>
