@@ -60,16 +60,16 @@
     last: writing.findLast(stroke => element.contains(stroke.element))
   }));
   const noteCaptions = {
-    clear: 'Clear: one primary metric, before the supporting detail.',
-    bold: 'Bold: make the trend visible, with a restrained accent.',
-    useful: 'Useful: compare periods to understand what changed.'
+    clear: 'Clear: one supplier score, with every part on screen.',
+    bold: 'Bold: show the stock line before it runs out.',
+    useful: 'Useful: let the manager test a split before moving an order.'
   };
   // A reading hold precedes every action. Targets sit inside reading intervals,
   // so chapter navigation doesn't skip straight to the completed illustration.
   const scenes = [
-    { id: 'observe', label: 'Observe', target: .15, textStart: .035, textSplit: .11, textEnd: .22 },
-    { id: 'compose', label: 'Compose', target: .50, textStart: .36, textSplit: .40, textEnd: .44 },
-    { id: 'resolve', label: 'Resolve', target: .88, textStart: .78, textSplit: .82, textEnd: .88 }
+    { id: 'observe', label: 'Question', target: .15, textStart: .035, textSplit: .11, textEnd: .22 },
+    { id: 'compose', label: 'Sketch', target: .50, textStart: .36, textSplit: .40, textEnd: .44 },
+    { id: 'resolve', label: 'Build', target: .88, textStart: .78, textSplit: .82, textEnd: .88 }
   ];
   let pinned = false, dock = 104, readingLine = 440;
   let frame = 0, layoutDirty = false, lastPaint = -1, stepGeometry = [], anchors = [];
@@ -284,7 +284,7 @@
       note.element.setAttribute('transform', `translate(${((note.goalX - note.x) * convergence).toFixed(4)} ${((note.goalY - note.y) * convergence).toFixed(4)})`);
     }
     const latest = notes.filter(note => note.last && drawing >= note.last.end).at(-1);
-    const captionText = finish > 0 ? 'Clear + bold + useful. Made tangible in Kinetix.'
+    const captionText = finish > 0 ? 'The notes become Kinetix.'
       : p >= .75 ? 'Keep the decisions. Bring them together into one usable view.'
       : latest ? noteCaptions[latest.element.dataset.note] : p >= .56 ? 'Try a direction. Write it down. Connect the ideas.'
       : p >= .33 ? 'One traceable score. A visible stock line. A way to test a split.'
