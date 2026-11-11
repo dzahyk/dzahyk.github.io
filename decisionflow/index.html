@@ -134,38 +134,41 @@
           <ol class="how-progress" aria-hidden="true"><li></li><li></li><li></li><li></li><li></li></ol>
           <article class="how-step" data-index="0">
             <span class="num">01</span><h3>Evidence, not guesses</h3>
-            <p>Every requirement is linked to the exact sentence it came from — or marked missing. Select a field and its source lights up.</p>
+            <p>Each value points to the sentence it came from. No source? It is marked missing, not guessed.</p>
           </article>
           <article class="how-step" data-index="1">
             <span class="num">02</span><h3>Rules do the math</h3>
-            <p>Cost and margin come from a versioned rate card and integer arithmetic, with a visible trace. A good margin still can't skip missing facts.</p>
+            <p>Cost and margin come from the rate card, not from the AI.</p>
             <p class="math"><span>3,000 × Rp35,000</span><span>+ Rp12,000,000</span><span>= <b data-count="117000000" data-prefix="Rp">Rp117,000,000</b></span><span>margin <b data-count="22" data-suffix="%">22%</b></span></p>
           </article>
           <article class="how-step" data-index="2">
             <span class="num">03</span><h3>Approve the exact snapshot</h3>
-            <p>The package is frozen and hashed. Approval binds to that hash; any change makes a new version. High-risk deals need two different people.</p>
+            <p>Approval locks to one hashed version. High-risk deals need two different people.</p>
           </article>
           <article class="how-step" data-index="3">
             <span class="num">04</span><h3>Execute only what was approved</h3>
-            <p>Execution is authorized separately, queued, and idempotent. If an outcome is unknown, blind retry is off until someone checks the target.</p>
+            <p>If an outcome is unclear, retry stays off until someone checks the target system.</p>
           </article>
           <article class="how-step" data-index="4">
-            <span class="num">05</span><h3>Measure what you didn't tune</h3>
-            <p>The extractor passes the cases it was written against — 24 of 24 — but only 1 of 36 held-out cases. The release gate fails, and says so.</p>
+            <span class="num">05</span><h3>Measure honestly</h3>
+            <p>Scored on 36 cases it never saw: 1 passed. The release gate blocks it.</p>
           </article>
         </div>
         <div class="how-visual" aria-hidden="true">
           <div class="frame">
             <div class="frame-bar"><span></span><span></span><span></span><em data-frame-label>Requirements &amp; evidence</em></div>
             <div class="frame-screens">
-              <img src="assets/decisionflow-evidence.webp" width="1600" height="1000" alt="" class="is-active" data-screen="0">
-              <img src="assets/decisionflow-pricing.webp" width="1600" height="1000" alt="" loading="lazy" data-screen="1">
-              <img src="assets/decisionflow-dual-approval.webp" width="1600" height="1000" alt="" loading="lazy" data-screen="2">
-              <img src="assets/decisionflow-execution.webp" width="1600" height="1000" alt="" loading="lazy" data-screen="3">
-              <img src="assets/decisionflow-evaluation.webp" width="1600" height="1000" alt="" loading="lazy" data-screen="4">
+              <div class="stage" data-stage>
+                <img src="assets/decisionflow-evidence.webp" width="1600" height="1000" alt="" class="is-active" data-screen="0">
+                <img src="assets/decisionflow-pricing.webp" width="1600" height="1000" alt="" loading="lazy" data-screen="1">
+                <img src="assets/decisionflow-dual-approval.webp" width="1600" height="1000" alt="" loading="lazy" data-screen="2">
+                <img src="assets/decisionflow-execution.webp" width="1600" height="1000" alt="" loading="lazy" data-screen="3">
+                <img src="assets/decisionflow-evaluation.webp" width="1600" height="1000" alt="" loading="lazy" data-screen="4">
+              </div>
+              <div class="spot" data-spot></div>
             </div>
           </div>
-          <div class="chip-float" data-chip>Source: “to be determined” → Missing</div>
+          <div class="callout" data-callout><b>This is the evidence check</b><span>for flagging gaps: Geography is missing, not guessed.</span></div>
         </div>
       </div>
     </section>
