@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Karsa — What gets approved is what runs</title>
+  <meta name="description" content="Karsa turns business requests into checked requirements, approved decisions and bounded execution. A portfolio prototype on synthetic data, formerly DecisionFlow AI.">
+  <meta name="theme-color" content="#f4f1ea">
+  <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav" data-nav>
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="Karsa, back to top">
+        <svg class="mark" viewBox="0 0 40 32" aria-hidden="true"><path d="M10 2h26l-8 12H2z" fill="#1d5b44"/><path d="M14 18h24l-8 12H6z" fill="#2f7a5d"/></svg>
+        <span>karsa.</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#product">Product</a><a href="#how">How it works</a><a href="#capabilities">Capabilities</a>
+      </nav>
+      <a class="btn btn-dark btn-sm" href="https://dzahyk.github.io/case-karsa.html">Case study <span aria-hidden="true">→</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="top" aria-labelledby="heroTitle">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow" data-reveal>AI-assisted decision workspace <span class="eyebrow-rule"></span></p>
+          <h1 id="heroTitle" data-reveal><span>What gets</span><span>approved is</span><span>what runs.</span></h1>
+          <p class="lead" data-reveal>Turn business requests into clear requirements, informed decisions, and controlled action.</p>
+          <div class="hero-cta" data-reveal>
+            <a class="btn btn-dark" href="#product">Explore Karsa <span aria-hidden="true">→</span></a>
+            <a class="btn btn-line" href="#how">How it works</a>
+          </div>
+          <p class="note" data-reveal>Portfolio prototype · synthetic data</p>
+        </div>
+
+        <div class="hero-art" aria-hidden="true" data-parallax>
+          <svg class="threads" viewBox="0 0 900 600" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="thread" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="400" y2="0"><stop offset="0" stop-color="#b9a48f" stop-opacity="0"/><stop offset=".45" stop-color="#c2a58b" stop-opacity=".55"/><stop offset="1" stop-color="#e29a68" stop-opacity=".95"/></linearGradient>
+              <linearGradient id="beam" x1="0" x2="1"><stop offset="0" stop-color="#e8a477"/><stop offset=".6" stop-color="#c46a35"/><stop offset="1" stop-color="#c46a35" stop-opacity=".2"/></linearGradient>
+              <filter id="glow" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="3"/></filter>
+            </defs>
+            <g class="thread-set thread-glow" filter="url(#glow)">
+              <path d="M0 90 C 180 110, 260 250, 400 300"/>
+              <path d="M0 250 C 160 250, 270 290, 400 300"/>
+              <path d="M0 420 C 170 400, 270 320, 400 300"/>
+            </g>
+            <g class="thread-set">
+              <path d="M0 90 C 180 110, 260 250, 400 300"/>
+              <path d="M0 130 C 175 145, 260 260, 400 300"/>
+              <path d="M0 170 C 170 180, 260 270, 400 300"/>
+              <path d="M0 210 C 165 215, 265 280, 400 300"/>
+              <path d="M0 250 C 160 250, 270 290, 400 300"/>
+              <path d="M0 290 C 165 292, 275 300, 400 300"/>
+              <path d="M0 330 C 170 330, 280 305, 400 300"/>
+              <path d="M0 375 C 170 365, 275 312, 400 300"/>
+              <path d="M0 420 C 170 400, 270 320, 400 300"/>
+              <path d="M0 465 C 180 440, 270 330, 400 300"/>
+              <path d="M0 510 C 190 480, 270 340, 400 300"/>
+            </g>
+            <path class="beam-glow" d="M400 300 C 440 300, 470 302, 900 302" filter="url(#glow)"/>
+            <path class="beam" d="M400 300 C 440 300, 470 302, 900 302"/>
+            <path class="beam-pulse" d="M400 300 C 440 300, 470 302, 900 302"/>
+          </svg>
+          <div class="panels">
+            <div class="panel panel-green p1"></div>
+            <div class="panel panel-glass p2"></div>
+            <div class="panel panel-green p3"></div>
+            <div class="panel panel-glass p4"></div>
+          </div>
+          <div class="floor-shadow"></div>
+        </div>
+      </div>
+
+      <div class="wrap flow" id="product">
+        <div class="flow-head" data-reveal><h2>From uncertainty to action</h2><span class="flow-rule"></span></div>
+        <ol class="flow-steps">
+          <li data-reveal><span class="flow-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></span><span>Understand</span></li>
+          <li data-reveal><span class="flow-icon"><svg viewBox="0 0 24 24"><path d="m12 4 8 4.5-8 4.5-8-4.5z"/><path d="m4 13 8 4.5 8-4.5"/></svg></span><span>Evaluate</span></li>
+          <li data-reveal><span class="flow-icon"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span>Approve</span></li>
+          <li data-reveal><span class="flow-icon"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10-6.5z"/></svg></span><span>Execute</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="problem section" aria-labelledby="problemTitle">
+      <div class="wrap problem-grid">
+        <div class="problem-copy">
+          <p class="kicker" data-reveal>01 · The problem</p>
+          <h2 id="problemTitle" data-reveal>Requests arrive unfinished. Decisions shouldn't.</h2>
+          <p data-reveal>Briefs come as emails, PDFs and chat messages. Targets are clear, but the details that decide a deal are missing or contradict each other. An AI can read faster — it can also guess.</p>
+          <p data-reveal>Karsa reads the brief, marks every gap, and never fills one with a guess.</p>
+        </div>
+        <figure class="brief" data-brief aria-label="A client brief with three issues highlighted one by one as you scroll">
+          <div class="brief-bar"><span></span><span></span><span></span><em>brief — Aster Labs (synthetic)</em></div>
+          <div class="brief-body">
+            <p>Target: <mark class="ok" data-step="0">3,000 qualified leads</mark></p>
+            <p>Budget: <mark class="ok" data-step="0">Rp150,000,000</mark> for the full campaign</p>
+            <p>Timeline: <mark class="ok" data-step="0">2 months</mark> from kickoff</p>
+            <p>Geography: <mark class="miss" data-step="1">to be determined</mark></p>
+            <p>We have not yet agreed <mark class="miss" data-step="2">what counts as a qualified lead</mark>.</p>
+            <p>Finance note: the vendor cap is <mark class="conflict" data-step="3">Rp120 juta</mark>.</p>
+          </div>
+          <ul class="brief-tags">
+            <li data-step="0"><b class="t-ok">Confirmed</b> target, budget, timeline — each with its exact quote</li>
+            <li data-step="1"><b class="t-miss">Missing</b> geography — the brief says it is still open</li>
+            <li data-step="2"><b class="t-miss">Missing</b> lead definition — asked, not guessed</li>
+            <li data-step="3"><b class="t-conflict">Conflicting</b> budget — both values shown, a person decides</li>
+          </ul>
+        </figure>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS (pinned) -->
+    <section class="how" id="how" aria-labelledby="howTitle" data-how>
+      <div class="wrap how-head">
+        <p class="kicker" data-reveal>02 · How it works</p>
+        <h2 id="howTitle" data-reveal>Five steps. A person signs off on every one that matters.</h2>
+      </div>
+      <div class="wrap how-grid">
+        <div class="how-steps">
+          <ol class="how-progress" aria-hidden="true"><li></li><li></li><li></li><li></li><li></li></ol>
+          <article class="how-step" data-index="0">
+            <span class="num">01</span><h3>Evidence, not guesses</h3>
+            <p>Each value points to the sentence it came from. No source? It is marked missing, not guessed.</p>
+          </article>
+          <article class="how-step" data-index="1">
+            <span class="num">02</span><h3>Rules do the math</h3>
+            <p>Cost and margin come from the rate card, not from the AI.</p>
+            <p class="math"><span>3,000 × Rp35,000</span><span>+ Rp12,000,000</span><span>= <b data-count="117000000" data-prefix="Rp">Rp117,000,000</b></span><span>margin <b data-count="22" data-suffix="%">22%</b></span></p>
+          </article>
+          <article class="how-step" data-index="2">
+            <span class="num">03</span><h3>Approve the exact snapshot</h3>
+            <p>Approval locks to one hashed version. High-risk deals need two different people.</p>
+          </article>
+          <article class="how-step" data-index="3">
+            <span class="num">04</span><h3>Execute only what was approved</h3>
+            <p>If an outcome is unclear, retry stays off until someone checks the target system.</p>
+          </article>
+          <article class="how-step" data-index="4">
+            <span class="num">05</span><h3>Measure honestly</h3>
+            <p>Scored on 36 cases it never saw: 1 passed. The release gate blocks it.</p>
+          </article>
+        </div>
+        <div class="how-visual" aria-hidden="true">
+          <div class="frame">
+            <div class="frame-bar"><span></span><span></span><span></span><em data-frame-label>Requirements &amp; evidence</em></div>
+            <div class="frame-screens">
+              <div class="stage" data-stage>
+                <img src="assets/decisionflow-evidence.webp" width="1600" height="1000" alt="" class="is-active" data-screen="0">
+                <img src="assets/decisionflow-pricing.webp" width="1600" height="1000" alt="" loading="lazy" data-screen="1">
+                <img src="assets/decisionflow-dual-approval.webp" width="1600" height="1000" alt="" loading="lazy" data-screen="2">
+                <img src="assets/decisionflow-execution.webp" width="1600" height="1000" alt="" loading="lazy" data-screen="3">
+                <img src="assets/decisionflow-evaluation.webp" width="1600" height="1000" alt="" loading="lazy" data-screen="4">
+              </div>
+              <div class="spot" data-spot></div>
+            </div>
+          </div>
+          <div class="callout" data-callout><b>This is the evidence check</b><span>for flagging gaps: Geography is missing, not guessed.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRINCIPLES -->
+    <section class="principles section" id="capabilities" aria-labelledby="principlesTitle">
+      <div class="wrap">
+        <p class="kicker" data-reveal>03 · Principles</p>
+        <h2 id="principlesTitle" data-reveal>AI where it helps.<br>People where it matters.</h2>
+        <div class="principle-list">
+          <div class="principle" data-reveal><span>A source, or visibly missing</span><p>Values carry their quote and position. Answers from clients need a reference you can check.</p></div>
+          <div class="principle" data-reveal><span>Approving is not executing</span><p>Two separate acts, recorded separately. Nothing reaches the CRM or tracker on approval alone.</p></div>
+          <div class="principle" data-reveal><span>Failures stay visible</span><p>Incidents, manual resolution and cancellation with a compensation list. Nothing is deleted quietly.</p></div>
+          <div class="principle" data-reveal><span>Honest measurement</span><p>Held-out evaluation, sample sizes, and a causation caveat on every impact chart.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROOF -->
+    <section class="proof section" aria-labelledby="proofTitle">
+      <div class="wrap">
+        <p class="kicker" data-reveal>04 · What is proven</p>
+        <h2 id="proofTitle" data-reveal>Tested by breaking its own rules.</h2>
+        <dl class="stats">
+          <div data-reveal><dt>Backend tests</dt><dd data-count="51">51</dd></div>
+          <div data-reveal><dt>Browser journeys</dt><dd data-count="16">16</dd></div>
+          <div data-reveal><dt>Pages scanned for WCAG 2.2 AA</dt><dd data-count="12">12</dd></div>
+          <div data-reveal><dt>Prices equal to hand-computed values</dt><dd><span data-count="60">60</span>/60</dd></div>
+        </dl>
+        <div class="limits" data-reveal>
+          <p><b>Not yet:</b> a live Claude evaluation, SSO, real CRM connectors, OCR, a hosted demo, or real users.</p>
+          <p class="mono">Prototype on synthetic data · no client or business result is claimed</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOBILE + CTA -->
+    <section class="closing section" aria-labelledby="ctaTitle">
+      <div class="wrap closing-grid">
+        <div>
+          <p class="kicker" data-reveal>05 · Built to be used</p>
+          <h2 id="ctaTitle" data-reveal>Decide at your desk. Approve from your phone.</h2>
+          <p data-reveal>Analysts work in a dense desktop workspace; approvers get a calm mobile review with the numbers, the changes and the evidence one tap away.</p>
+          <div class="hero-cta" data-reveal>
+            <a class="btn btn-dark" href="https://dzahyk.github.io/case-karsa.html">Read the case study <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-line" href="https://dzahyk.github.io/">More work</a>
+          </div>
+        </div>
+        <figure class="phone" data-reveal><img src="assets/decisionflow-mobile.webp" width="780" height="1688" alt="Mobile approval screen for a high-risk package with two approver slots and approve, reject and request-changes buttons" loading="lazy"></figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="wrap footer-inner"><span>Karsa, formerly DecisionFlow AI, is a portfolio prototype by Daffa Zahy Khairy</span><span class="mono">Synthetic data · 2026</span></div></footer>
+  <script src="main.js" defer></script>
+</body>
+</html>
