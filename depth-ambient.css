@@ -1,0 +1,47 @@
+/* Depth ambient: sun shafts near the surface, suspended motes in deeper water.
+   Both layers are injected by depth-ambient.js and sit between the water and the page. */
+.depth-rays,.depth-motes{position:fixed;inset:0;z-index:0;pointer-events:none}
+.depth-rays{
+  overflow:hidden;
+  background:linear-gradient(103deg,transparent 4%,rgba(18,86,116,.2) 10%,transparent 15%,transparent 25%,rgba(18,86,116,.15) 29%,transparent 32%,transparent 42%,rgba(18,86,116,.22) 47%,transparent 51%,transparent 63%,rgba(18,86,116,.17) 67%,transparent 70%,transparent 79%,rgba(18,86,116,.14) 84%,transparent 90%);
+  opacity:calc(max(0, 1 - var(--water-depth,0) * 2.3) * .9);
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.62) 42%,transparent 88%);
+  mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.62) 42%,transparent 88%);
+}
+.depth-rays::before,.depth-rays::after{content:'';position:absolute;inset:-12% -22% -6%;transform-origin:50% 0}
+/* Uneven beams read as light through moving water, not as stripes. */
+.depth-rays::before{
+  background:
+    radial-gradient(ellipse 50% 34% at 34% -6%,rgba(255,248,222,.7),transparent 72%),
+    linear-gradient(103deg,transparent 14%,rgba(255,250,228,.62) 18.5%,transparent 23%,transparent 33%,rgba(255,250,228,.42) 36%,transparent 39.5%,transparent 52%,rgba(255,250,228,.68) 57%,transparent 62.5%,transparent 71%,rgba(255,250,228,.28) 73.5%,transparent 76%);
+  mix-blend-mode:screen;
+  animation:depth-rays-sway 15s cubic-bezier(.45,0,.55,1) infinite alternate;
+}
+.depth-rays::after{
+  background:linear-gradient(99deg,transparent 24%,rgba(236,255,252,.34) 27%,transparent 30.5%,transparent 44%,rgba(236,255,252,.4) 47.5%,transparent 51%,transparent 63%,rgba(236,255,252,.24) 66%,transparent 69%,transparent 81%,rgba(236,255,252,.34) 84%,transparent 88%);
+  mix-blend-mode:screen;
+  animation:depth-rays-sway-2 11s cubic-bezier(.45,0,.55,1) infinite alternate;
+}
+.depth-rays.is-dormant{visibility:hidden}
+.depth-rays.is-dormant::before,.depth-rays.is-dormant::after{animation-play-state:paused}
+@keyframes depth-rays-sway{
+  0%{transform:translate3d(-2.5%,0,0) skewX(-4deg);opacity:.75}
+  50%{opacity:1}
+  100%{transform:translate3d(2.5%,0,0) skewX(3deg);opacity:.82}
+}
+@keyframes depth-rays-sway-2{
+  0%{transform:translate3d(2%,0,0) skewX(3deg);opacity:.9}
+  50%{opacity:.55}
+  100%{transform:translate3d(-2%,0,0) skewX(-2.5deg);opacity:1}
+}
+.depth-motes{width:100vw;height:100vh}
+
+@media(max-width:700px){
+  .depth-rays{opacity:calc(max(0, 1 - var(--water-depth,0) * 2.6) * .75)}
+  .depth-rays::before,.depth-rays::after{inset:-8% -40% -6%}
+}
+@media(prefers-reduced-motion:reduce){
+  .depth-rays::before,.depth-rays::after{animation:none;transform:none}
+}
+@media(prefers-reduced-transparency:reduce){.depth-rays{display:none}}
+@media(forced-colors:active){.depth-rays,.depth-motes{display:none}}
