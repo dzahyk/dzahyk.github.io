@@ -103,14 +103,14 @@
 }
 @media(forced-colors:active){.credentials>.page-width,.cred-card{background:Canvas;color:CanvasText}.credentials *{color:CanvasText!important}}
 
-/* ---------- Hero proof points ---------- */
-.hero-proof{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:8px}
-.hero-proof a{display:grid;grid-template-columns:4.2em minmax(0,1fr);align-items:baseline;gap:10px;padding:8px 0;border-top:1px solid var(--line);text-decoration:none}
-.hero-proof li:last-child a{border-bottom:1px solid var(--line)}
-.hero-proof strong{font-size:clamp(20px,1.6vw,24px);font-weight:800;letter-spacing:-.03em;line-height:1}
+/* ---------- Hero proof points: one full-width strip under the hero ---------- */
+.hero-proof{grid-column:1/-1;list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,3vw,48px);margin:clamp(28px,3vw,40px) 0 0;padding:18px 0 0;border-top:1px solid var(--line)}
+.hero-proof a{display:flex;align-items:baseline;gap:12px;text-decoration:none}
+.hero-proof strong{flex:none;font-size:clamp(24px,2.2vw,32px);font-weight:800;letter-spacing:-.04em;line-height:1}
 .hero-proof span{font-size:14px;line-height:1.4;color:#27465a}
 .hero-proof a:hover span{text-decoration:underline;text-underline-offset:3px}
-@media(max-width:700px){.hero-aside .hero-proof{grid-column:1/-1;margin:8px 0 0}}
+.hero-proof+.hero-meta{margin-top:18px}
+@media(max-width:700px){.hero-proof{grid-template-columns:minmax(0,1fr);gap:12px;margin-top:28px}.hero-proof a{align-items:center}.hero-proof strong{min-width:2.4em;font-size:24px}}
 
 /* ---------- Selected work: flagship group, then the rest ---------- */
 .work-group-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin:clamp(56px,6vw,88px) 0 24px;padding-bottom:16px;border-bottom:1px solid var(--line)}
