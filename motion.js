@@ -10,7 +10,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const header = document.querySelector('.site-header');
   const navLinks = [...document.querySelectorAll('.site-nav a[href^="#"],.mobile-menu a[href^="#"]')];
-  const sections = [...document.querySelectorAll('#work,#about,#services,#process,#contact')];
+  const sections = [...document.querySelectorAll('#work,#skills,#experience,#process,#contact')];
   const aboutSection = document.getElementById('about');
   // The long-form About controller owns its ink and scene together. Retain the
   // legacy ink only on pages without that narrative, including static fallback.

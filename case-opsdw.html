@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#bce4ed">
+  <meta name="description" content="OpsDW: a PostgreSQL warehouse for a fictional delivery platform, with incremental ETL, data-quality gates, 18 tested SQL queries, measured query performance and a KPI reconciliation across SQL, a Power BI-ready model and a dashboard. Synthetic data; tested locally; not deployed.">
+  <title>OpsDW — Case study</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Hanken+Grotesk:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="layout.css">
+  <link rel="stylesheet" href="background.css">
+  <link rel="stylesheet" href="case-study.css">
+</head>
+<body class="case-page">
+  <a class="skip-link" href="#caseMain">Skip to content</a>
+  <header class="case-header">
+    <a class="case-brand" href="index.html" data-brand>DAFFA ZAHY KHAIRY</a>
+    <nav aria-label="Case study navigation"><a href="index.html#work">All work</a><a href="index.html#services">Services</a><a href="contact.html">Contact</a></nav>
+  </header>
+  <main id="caseMain" tabindex="-1">
+
+    <section class="case-hero page-width" aria-labelledby="caseTitle">
+      <span class="case-kicker">Analytics engineering / prototype</span>
+      <div class="case-hero-row"><h1 id="caseTitle">OpsDW</h1><p>One definition per KPI, and proof that the SQL, the BI model and the dashboard all report the same number.</p></div>
+      <div class="case-meta"><span class="case-chip" data-case-position>01 / 08</span><span class="case-chip">SQL &amp; data modelling</span><span class="case-chip">Synthetic data</span><span class="case-chip">Not deployed</span></div>
+      <dl class="case-facts">
+        <div><dt>Role</dt><dd>Solo — KPI definitions, data model, SQL, data-quality rules, testing; implemented with AI coding agents under my direction</dd></div>
+        <div><dt>Stack</dt><dd>PostgreSQL 18, Python + uv, pytest, Docker Compose, DAX (text only)</dd></div>
+        <div><dt>Timeline</dt><dd>November 2026</dd></div>
+        <div><dt>Status</dt><dd>Built · tested locally · not deployed, no public repo</dd></div>
+      </dl>
+    </section>
+
+    <figure class="case-image page-width">
+      <div class="case-image-wrap"><img src="assets/projects/opsdw.webp" width="1600" height="1000" alt="Delivery operations KPI dashboard labelled Synthetic data: city and month filters, eight KPI tiles such as GMV Rp 167.7M and order completion rate 92.6 percent for December 2025, and charts of monthly GMV, completion and on-time rate, and P90 delivery time" decoding="async" fetchpriority="high"></div>
+      <figcaption><span>The dashboard, built from the development dataset (24,479 orders). Every value on it is checked against the KPI SQL.</span><span data-case-position>01 / 08</span></figcaption>
+    </figure>
+
+    <section class="case-story page-width" aria-labelledby="problemTitle"><span class="case-section-label">THE PROBLEM</span><div>
+      <h2 id="problemTitle">Two dashboards, two different GMVs.</h2>
+      <p>Operations teams lose trust in numbers in familiar ways: a late delivery update never reaches the report, a merchant’s new commission tier is applied to last year’s orders, a city P90 is averaged into a national P90, and the BI tool quietly disagrees with the analyst’s SQL.</p>
+      <p>OpsDW is a small but complete warehouse for a fictional on-demand delivery platform in six Indonesian cities, built to show that each of those failures is caught by design or by a test. All data comes from a seeded generator that also writes down every defect it injects, so the pipeline can be checked against a known answer.</p>
+    </div></section>
+
+    <section class="case-decision-band" aria-labelledby="decisionsTitle"><div class="page-width">
+      <div class="case-decision-heading"><div><span class="case-section-label">WHAT WAS BUILT</span><h2 id="decisionsTitle">Every layer has a check.</h2></div><p>Landing files → raw → staging → star schema → mart → BI views → dashboard.</p></div>
+      <ol class="case-decisions">
+        <li><span>01</span><h3>Incremental, idempotent ETL</h3><p>Each run takes only rows after a watermark, merges them, and commits the watermark in the same transaction. Late, out-of-order and duplicate records are handled; a crash rolls back cleanly. A test proves 53 incremental runs produce exactly the same tables as one full rebuild.</p></li>
+        <li><span>02</span><h3>History kept where it changes money</h3><p>Merchant commission tiers are a type-2 slowly changing dimension, so an order is charged the tier valid when it was placed. One query measures how wrong historical commission would be if the current tier were used instead.</p></li>
+        <li><span>03</span><h3>A data-quality gate that can fail</h3><p>43 checks — uniqueness, referential integrity, accepted values, business rules, history integrity, freshness and layer-to-layer row and sum reconciliation. Ten sabotage tests break the data on purpose and the gate must exit with an error each time.</p></li>
+        <li><span>04</span><h3>One KPI, three places, one number</h3><p>Eleven KPIs are defined once (question, numerator, denominator, grain, filters, caveats). The same values are computed by the canonical SQL, by the Power BI-ready model’s logic, and by the dashboard, then compared cell by cell. Tests check the comparison catches a wrong roll-up, such as averaging city percentiles.</p></li>
+      </ol>
+    </div></section>
+
+    <section class="case-story page-width" aria-labelledby="resultsTitle"><span class="case-section-label">RESULTS ON SYNTHETIC DATA</span><div>
+      <h2 id="resultsTitle">Measured on 800,100 orders.</h2>
+      <p>Benchmark volume: 800,100 orders and 3.58 million order events over two years, plus injected duplicates and corrupt rows. Each query ran seven times with <code>EXPLAIN (ANALYZE, BUFFERS)</code>; the median is shown. “Before” is the same data with no indexes and no partitioning.</p>
+      <div class="case-table-wrap"><table class="case-table">
+        <thead><tr><th scope="col">Query</th><th scope="col">Physical design</th><th scope="col" class="num">Before → after</th></tr></thead>
+        <tbody>
+          <tr><td>One month by city</td><td>Index on order date</td><td class="num">21.6 → 11.3 ms</td></tr>
+          <tr><td>A customer’s latest 20 orders</td><td>Composite index</td><td class="num">23.0 → 0.02 ms</td></tr>
+          <tr><td>Hourly deliveries over 7 days</td><td>Monthly partitions + index</td><td class="num">44.8 → 1.7 ms</td></tr>
+          <tr><td>One courier’s active days in a quarter</td><td>Partial index</td><td class="num">48.4 → 0.33 ms</td></tr>
+          <tr><td>24-month dashboard trend</td><td>Pre-aggregated mart</td><td class="num">75.9 → 1.1 ms</td></tr>
+        </tbody>
+      </table></div>
+      <div class="case-table-wrap"><table class="case-table">
+        <thead><tr><th scope="col">Check</th><th scope="col" class="num">Result</th></tr></thead>
+        <tbody>
+          <tr><td>KPI reconciliation: 11 KPIs × 24 months × 7 city views</td><td class="num">1,848 cells · 0 mismatches</td></tr>
+          <tr><td>Data-quality gate on the benchmark data</td><td class="num">42 pass · 1 expected warning · 0 fail</td></tr>
+          <tr><td>Fact orders vs the generator’s ground truth</td><td class="num">799,947 = 800,100 − 153 corrupt-only</td></tr>
+          <tr><td>Initial load of 4.4 million raw rows (ingest + transform)</td><td class="num">22.9 s + 93.3 s</td></tr>
+          <tr><td>Daily incremental run (~10,500 raw rows)</td><td class="num">2.0–3.5 s</td></tr>
+        </tbody>
+      </table></div>
+      <p class="case-table-note">All figures come from one run on one laptop (Docker VM, 4 vCPU, warm cache) against invented data. They show the effect of the physical design, not production latency, and say nothing about any real company. The benchmark volume also exposed a bug the small dataset could not: one load step became quadratic once its key list outgrew memory, and was rewritten as a join.</p>
+    </div></section>
+
+    <section class="case-story page-width" aria-labelledby="builtTitle"><span class="case-section-label">THE QUERIES &amp; THE DASHBOARD</span><div>
+      <h2 id="builtTitle">Eighteen questions, each with a known answer.</h2>
+      <p>The analytical queries cover cohort retention, an order funnel, rolling 28-day active customers, delivery-time percentiles, courier streaks (gaps and islands), top merchants per city, RFM segments, repeat rate, year-over-year growth, Pareto concentration and a 7-day moving average. Each runs against a small hand-built dataset in a test and must return the result worked out by hand.</p>
+      <div class="case-gallery">
+        <figure><img src="assets/projects/opsdw-table.webp" width="1600" height="1000" alt="Monthly active customers chart rising to 620 and a table of all eleven KPIs by month, from orders created to monthly active customers, with the note that data is synthetic and ratios are re-derived from summed numerators and denominators" loading="lazy" decoding="async"><figcaption>Every chart value is also in a table, for anyone who cannot read the charts.</figcaption></figure>
+        <figure><img src="assets/projects/opsdw-filtered.webp" width="1600" height="1000" alt="The same dashboard filtered to Bandung and the last 12 months: GMV Rp 26.4M, 220 delivered orders, completion rate 88.0 percent, P90 delivery time 55.7 minutes" loading="lazy" decoding="async"><figcaption>Filtered to one city: ratios and percentiles are recomputed for that city, never averaged.</figcaption></figure>
+        <figure><img src="assets/projects/opsdw-dark.webp" width="1600" height="1000" alt="Dashboard in dark mode showing monthly GMV, completion and on-time rate, P90 delivery time and monthly active customers charts above the KPI table" loading="lazy" decoding="async"><figcaption>Dark mode follows the system setting.</figcaption></figure>
+        <figure class="case-shot--portrait"><img src="assets/projects/opsdw-mobile.webp" width="647" height="1400" alt="Dashboard on a phone: filters above two columns of KPI tiles" loading="lazy" decoding="async"><figcaption>On a phone.</figcaption></figure>
+      </div>
+    </div></section>
+
+    <section class="case-check page-width" aria-labelledby="checkTitle"><div><span class="case-section-label">EVIDENCE &amp; LIMITS</span><h2 id="checkTitle">Tested on one laptop. No Power BI file.</h2></div><div>
+      <p>One script rebuilds everything from scratch and runs every check: re-running the transform must change nothing, the data-quality gate must pass, the reconciliation must show zero mismatches, and 54 tests must pass (ETL behaviour, query results, sabotage cases, reconciliation). Last run: 12 November 2026, all passing. An independent code review afterwards found six issues, including invalid values such as “NaN” slipping through validation; each was fixed with a regression test.</p>
+      <ul><li><strong>Not yet:</strong> a <code>.pbix</code> file — the semantic model is delivered as views, documented relationships and DAX text, and the DAX itself has never been run (no Power BI on macOS; only its SQL equivalent is tested). Also no scheduler or alerting, no deployment, no public repository.</li><li>The dashboard is static HTML regenerated by a command, not a live BI tool.</li><li>The code was written with AI coding agents under my direction; the results above come from the runs recorded in the repository.</li></ul>
+      <span class="case-honesty">Fictional business and synthetic data; no user, client, deployment or business result is claimed.</span>
+    </div></section>
+  </main>
+  <footer class="case-bottom"><div class="page-width case-bottom-inner"><div><span class="case-section-label">HIRING / NEXT</span><h2>Need an analyst<br>who builds?</h2><a href="contact.html">Get in touch ↗</a></div><div class="case-bottom-next"><span class="case-next-index">NEXT PROJECT</span><a data-case-next href="case-laras.html">LARAS ↗</a></div></div></footer>
+  <div class="case-page-footer page-width"><span data-brand>DAFFA ZAHY KHAIRY</span><span>Prototypes on synthetic data · © <span data-year>2026</span></span></div>
+  <script src="config.js"></script>
+  <script src="projects.js"></script>
+  <script src="case-study.js"></script>
+</body>
+</html>

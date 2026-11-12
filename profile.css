@@ -35,6 +35,10 @@
 .more-card{display:flex;flex-direction:column;min-width:0}
 .more-card .media-frame{flex:none;border-radius:10px;background:#dae2e4;box-shadow:0 8px 22px rgba(0,0,0,.08)}
 .more-card .media-frame>img{object-position:top left}
+/* Text-only frame for a project with test evidence but no published screenshot. */
+.more-card .more-evidence{display:flex;flex-direction:column;justify-content:flex-end;gap:2px;padding:clamp(12px,1.4vw,18px);background:var(--ink);color:#e8f1f3;font:500 11px/1.45 var(--mono);letter-spacing:.03em}
+.more-evidence-note{position:absolute;top:clamp(12px,1.4vw,18px);left:clamp(12px,1.4vw,18px);color:#b9c9d0;text-transform:uppercase;letter-spacing:.05em}
+.more-evidence-figure{margin-bottom:4px;font:800 clamp(28px,2.6vw,38px)/1 var(--sans);letter-spacing:-.04em}
 .more-tag{display:block;margin-top:14px;color:var(--orange);font:500 11px/1.4 var(--mono);letter-spacing:.05em;text-transform:uppercase}
 .more-card h4{margin:6px 0 0;font-size:19px;line-height:1.2;letter-spacing:-.025em}
 .more-card p{margin:6px 0 0;color:var(--muted);font-size:14px;line-height:1.5}
@@ -98,3 +102,59 @@
   .credentials>.page-width{-webkit-backdrop-filter:none;backdrop-filter:none;background:#0b2233}
 }
 @media(forced-colors:active){.credentials>.page-width,.cred-card{background:Canvas;color:CanvasText}.credentials *{color:CanvasText!important}}
+
+/* ---------- Hero proof points ---------- */
+.hero-proof{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:8px}
+.hero-proof a{display:grid;grid-template-columns:4.2em minmax(0,1fr);align-items:baseline;gap:10px;padding:8px 0;border-top:1px solid var(--line);text-decoration:none}
+.hero-proof li:last-child a{border-bottom:1px solid var(--line)}
+.hero-proof strong{font-size:clamp(20px,1.6vw,24px);font-weight:800;letter-spacing:-.03em;line-height:1}
+.hero-proof span{font-size:14px;line-height:1.4;color:#27465a}
+.hero-proof a:hover span{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:700px){.hero-aside .hero-proof{grid-column:1/-1;margin:8px 0 0}}
+
+/* ---------- Selected work: flagship group, then the rest ---------- */
+.work-group-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin:clamp(56px,6vw,88px) 0 24px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.work-group-head h3{margin:0;font-size:clamp(26px,2.4vw,34px);font-weight:800;line-height:1.05;letter-spacing:-.04em}
+.work-group-head p{max-width:42ch;margin:0;color:var(--muted);font-size:clamp(15px,1.1vw,17px);line-height:1.5}
+@media(min-width:901px){.project-grid--more{grid-template-columns:repeat(4,minmax(0,1fr))}.project-grid--more .project-caption{flex-direction:column;gap:3px}.project-grid--more .project-caption strong{font-size:19px}}
+@media(max-width:700px){.work-group-head{display:block}.work-group-head p{margin-top:10px}}
+
+/* ---------- Skills in practice: capability → where → proof → level ---------- */
+.skills{background:rgba(236,247,249,.62);border-block:1px solid rgba(246,252,253,.7)}
+.skills .section-heading{margin-bottom:28px}
+.skill-key,.skill-row{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.75fr) minmax(0,1.7fr) minmax(0,.8fr);gap:clamp(16px,2vw,32px)}
+.skill-key{padding:0 0 10px;border-bottom:1px solid var(--ink);color:var(--muted);font:500 11px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.skill-list{list-style:none;margin:0;padding:0}
+.skill-row{padding:clamp(18px,2vw,26px) 0;border-bottom:1px solid var(--line);align-items:start}
+.skill-cap h3{margin:0;font-size:clamp(19px,1.5vw,22px);font-weight:700;line-height:1.2;letter-spacing:-.025em}
+.skill-tags{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0;padding:0}
+.skill-tags li{padding:3px 8px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.55);color:#27465a;font:500 11px/1.4 var(--mono);letter-spacing:.01em}
+.skill-evidence{display:contents;margin:0}
+.skill-evidence>div{min-width:0}
+.skill-evidence dt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skill-evidence dd{margin:0;font-size:clamp(15px,1.1vw,16px);line-height:1.5;color:#2d4c5d}
+.skill-where dd{font-weight:600;color:var(--ink)}
+.skill-where a{text-underline-offset:3px}
+.skill-level dd{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.level{display:inline-block;padding:4px 8px;border-radius:6px;font:500 11px/1.35 var(--mono);letter-spacing:.02em}
+.level--built{background:#152c3e;color:#f1f8f7}
+.level--proto{background:#fff;color:#152c3e;border:1px solid var(--line)}
+.level--paper{background:#a83e1d;color:#fff}
+.level--work{background:#dcecef;color:#152c3e;border:1px solid var(--line)}
+.skill-note{max-width:72ch;margin:20px 0 0;color:var(--muted);font-size:14px;line-height:1.55}
+@media(max-width:900px){
+  .skill-key{display:none}
+  .skill-row{grid-template-columns:minmax(0,1fr);gap:12px;border-top:0}
+  .skill-list{border-top:1px solid var(--ink)}
+  .skill-evidence{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+  .skill-evidence>div{display:grid;grid-template-columns:6.5em minmax(0,1fr);gap:12px;align-items:baseline}
+  .skill-evidence dt{position:static;width:auto;height:auto;overflow:visible;clip:auto;white-space:normal;color:var(--muted);font:500 11px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+  .skill-level dd{flex-direction:row;flex-wrap:wrap}
+}
+
+/* ---------- How I work: the question leads in ---------- */
+.process-kicker{display:inline-block;margin-bottom:14px;padding:4px 10px;border-radius:6px;background:rgba(8,32,50,.62);color:#ffd9b8;font:500 13px/1.4 var(--mono);letter-spacing:.04em}
+.process-lede{max-width:46ch;margin:18px 0 0;color:#f4fafa;font-size:clamp(16px,1.3vw,19px);line-height:1.5;text-shadow:0 1px 2px rgba(8,32,50,.55),0 0 18px rgba(8,32,50,.5)}
+body:not(.chapter-scroll-active) .process-lede{color:var(--muted)}
+
+[data-cv-link][hidden]{display:none!important}

@@ -5,7 +5,7 @@
   const breath = document.getElementById('breath');
   const process = document.getElementById('process');
   const footer = document.getElementById('contact');
-  if (!page || !work || !breath || !footer) return;
+  if (!page || !work || !footer) return;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const arts = [...document.querySelectorAll('.project-card .project-art')];
   const services = [...document.querySelectorAll('.service-row')];
@@ -72,10 +72,8 @@
     page.style.setProperty('--water-light', (1 - .76 * shade).toFixed(3));
     page.style.setProperty('--water-depth', depth.toFixed(3));
     // The pause fills only while its sticky panel is held in the viewport.
-    const breathTop = breath.getBoundingClientRect().top;
-    const breathTravel = Math.max(1, breath.offsetHeight - viewport);
-    const pause = clamp(-breathTop / breathTravel);
-    breath.style.setProperty('--breath-progress', pause.toFixed(3));
+    const pause = breath ? clamp(-breath.getBoundingClientRect().top / Math.max(1, breath.offsetHeight - viewport)) : 1;
+    breath?.style.setProperty('--breath-progress', pause.toFixed(3));
     breathLetters.forEach((letter, index) => letter.classList.toggle('is-inked', reduced.matches || index < Math.ceil(pause * breathLetters.length)));
     let opened = 0;
     arts.forEach(art => {

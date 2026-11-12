@@ -26,6 +26,12 @@ document.querySelectorAll('[data-profile-link]').forEach(link => {
   if (url) link.href = url; else link.replaceWith(document.createTextNode(link.textContent));
 });
 // Project totals come from the list, so adding a project never leaves a stale "03".
+document.querySelectorAll('[data-cv-link]').forEach(link => {
+  if (!siteConfig.cvUrl) return;
+  link.href = siteConfig.cvUrl;
+  link.setAttribute('download', '');
+  link.hidden = false;
+});
 document.querySelectorAll('[data-project-total]').forEach(element => { element.textContent = String(projects.length).padStart(2, '0'); });
 document.title = siteConfig.siteTitle || siteConfig.name;
 document.getElementById('year').textContent = new Date().getFullYear();

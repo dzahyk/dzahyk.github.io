@@ -4,9 +4,9 @@
   const glass = nav?.querySelector('.nav-section-glass');
   const grab = nav?.querySelector('.nav-glass-grab');
   if (!nav || !glass || !grab) return;
-  const links = [...nav.querySelectorAll('a[href="#work"],a[href="#about"],a[href="#services"]')];
+  const links = [...nav.querySelectorAll('a[href="#work"],a[href="#skills"],a[href="#experience"]')];
   if (links.length !== 3) return;
-  const sections = [...document.querySelectorAll('#work,#about,#services,#process,#contact')];
+  const sections = [...document.querySelectorAll('#work,#skills,#experience,#process,#contact')];
   const desktop = matchMedia('(min-width:900px)');
   const fine = matchMedia('(hover:hover) and (pointer:fine)');
   const reduced = matchMedia('(prefers-reduced-motion:reduce)');
