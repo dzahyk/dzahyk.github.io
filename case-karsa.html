@@ -59,7 +59,7 @@
       <blockquote class="case-quote"><span class="case-quote-label">From the product spec</span><p>AI proposes, business rules calculate, people authorize, the system executes in a bounded way, and evaluators check the results.</p></blockquote>
     </div></section>
     <section class="case-story page-width" aria-labelledby="resultsTitle"><span class="case-section-label">EVALUATION</span><div>
-      <h2 id="resultsTitle">24 of 24 on my own cases, 1 of 36 on new ones.</h2>
+      <h2 id="resultsTitle">1 of 36, then 21 of 50 on new briefs. Still below the gate.</h2>
       <div class="case-table-wrap"><table class="case-table">
         <thead><tr><th scope="col">Check</th><th scope="col" class="num">Result</th></tr></thead>
         <tbody>
@@ -67,13 +67,17 @@
           <tr><td>Browser tests (full journey, sign-in and tenancy, mobile dual approval, keyboard-only reject)</td><td class="num">16 passing</td></tr>
           <tr><td>Pages scanned with axe (WCAG 2.2 A/AA), no serious issues</td><td class="num">12</td></tr>
           <tr><td>Pricing equal to hand-computed values</td><td class="num">60 / 60</td></tr>
-          <tr><td>Extraction rules on the dev split (used while writing them)</td><td class="num">24 / 24</td></tr>
-          <tr><td>Extraction rules on the independent held-out split</td><td class="num">1 / 36 · F1 0.78</td></tr>
-          <tr><td>Prompt-injection briefs flagged (held-out)</td><td class="num">2 / 4</td></tr>
-          <tr><td>Release gate</td><td class="num">Failed</td></tr>
+          <tr><td>Run 1 · original rules on the dev split (used while writing them)</td><td class="num">24 / 24</td></tr>
+          <tr><td>Run 1 · original rules on held-out v1 (36 new briefs)</td><td class="num">1 / 36 · F1 0.78</td></tr>
+          <tr><td>Run 2 · revised rules on held-out v2 (50 briefs frozen before the revision)</td><td class="num">21 / 50 · 95% CI 29–56%</td></tr>
+          <tr><td>Run 2 · original rules on the same v2 set, for comparison</td><td class="num">4 / 50</td></tr>
+          <tr><td>Run 2 · lead definition found when stated (recall)</td><td class="num">0.14 → 0.84</td></tr>
+          <tr><td>Run 2 · new prompt-injection phrasings flagged</td><td class="num">1 / 6</td></tr>
+          <tr><td>Release gate (≥ 70% pass, every injection caught), both runs</td><td class="num">Failed</td></tr>
         </tbody>
       </table></div>
-      <p class="case-table-note">Synthetic data and automated tests only. The extractor is a rule-based baseline, not an LLM; the optional Claude provider is built but not yet evaluated live. The gap between 24/24 and 1/36 is the point of keeping a held-out set.</p>
+      <p class="case-table-note">Synthetic data and automated tests only. The extractor is a rule-based baseline, not an LLM; the optional Claude provider is built but not yet evaluated live. For run 2, the v2 set and the gate were committed before the rules changed, the revision used only the dev split and held-out v1, and v2 was scored once. I wrote v2 myself and no second person has checked its labels yet, so read it as my own measurement, not an independent audit.</p>
+      <p><a href="demos/karsa-brief-checker/">Try the extractor yourself</a>. It runs the exact rule file that was scored, in your browser, with an example that it misses.</p>
     </div></section>
     <section class="case-decision-band" aria-labelledby="decisionsTitle"><div class="page-width">
       <div class="case-decision-heading"><div><span class="case-section-label">DESIGN RULES</span><h2 id="decisionsTitle">Every step can say no.</h2></div><p>Each rule stops the model, or the system, from making a business call or a silent change.</p></div>
@@ -81,7 +85,7 @@
         <li><span>01</span><h3>A source, or visibly missing</h3><p>Every extracted value carries its exact quote and character range (or PDF page). “To be determined” becomes Missing; two budgets become Conflicting. Client answers need a checkable reference, and an analyst's note is labelled apart from the client's own words.</p></li>
         <li><span>02</span><h3>Approving is not executing</h3><p>A package is frozen with a SHA-256 hash and approval binds to it; any change creates a new version. Below-floor margins need a written exception and two different approvers. Execution needs a separate authorization of each sandbox action.</p></li>
         <li><span>03</span><h3>Failures stay visible</h3><p>Work runs through a transactional outbox and a worker with leases. Writes are idempotent, so retries never duplicate. An unknown outcome disables blind retry until someone checks the target; escalations and cancellations land in an exception queue.</p></li>
-        <li><span>04</span><h3>Measure on held-out data</h3><p>The rules score 24/24 on the cases used to write them, but 1/36 on an independently written held-out set. The release gate fails, and the app shows it instead of the flattering number.</p></li>
+        <li><span>04</span><h3>Measure on held-out data</h3><p>The rules scored 24/24 on the cases used to write them, but 1/36 on new briefs. Rewritten and tested on 50 more, they reach 21/50 and still miss 5 of 6 new injection phrasings. The release gate fails, and the app shows it instead of the flattering number.</p></li>
       </ol>
     </div></section>
     <section class="case-story page-width" aria-labelledby="usersTitle"><span class="case-section-label">ROLES</span><div>
@@ -116,7 +120,7 @@
     </div></section>
     <section class="case-check page-width" aria-labelledby="checkTitle"><div><span class="case-section-label">LIMITS</span><h2 id="checkTitle">Stale approvals get a 409. Frozen packages refuse edits.</h2></div><div>
       <p>Stale approvals return 409 and self-review 403; editing a frozen package is refused by a database trigger and, with the trigger removed, still stopped by the hash check; a crashed worker's job is re-claimed without a duplicate write; the full journey runs in a real browser against the real worker, on desktop and at 390 px.</p>
-      <ul><li><strong>Not yet:</strong> a live Claude evaluation, SSO/MFA, real CRM or tracker connectors, OCR, a hosted demo, manual screen-reader testing, or real users.</li><li>The held-out result shows the rule-based extractor does not generalise; the next step is to evaluate the Claude provider on the same set, or rewrite the rules and test them on a new held-out set.</li></ul>
+      <ul><li><strong>Not yet:</strong> a live Claude evaluation, SSO/MFA, real CRM or tracker connectors, OCR, a hosted version of the full app, manual screen-reader testing, a second person checking the v2 labels, or real users.</li><li>Two held-out runs show a pattern list does not generalise to new phrasing, and that injection detection cannot rest on it. The next step is to run the Claude provider on dev, v1 and v2 under the same gate; any further rule change needs a new v3 set.</li><li>The business-analysis pack (BRD, 24 functional requirements with acceptance criteria, AS-IS/TO-BE BPMN, traceability, scripted UAT, a change-impact example) is in the project repository, which is not public yet.</li></ul>
       <span class="case-honesty">Synthetic tenants and cases; no client, user or business result is claimed.</span>
     </div></section>
   </main>
