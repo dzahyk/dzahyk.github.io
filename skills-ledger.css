@@ -1,0 +1,83 @@
+/* Skills ledger: a tally of proof levels, ruled columns, then each row reads claim → proof → stamped level.
+   Every state below is gated on classes that skills-ledger.js adds, so without JS the table is simply visible.
+   Scroll progress arrives as --ledger (column key) and --p (each row), both 0–1. */
+
+/* ---------- Tally: how far each piece of proof goes, counted ---------- */
+.skill-tally{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0 0 clamp(30px,3.4vw,48px);padding:0;border-top:1px solid var(--line)}
+.skill-tally li{display:flex;flex-direction:column;gap:10px;min-width:0;padding:18px clamp(12px,1.6vw,26px) 2px;border-left:1px solid var(--line)}
+.skill-tally li:first-child{padding-left:0;border-left:0}
+.skill-tally b{font:800 clamp(40px,4.2vw,64px)/.88 var(--sans);letter-spacing:-.045em;color:var(--ink);font-variant-numeric:tabular-nums}
+.skill-tally span{display:flex;align-items:flex-start;gap:8px;color:#27465a;font:500 11px/1.4 var(--mono);letter-spacing:.05em;text-transform:uppercase}
+.skill-tally i{flex:none;width:10px;height:10px;margin-top:2px;border-radius:3px;border:1px solid var(--line)}
+.skill-tally .tally--built i{background:#152c3e;border-color:#152c3e}
+.skill-tally .tally--proto i{background:#fff}
+.skill-tally .tally--paper i{background:#a83e1d;border-color:#a83e1d}
+.skill-tally .tally--work i{background:#dcecef}
+.skill-tally.is-armed li{opacity:0;translate:0 12px;transition:opacity 520ms var(--ease-out),translate 760ms var(--ease-out);transition-delay:calc(var(--n,0) * 90ms)}
+.skill-tally.is-armed.is-counted li{opacity:1;translate:none}
+
+/* ---------- The column key is ruled, then labelled column by column ---------- */
+.skills.is-staged .skill-key{position:relative;border-bottom-color:transparent}
+.skills.is-staged .skill-key::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--ink);transform-origin:0 50%;transform:scaleX(var(--ledger,0))}
+.skills.is-staged .skill-key span{--k:clamp(0,calc((var(--ledger,0) - var(--at,0)) * 4.5),1);opacity:var(--k);translate:0 calc((1 - var(--k)) * 7px)}
+.skills.is-staged .skill-key span:nth-child(1){--at:.08}
+.skills.is-staged .skill-key span:nth-child(2){--at:.28}
+.skills.is-staged .skill-key span:nth-child(3){--at:.48}
+.skills.is-staged .skill-key span:nth-child(4){--at:.68}
+
+/* ---------- Each row: claim, tags, where, proof (line by line), then the level is stamped ---------- */
+.skills.is-staged .skill-row{
+  --cap:clamp(0,calc(var(--p,0) / .32),1);
+  --where:clamp(0,calc((var(--p,0) - .26) / .24),1);
+  --proof:clamp(0,calc((var(--p,0) - .34) / .42),1);
+  position:relative;isolation:isolate;border-bottom-color:transparent;
+}
+.skills.is-staged .skill-row::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--line);transform-origin:0 50%;transform:scaleX(var(--p,0))}
+.skills.is-staged .skill-cap h3{opacity:var(--cap);translate:0 calc((1 - var(--cap)) * 16px)}
+.skills.is-staged .skill-tags li{--t:clamp(0,calc((var(--p,0) - .16 - var(--i,0) * .05) / .16),1);opacity:var(--t);scale:calc(.86 + .14 * var(--t))}
+.skills.is-staged .skill-tags li:nth-child(2){--i:1}.skills.is-staged .skill-tags li:nth-child(3){--i:2}.skills.is-staged .skill-tags li:nth-child(n+4){--i:3}
+.skills.is-staged .skill-where dd{opacity:var(--where);translate:calc((1 - var(--where)) * -10px) 0}
+/* The proof surfaces line by line: a soft mask edge travels down the paragraph. */
+.skills.is-staged .skill-proof dd{
+  -webkit-mask-image:linear-gradient(180deg,#000 calc(var(--proof) * 130% - 30%),transparent calc(var(--proof) * 130%));
+  mask-image:linear-gradient(180deg,#000 calc(var(--proof) * 130% - 30%),transparent calc(var(--proof) * 130%));
+}
+.skills.is-staged .skill-row:not(.is-stamped) .level{opacity:0;scale:1.22}
+.skills.is-staged .skill-row.is-stamped .level{position:relative;animation:level-stamp 560ms cubic-bezier(.2,1.6,.4,1) both}
+.skills.is-staged .skill-row.is-stamped .level+.level{animation-delay:110ms}
+.skills.is-staged .skill-row.is-stamped .level::after{content:'';position:absolute;inset:-1px;border:1.5px solid #152c3e;border-radius:inherit;opacity:0;pointer-events:none;animation:level-ripple 820ms 120ms cubic-bezier(.12,.6,.25,1) both}
+.skills.is-staged .skill-row.is-stamped .level--paper::after{border-color:#a83e1d}
+@keyframes level-stamp{0%{opacity:0;scale:1.22}55%{opacity:1;scale:.95}100%{opacity:1;scale:1}}
+@keyframes level-ripple{0%{opacity:.6;transform:scale(1)}100%{opacity:0;transform:scale(1.32,1.9)}}
+/* Keyboard readers never wait for scroll. */
+.skills.is-staged .skill-row:focus-within{--p:1!important}
+
+/* ---------- Hover: a caustic glint crosses the row; project names preview their case study ---------- */
+@media(hover:hover) and (pointer:fine){
+  .skill-row{position:relative;isolation:isolate}
+  .skill-row::before{content:'';position:absolute;z-index:-1;inset:0 -14px;border-radius:14px;pointer-events:none;
+    background:linear-gradient(100deg,transparent 38%,rgba(255,255,255,.62) 50%,transparent 62%) no-repeat,rgba(255,255,255,.28);
+    background-size:260% 100%,100% 100%;background-position:130% 0,0 0;opacity:0;transition:opacity 260ms ease}
+  .skill-row:hover::before{opacity:1;animation:skill-glint 1100ms cubic-bezier(.3,.1,.2,1) both}
+}
+@keyframes skill-glint{from{background-position:130% 0,0 0}to{background-position:-30% 0,0 0}}
+.skill-peek{position:fixed;left:0;top:0;z-index:110;width:260px;aspect-ratio:1.6;margin:0;overflow:hidden;border:1px solid rgba(255,255,255,.85);border-radius:12px;background:#132235;box-shadow:0 18px 44px rgba(8,32,50,.28),0 2px 6px rgba(8,32,50,.12);pointer-events:none;opacity:0;transform:translate3d(var(--peek-x,0px),var(--peek-y,0px),0);scale:.92;transform-origin:0 100%;transition:opacity 180ms ease,scale 260ms var(--ease-out)}
+.skill-peek img{display:block;width:100%;height:100%;object-fit:cover;object-position:top left}
+.skill-peek figcaption{position:absolute;left:8px;bottom:8px;padding:3px 8px;border-radius:6px;background:rgba(240,249,247,.92);color:#163448;font:500 11px/1.3 var(--mono)}
+.skill-peek.is-on{opacity:1;scale:1}
+
+@media(max-width:900px){
+  .skill-tally{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .skill-tally li:nth-child(3){padding-left:0;border-left:0}
+  .skill-tally li:nth-child(n+3){margin-top:14px;border-top:1px solid var(--line)}
+}
+@media(prefers-reduced-motion:reduce){
+  .skill-tally.is-armed li{opacity:1;translate:none;transition:none}
+  .skills.is-staged .skill-row{--p:1!important}
+  .skills.is-staged .skill-key{--ledger:1!important}
+  .skills.is-staged .skill-row .level{animation:none!important;opacity:1;scale:1}
+  .skills.is-staged .skill-row .level::after{display:none}
+  .skill-row:hover::before{animation:none}
+  .skill-peek{transition:none}
+}
+@media(forced-colors:active){.skill-row::before,.skill-peek{display:none}.skills.is-staged .skill-row .level{opacity:1;scale:1;animation:none}}
