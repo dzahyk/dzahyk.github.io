@@ -38,6 +38,15 @@
 .nav-intro-running .hero-summary{animation:support-enter 460ms 2190ms var(--ease-out) both}
 .nav-intro-running .hero-preview{animation:preview-enter 420ms 2390ms var(--ease-out) both}
 .nav-intro-running .hero-meta{animation:support-enter 430ms 2190ms var(--ease-out) both}
+/* The proof strip arrives with the supporting copy, one point at a time. */
+.nav-intro-running .hero-proof>li{animation:support-enter 460ms 2240ms var(--ease-out) both}
+.nav-intro-running .hero-proof>li:nth-child(2){animation-delay:2310ms}
+.nav-intro-running .hero-proof>li:nth-child(3){animation-delay:2380ms}
+.nav-intro-running .hero-proof:focus-within>li{opacity:1;animation:none}
+/* Anything below the hero that peeks into the first screen waits for the navbar, then fades in (opacity only, so sticky chapters are untouched). */
+.nav-intro-running main>section:not(.hero){animation:intro-below-fold 520ms 2460ms ease-out both}
+.nav-intro-running main>section:not(.hero):focus-within{opacity:1;animation:none}
+@keyframes intro-below-fold{from{opacity:0}to{opacity:1}}
 .nav-intro-running .hero-actions:focus-within,.nav-intro-running .hero-aside:focus-within{opacity:1;animation:none}
 .nav-intro-running .hero-aside:focus-within .hero-identity,.nav-intro-running .hero-aside:focus-within .hero-summary,.nav-intro-running .hero-aside:focus-within .hero-preview{opacity:1;animation:none}
 @keyframes support-enter{from{opacity:0;transform:translate3d(0,12px,0)}to{opacity:1;transform:none}}
@@ -159,7 +168,7 @@
   .nav-intro-running main::before{display:none}
   .nav-intro-running .site-header,.nav-intro-running .site-brand,.nav-intro-running .site-nav a,.nav-intro-running .menu-toggle{opacity:1;filter:none;transform:none;clip-path:none;animation:none!important}
   .nav-intro-running .nav-lens::before{display:none}
-  .nav-intro-running .hero-actions,.nav-intro-running .hero-identity,.nav-intro-running .hero-summary,.nav-intro-running .hero-preview,.nav-intro-running .hero-meta{opacity:1;transform:none;animation:none!important}
+  .nav-intro-running .hero-actions,.nav-intro-running .hero-identity,.nav-intro-running .hero-summary,.nav-intro-running .hero-preview,.nav-intro-running .hero-meta,.nav-intro-running .hero-proof>li,.nav-intro-running main>section:not(.hero){opacity:1;transform:none;animation:none!important}
   .site-header,.nav-label>span,.heading-line>span,.read-word,.project-image,.project-card .project-art,.project-card .project-caption,.faq summary{transition:none!important}
   .motion-ready .reveal,.motion-ready .reveal:not(.visible) .heading-line>span,.project-open:hover .project-image,.project-open:focus-visible .project-image,.motion-ready .project-art:not(.is-seen) .project-image{opacity:1;filter:none!important;translate:none!important;transform:none!important;transition:none!important;animation:none!important}
   .motion-ready .project-card .project-art:not(.is-seen){opacity:1;clip-path:none}

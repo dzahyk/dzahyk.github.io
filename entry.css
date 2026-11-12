@@ -224,6 +224,10 @@ html.nav-seed-wait .nav-lens::before,
 .nav-intro-compact.nav-intro-running .hero-actions{animation-duration:420ms;animation-delay:2500ms}
 .nav-intro-compact.nav-intro-running .hero-identity{animation-duration:360ms;animation-delay:2550ms}
 .nav-intro-compact.nav-intro-running .hero-summary,.nav-intro-compact.nav-intro-running .hero-meta{animation-duration:360ms;animation-delay:2640ms}
+.nav-intro-compact.nav-intro-running .hero-proof>li{animation-duration:360ms;animation-delay:2680ms}
+.nav-intro-compact.nav-intro-running .hero-proof>li:nth-child(2){animation-delay:2730ms}
+.nav-intro-compact.nav-intro-running .hero-proof>li:nth-child(3){animation-delay:2780ms}
+.nav-intro-compact.nav-intro-running main>section:not(.hero){animation-duration:420ms;animation-delay:2840ms}
 .nav-intro-compact.nav-intro-running .hero-preview{animation-duration:350ms;animation-delay:2740ms}
 .nav-intro-compact.nav-intro-running .type-hint{animation-duration:300ms;animation-delay:2760ms}
 @media(min-width:701px) and (max-height:850px){
