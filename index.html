@@ -42,6 +42,7 @@
   <link rel="stylesheet" href="profile.css?v=5">
   <link rel="stylesheet" href="depth-ambient.css">
   <link rel="stylesheet" href="skills-ledger.css">
+  <link rel="stylesheet" href="work-lanes.css">
 </head>
 <body id="top">
   <div class="entry-screen" id="entryScreen" data-phase="ready" data-helper="phone">
@@ -137,6 +138,39 @@
           <h2 id="workTitle">Selected work</h2>
           <p>Four flagship builds first.<br>Every label says how far each one was tested.</p>
         </div>
+        <div class="role-lanes reveal" data-role-lanes>
+          <p class="role-lanes-label" id="roleLanesLabel">Hiring for <span aria-hidden="true">→</span> three to read first</p>
+          <div class="role-lane-tabs" role="tablist" aria-labelledby="roleLanesLabel">
+            <button type="button" role="tab" id="laneTab-ba" aria-controls="lane-ba" aria-selected="true">Business analysis</button>
+            <button type="button" role="tab" id="laneTab-data" aria-controls="lane-data" aria-selected="false" tabindex="-1">Data engineering</button>
+            <button type="button" role="tab" id="laneTab-ai" aria-controls="lane-ai" aria-selected="false" tabindex="-1">Applied AI</button>
+          </div>
+          <div class="role-lane-panel" id="lane-ba" role="tabpanel" aria-labelledby="laneTab-ba">
+            <h3 class="role-lane-title">Business analysis</h3>
+            <ol class="role-picks">
+              <li><a href="case-karsa.html"><strong>Karsa</strong><span>Request to approval to execution: seven roles, dual approval, an exception queue.</span><em>51 backend + 16 browser tests</em></a></li>
+              <li><a href="case-decision-hub.html"><strong>Decision Hub</strong><span>A free-text brief becomes validated requirements, a rule-priced quote and one approved revision.</span><em>101 backend tests · 5 browser journeys</em></a></li>
+              <li><a href="case-vera.html"><strong>Vera</strong><span>Purchase order, delivery note and invoice reconciled before anything is ready to pay.</span><em>13 domain tests · frontend demo</em></a></li>
+            </ol>
+          </div>
+          <div class="role-lane-panel" id="lane-data" role="tabpanel" aria-labelledby="laneTab-data">
+            <h3 class="role-lane-title">Data engineering</h3>
+            <ol class="role-picks">
+              <li><a href="case-opsdw.html"><strong>OpsDW</strong><span>Incremental ETL, a data-quality gate that can fail, and eleven KPIs reconciled cell by cell.</span><em>1,848 cells · 0 mismatches</em></a></li>
+              <li><a href="case-laras.html"><strong>LARAS</strong><span>Data model, a temporal split with a leakage audit, and validity gates before any rollout.</span><em>107 Python + 213 web tests</em></a></li>
+              <li><a href="case-kinetix.html"><strong>Kinetix</strong><span>Supplier scores, stock-out risk and order splits from one purchase-order dataset.</span><em>5 backend tests + 14 model checks</em></a></li>
+            </ol>
+          </div>
+          <div class="role-lane-panel" id="lane-ai" role="tabpanel" aria-labelledby="laneTab-ai">
+            <h3 class="role-lane-title">Applied AI</h3>
+            <ol class="role-picks">
+              <li><a href="case-karsa.html"><strong>Karsa</strong><span>Extraction measured on a held-out set; the release gate fails and the app says so.</span><em>24 / 24 dev · 1 / 36 held out</em></a></li>
+              <li><a href="case-laras.html"><strong>LARAS</strong><span>A ranker against popularity offline, with a bootstrap interval and the exposure bias stated.</span><em>NDCG@5 0.818 → 0.911</em></a></li>
+              <li><a href="case-retentionos.html"><strong>RetentionOS</strong><span>A 60-day churn radar with per-account drivers from exact Shapley values.</span><em>85 tests · 420 synthetic accounts</em></a></li>
+            </ol>
+          </div>
+          <p class="role-lanes-note">Synthetic or simulated data, tested locally, not deployed. Each case study says what is not proven yet.</p>
+        </div>
         <p class="work-progress" aria-hidden="true"><span id="workCounter">00</span><span class="work-progress-rule"></span><span data-project-total>03</span></p>
         <div class="project-grid project-grid--flagship">
           <article class="project-card reveal" data-project="opsdw">
@@ -144,6 +178,7 @@
               <span class="project-art"><img class="project-image" src="assets/projects/opsdw.webp" width="1600" height="1000" alt="Delivery operations KPI dashboard labelled Synthetic data: city and month filters, eight KPI tiles such as GMV and order completion rate, and charts of monthly GMV, completion and on-time rate, and P90 delivery time" loading="lazy" decoding="async"><span class="project-handoff" aria-hidden="true"><img src="assets/pixel-guide.svg" width="40" height="56" alt=""><span>One KPI, one number</span></span><span class="project-open-label" aria-hidden="true">View project ↗</span></span>
               <span class="project-caption"><span><strong>OpsDW</strong><span class="project-discipline">Analytics engineering</span></span><span class="project-number">Prototype / 01</span></span>
             </button>
+            <p class="project-proof"><strong>1,848 KPI cells reconciled · 0 mismatches</strong><span>Synthetic data · tested locally · not deployed</span></p>
             <a class="case-entry" href="case-opsdw.html">Read the OpsDW case study <span aria-hidden="true">↗</span></a>
           </article>
           <article class="project-card reveal" data-project="laras">
@@ -151,6 +186,7 @@
               <span class="project-art"><img class="project-image" src="assets/projects/laras.webp" width="1600" height="1000" alt="LARAS product page: the headline “Test which offers pay for themselves before you scale them.” above a four-step strip — eligible audience, ranked offer in budget, randomized assignment, evidence with an interval — and an experiment readout labelled Illustrative · Synthetic data" loading="lazy" decoding="async"><span class="project-handoff" aria-hidden="true"><img src="assets/pixel-guide.svg" width="40" height="56" alt=""><span>Eligibility before ranking</span></span><span class="project-open-label" aria-hidden="true">View project ↗</span></span>
               <span class="project-caption"><span><strong>LARAS</strong><span class="project-discipline">Growth experimentation</span></span><span class="project-number">Prototype / 02</span></span>
             </button>
+            <p class="project-proof"><strong>NDCG@5 0.818 → 0.911 · 95% CI [+0.079, +0.105]</strong><span>Offline, synthetic · not causal · not deployed</span></p>
             <a class="case-entry" href="case-laras.html">Read the LARAS case study <span aria-hidden="true">↗</span></a>
           </article>
           <article class="project-card reveal" data-project="decision-hub">
@@ -158,31 +194,33 @@
               <span class="project-art"><img class="project-image" src="assets/projects/decision-hub.webp" width="1600" height="1000" alt="Decision Hub product page: the headline “The model has no price field.” beside a sample brief with four quoted phrases and the rule-priced quote built from them, $102,300 at a 41.54% margin" loading="lazy" decoding="async"><span class="project-handoff" aria-hidden="true"><img src="assets/pixel-guide.svg" width="40" height="56" alt=""><span>Rule-priced quotes</span></span><span class="project-open-label" aria-hidden="true">View project ↗</span></span>
               <span class="project-caption"><span><strong>Decision Hub</strong><span class="project-discipline">AI decision workflow</span></span><span class="project-number">Prototype / 03</span></span>
             </button>
+            <p class="project-proof"><strong>0 of 60 briefs sent personal data to the model</strong><span>Synthetic data · 101 backend tests · runs locally</span></p>
             <a class="case-entry" href="case-decision-hub.html">Read the Decision Hub case study <span aria-hidden="true">↗</span></a>
-          </article>
-          <article class="project-card reveal" data-project="retentionos">
-            <button class="project-open" type="button" data-open="retentionos" data-cursor="View" aria-label="View RetentionOS, churn early warning prototype">
-              <span class="project-art"><img class="project-image" src="assets/projects/retentionos.webp" width="1600" height="1000" alt="RetentionOS guide page: the name set large behind a miniature town where one weakening connection is caught early" loading="lazy" decoding="async"><span class="project-handoff" aria-hidden="true"><img src="assets/pixel-guide.svg" width="40" height="56" alt=""><span>60-day risk radar</span></span><span class="project-open-label" aria-hidden="true">View project ↗</span></span>
-              <span class="project-caption"><span><strong>RetentionOS</strong><span class="project-discipline">Churn early warning</span></span><span class="project-number">Prototype / 04</span></span>
-            </button>
-            <a class="case-entry" href="case-retentionos.html">Read the RetentionOS case study <span aria-hidden="true">↗</span></a>
-          </article>
-        </div>
-        <div class="work-group-head reveal"><h3>More built work.</h3><p>Earlier prototypes on synthetic data, each with its own case study and tests.</p></div>
-        <div class="project-grid project-grid--more">
-          <article class="project-card reveal" data-project="kinetix">
-            <button class="project-open" type="button" data-open="kinetix" data-cursor="View" aria-label="View Kinetix, procurement analytics prototype">
-              <span class="project-art"><img class="project-image" src="assets/projects/kinetix.webp" width="1600" height="1000" alt="Kinetix landing page: “Calm procurement. Sharp decisions.” beside a glass sculpture of stacked layers" loading="lazy" decoding="async"><span class="project-handoff" aria-hidden="true"><img src="assets/pixel-guide.svg" width="40" height="56" alt=""><span>Supplier scorecard</span></span><span class="project-open-label" aria-hidden="true">View project ↗</span></span>
-              <span class="project-caption"><span><strong>Kinetix</strong><span class="project-discipline">Procurement analytics</span></span><span class="project-number">Prototype / 05</span></span>
-            </button>
-            <a class="case-entry" href="case-kinetix.html">Read the Kinetix case study <span aria-hidden="true">↗</span></a>
           </article>
           <article class="project-card reveal" data-project="decisionflow">
             <button class="project-open" type="button" data-open="decisionflow" data-cursor="View" aria-label="View Karsa, AI workflow orchestration prototype">
               <span class="project-art"><img class="project-image" src="assets/projects/karsa-landing.webp" width="1600" height="1000" alt="Karsa product page: the headline “What gets approved is what runs.” beside green and frosted glass panels, with light threads converging into a copper beam" loading="lazy" decoding="async"><span class="project-handoff" aria-hidden="true"><img src="assets/pixel-guide.svg" width="40" height="56" alt=""><span>After the yes</span></span><span class="project-open-label" aria-hidden="true">View project ↗</span></span>
-              <span class="project-caption"><span><strong>Karsa</strong><span class="project-discipline">AI workflow orchestration</span></span><span class="project-number">Prototype / 06</span></span>
+              <span class="project-caption"><span><strong>Karsa</strong><span class="project-discipline">AI workflow orchestration</span></span><span class="project-number">Prototype / 04</span></span>
             </button>
+            <p class="project-proof"><strong>AI extraction: 24 / 24 on dev, 1 / 36 held out · release gate fails</strong><span>Synthetic data · rule-based baseline · runs locally</span></p>
             <a class="case-entry" href="case-karsa.html">Read the Karsa case study <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+        <div class="work-group-head reveal"><h3>More built work.</h3><p>More prototypes on synthetic data, each with its own case study and tests.</p></div>
+        <div class="project-grid project-grid--more">
+          <article class="project-card reveal" data-project="retentionos">
+            <button class="project-open" type="button" data-open="retentionos" data-cursor="View" aria-label="View RetentionOS, churn early warning prototype">
+              <span class="project-art"><img class="project-image" src="assets/projects/retentionos.webp" width="1600" height="1000" alt="RetentionOS guide page: the name set large behind a miniature town where one weakening connection is caught early" loading="lazy" decoding="async"><span class="project-handoff" aria-hidden="true"><img src="assets/pixel-guide.svg" width="40" height="56" alt=""><span>60-day risk radar</span></span><span class="project-open-label" aria-hidden="true">View project ↗</span></span>
+              <span class="project-caption"><span><strong>RetentionOS</strong><span class="project-discipline">Churn early warning</span></span><span class="project-number">Prototype / 05</span></span>
+            </button>
+            <a class="case-entry" href="case-retentionos.html">Read the RetentionOS case study <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="project-card reveal" data-project="kinetix">
+            <button class="project-open" type="button" data-open="kinetix" data-cursor="View" aria-label="View Kinetix, procurement analytics prototype">
+              <span class="project-art"><img class="project-image" src="assets/projects/kinetix.webp" width="1600" height="1000" alt="Kinetix landing page: “Calm procurement. Sharp decisions.” beside a glass sculpture of stacked layers" loading="lazy" decoding="async"><span class="project-handoff" aria-hidden="true"><img src="assets/pixel-guide.svg" width="40" height="56" alt=""><span>Supplier scorecard</span></span><span class="project-open-label" aria-hidden="true">View project ↗</span></span>
+              <span class="project-caption"><span><strong>Kinetix</strong><span class="project-discipline">Procurement analytics</span></span><span class="project-number">Prototype / 06</span></span>
+            </button>
+            <a class="case-entry" href="case-kinetix.html">Read the Kinetix case study <span aria-hidden="true">↗</span></a>
           </article>
           <article class="project-card reveal" data-project="vera">
             <button class="project-open" type="button" data-open="vera" data-cursor="View" aria-label="View Vera, invoice reconciliation prototype">
@@ -366,7 +404,7 @@
       <div class="page-width">
         <div class="section-heading section-heading--split reveal">
           <h2 id="credentialsTitle">On paper.</h2>
-          <p>A published paper, a finished degree, and the courses behind the work.</p>
+          <p>A published paper, a completed degree, and the courses behind the work.</p>
         </div>
         <div class="cred-grid">
           <article class="cred-card reveal">
@@ -374,12 +412,13 @@
             <h3>Sensitivity Evaluation of Cardiovascular Risk Profiles for Machine Learning-Based Heart Attack Prediction</h3>
             <p>First author and presenter at ICICoS 2026, the 9th International Conference on Informatics and Computational Sciences (Universitas Diponegoro). An end-to-end pipeline with CatBoost, evaluated with F1, AUROC, AUPRC, and Brier score, and explained globally with SHAP.</p>
             <ul class="cred-meta" role="list"><li>Aug 2026</li><li>with Untari Novia Wisesty</li><li>First author</li></ul>
+            <a class="cred-paper-link" data-paper-link href="#credentials" hidden>Read the paper on IEEE Xplore <span aria-hidden="true">↗</span></a>
           </article>
           <article class="cred-card reveal">
             <span class="profile-label">Education</span>
             <h3>Telkom University</h3>
             <p>Bachelor of Informatics, School of Computing. Capstone IntelliTix — an IT change-request platform with an AI chatbot — was selected for the faculty’s computing exhibition in January 2026, with me as business analyst.</p>
-            <ul class="cred-meta" role="list"><li>2022 – 2026</li><li>Graduation 25 Nov 2026</li><li>GPA 3.69 / 4.00</li><li>English test 513</li></ul>
+            <ul class="cred-meta" role="list"><li>2022 – 2026</li><li>Graduation ceremony 25 Nov 2026</li><li>GPA 3.69 / 4.00</li><li>English test 513</li></ul>
           </article>
         </div>
         <div class="cred-lists">
@@ -446,5 +485,6 @@
   <script src="chapter-scroll.js"></script>
   <script src="depth-ambient.js"></script>
   <script src="skills-ledger.js"></script>
+  <script src="work-lanes.js"></script>
 </body>
 </html>

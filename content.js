@@ -32,6 +32,12 @@ document.querySelectorAll('[data-cv-link]').forEach(link => {
   link.setAttribute('download', '');
   link.hidden = false;
 });
+document.querySelectorAll('[data-paper-link]').forEach(link => {
+  if (!siteConfig.paperUrl) return;
+  link.href = siteConfig.paperUrl;
+  link.rel = 'noopener';
+  link.hidden = false;
+});
 document.querySelectorAll('[data-project-total]').forEach(element => { element.textContent = String(projects.length).padStart(2, '0'); });
 document.title = siteConfig.siteTitle || siteConfig.name;
 document.getElementById('year').textContent = new Date().getFullYear();

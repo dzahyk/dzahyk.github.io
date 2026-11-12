@@ -16,6 +16,8 @@ window.portfolioConfig = {
   },
   // CV download for the hero button, e.g. 'assets/cv/daffa-zahy-khairy-cv.pdf'. Empty hides the button.
   cvUrl: '',
+  // IEEE Xplore page (or https://doi.org/…) of the ICICoS 2026 paper, shown on the "On paper" card. Empty hides the link.
+  paperUrl: '',
   // Profile links. An empty string hides the link everywhere (add the GitHub URL when it is ready).
   links: {
     linkedin: 'https://www.linkedin.com/in/daffazahykhairy',

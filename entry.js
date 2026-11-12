@@ -83,7 +83,8 @@
     allowPage();
     if (focusBrand || heldFocus) {
       // Finishing the gate must not focus the header and cancel its ongoing journey.
-      const target = skip || focusBrand ? '.site-brand' : '#mainContent';
+      // A keyboard skip lands on "Skip to content", so the very next Enter reaches the page.
+      const target = focusBrand === 'skip-link' ? '.skip-link' : skip || focusBrand ? '.site-brand' : '#mainContent';
       document.querySelector(target)?.focus({ preventScroll: true });
     }
   }
@@ -159,7 +160,7 @@
   listen(document, 'keydown', event => {
     if (event.key !== 'Tab' && event.key !== 'Escape') return;
     if (event.key === 'Tab') event.preventDefault();
-    finish(true, event.key === 'Tab');
+    finish(true, event.key === 'Tab' ? 'skip-link' : false);
   }, { capture: true });
   listen(window, 'wheel', () => finish(true), { passive: true });
   listen(window, 'scroll', () => { if (scrollY > 20) finish(true); }, { passive: true });

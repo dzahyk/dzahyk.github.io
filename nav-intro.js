@@ -26,11 +26,16 @@
   }
   const atTop = resetToTop || ((window.scrollY || 0) < 80 && (!location.hash || location.hash === '#top'));
   if (atTop && !document.hidden && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // The full opening plays once; a visitor who comes back within 30 days gets the short header intro.
+    // The logo (index.html?intro=1) replays it on request.
+    const REMEMBER = 30 * 24 * 60 * 60 * 1000;
     let seenEntry = false;
     try { seenEntry = sessionStorage.getItem('sky-entry-seen') === '1'; } catch (_) {}
+    try { seenEntry = seenEntry || Date.now() - Number(localStorage.getItem('sky-entry-seen-at') || 0) < REMEMBER; } catch (_) {}
     if (root.hasAttribute('data-entry-preloader') && (!seenEntry || replayEntry)) {
       root.classList.add('entry-running');
       try { sessionStorage.setItem('sky-entry-seen', '1'); } catch (_) {}
+      try { localStorage.setItem('sky-entry-seen-at', String(Date.now())); } catch (_) {}
     } else {
       root.classList.add('nav-intro-running');
     }
