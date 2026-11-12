@@ -15,3 +15,12 @@ window.portfolioProjects = [
   { id: 'vera', label: 'Prototype · synthetic data', name: 'Vera', caseUrl: 'case-vera.html', description: 'A three-way match workspace that reconciles purchase orders, delivery notes, and vendor invoices before anything is marked ready to pay.', details: ['Role: Spec review, frontend build, QA', 'Stack: HTML, CSS, JavaScript, IndexedDB, service worker', 'Status: Frontend demo with synthetic fixtures · 13 domain tests'] },
   { id: 'tiktory', label: 'Prototype · simulated data', name: 'Tiktory', caseUrl: 'case-tiktory.html', description: 'A field-expansion planner for a fiber network: map demand, simulate cost, dispatch a surveyor, and record the manager’s decision with an audit trail.', details: ['Role: Full-stack — backend, map interface, QA', 'Stack: FastAPI, SQLite, Leaflet, vanilla JavaScript', 'Status: Local demo with simulated data · 31 API tests'] }
 ];
+
+/* Role lanes: three case studies to read first per role (ids from the list above).
+   index.html lists the same picks as static markup so they work without JavaScript; keep both in step.
+   A case page opened with ?role=<key> points its "next" link at the next project in that lane. */
+window.portfolioLanes = {
+  ba: { name: 'Business analysis', projects: ['decisionflow', 'decision-hub', 'vera'] },
+  data: { name: 'Data engineering', projects: ['opsdw', 'laras', 'kinetix'] },
+  ai: { name: 'Applied AI', projects: ['decisionflow', 'laras', 'retentionos'] }
+};

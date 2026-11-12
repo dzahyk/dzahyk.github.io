@@ -2,6 +2,17 @@
    Without this script every lane is listed in full under its own heading (see index.html).
    With it, the lanes become an ARIA tab set: arrow keys, Home and End move between roles.
    ?role=ba | data | ai in the URL opens that lane, so a link can be sent for one role. */
+/* On phones the smaller-projects list scrolls sideways: give it a keyboard stop only while it actually scrolls. */
+(() => {
+  const row = document.querySelector('.more-grid');
+  if (!row) return;
+  row.setAttribute('aria-label', 'Smaller projects');
+  const sync = () => {
+    if (row.scrollWidth > row.clientWidth + 1) row.tabIndex = 0; else row.removeAttribute('tabindex');
+  };
+  addEventListener('resize', sync, { passive: true });
+  sync();
+})();
 (() => {
   const lanes = document.querySelector('[data-role-lanes]');
   if (!lanes) return;

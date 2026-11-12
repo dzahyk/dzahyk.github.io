@@ -84,7 +84,7 @@
 .reach-copy h2{margin:20px 0 0;font-size:clamp(40px,5vw,72px);line-height:.98;letter-spacing:-.045em}
 .reach-address{padding-bottom:9px}
 .reach-address>p:first-child{max-width:30ch;margin:0 0 33px;font-size:clamp(18px,1.4vw,21px);line-height:1.42}
-.reach-label{display:block;margin-bottom:12px;color:#42606b}
+.reach-label{display:block;margin-bottom:12px;color:#27465a}
 .reach-email{font-size:clamp(22px,2vw,30px);font-weight:700;letter-spacing:-.035em;overflow-wrap:anywhere}
 .reach-email a{text-underline-offset:7px;text-decoration-thickness:1px}
 .reach-status{max-width:36ch;margin:14px 0 0;color:#8d3b20;font-size:14px;line-height:1.4}

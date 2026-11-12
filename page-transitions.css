@@ -1,0 +1,12 @@
+/* Page transitions between documents (View Transitions, level 2). Browsers without support navigate normally.
+   The page cross-fades; a project card's image grows into the case study's hero image (named by page-transitions.js
+   on the homepage, and here on the case page). Reduced motion turns the whole thing off. */
+@view-transition{navigation:auto}
+.case-page .case-image-wrap{view-transition-name:case-hero}
+::view-transition-old(root),::view-transition-new(root){animation-duration:280ms;animation-timing-function:ease}
+::view-transition-group(case-hero){animation-duration:560ms;animation-timing-function:cubic-bezier(.2,.8,.2,1)}
+::view-transition-old(case-hero),::view-transition-new(case-hero){height:100%;object-fit:cover;object-position:top left;animation-duration:420ms}
+@media(prefers-reduced-motion:reduce){
+  @view-transition{navigation:none}
+  .case-page .case-image-wrap{view-transition-name:none}
+}

@@ -10,10 +10,24 @@
   if (index >= 0) {
     const pad = value => String(value).padStart(2, '0');
     document.querySelectorAll('[data-case-position]').forEach(element => { element.textContent = `${pad(index + 1)} / ${pad(pages.length)}`; });
-    const next = pages[(index + 1) % pages.length];
+    let next = pages[(index + 1) % pages.length];
+    // Arrived from a role lane (?role=ba|data|ai): the next link stays inside that lane and keeps the role.
+    const roleKey = new URLSearchParams(location.search).get('role');
+    const lane = roleKey && window.portfolioLanes?.[roleKey];
+    const laneIds = lane ? lane.projects.filter(id => pages.some(project => project.id === id)) : [];
+    const laneIndex = laneIds.indexOf(pages[index].id);
+    let suffix = '';
+    if (laneIndex >= 0 && laneIds.length > 1) {
+      const nextId = laneIds[(laneIndex + 1) % laneIds.length];
+      next = pages.find(project => project.id === nextId);
+      suffix = `?role=${roleKey}`;
+      document.querySelectorAll('.case-next-index').forEach(label => {
+        label.textContent = `Next in ${lane.name} · ${(laneIndex + 1) % laneIds.length + 1} of ${laneIds.length}`;
+      });
+    }
     document.querySelectorAll('[data-case-next]').forEach(link => {
       if (pages.length < 2) { link.closest('.case-bottom-next')?.setAttribute('hidden', ''); return; }
-      link.href = next.caseUrl;
+      link.href = `${next.caseUrl}${suffix}`;
       link.textContent = `${next.name} ↗`;
     });
   }

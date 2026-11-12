@@ -94,3 +94,29 @@ body.case-page{background:#bce4ed}
 @media(max-width:600px){.case-header{min-height:58px;flex-wrap:wrap;gap:8px;top:10px;margin-top:10px;padding:8px 16px}.case-brand{font-size:15px}.case-header nav{width:100%;justify-content:space-between;gap:12px}.case-header nav a{display:inline-flex;align-items:center;min-height:44px;font-size:14px}.case-hero{padding-top:62px}.case-hero h1{font-size:clamp(52px,14vw,80px)}.case-hero-row{gap:28px}.case-meta{margin-top:28px}.case-chip{font-size:11px}.case-image img{aspect-ratio:1.6}.case-image figcaption{font-size:11px}.case-bottom-inner{grid-template-columns:1fr}.case-bottom-next{justify-self:start;text-align:left}.case-page-footer{flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){.case-page::before,.case-page::after{animation:none!important}}
 @media(prefers-reduced-transparency:reduce),(forced-colors:active){.case-header,.case-check{background:#edf6f5;-webkit-backdrop-filter:none;backdrop-filter:none}}
+
+/* ---------- In 30 seconds: problem, proof, limits and fit, before the story starts ---------- */
+.case-brief{margin-top:4px;margin-bottom:clamp(28px,3vw,44px)}
+.case-brief>dl,.case-brief>h2{max-width:none}
+.case-brief-label{margin:0 0 12px;color:var(--orange);font:500 12px/1.5 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.case-brief dl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0;border:1px solid rgba(255,255,255,.72);border-radius:clamp(16px,1.8vw,22px);background:linear-gradient(140deg,rgba(255,255,255,.52),rgba(236,248,248,.3));-webkit-backdrop-filter:blur(14px) saturate(1.15);backdrop-filter:blur(14px) saturate(1.15);box-shadow:0 16px 36px rgba(8,32,50,.08),inset 0 1px 0 rgba(255,255,255,.7)}
+.case-brief dl>div{min-width:0;padding:18px clamp(16px,1.6vw,22px)}
+.case-brief dl>div+div{border-left:1px solid rgba(21,44,62,.12)}
+.case-brief dt{color:#27465a;font:500 11.5px/1.4 var(--mono);letter-spacing:.05em;text-transform:uppercase}
+.case-brief dl>div:nth-child(2) dt{color:var(--orange)}
+.case-brief dd{margin:8px 0 0;color:#12293a;font-size:15.5px;line-height:1.45}
+.case-brief dl>div:nth-child(2) dd{font-weight:650}
+.case-brief dl>div:nth-child(3) dd{color:#5b2c1c}
+@media(max-width:900px){
+  .case-brief dl{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .case-brief dl>div:nth-child(3){border-left:0}
+  .case-brief dl>div:nth-child(n+3){border-top:1px solid rgba(21,44,62,.12)}
+}
+@media(max-width:560px){
+  .case-brief dl{grid-template-columns:minmax(0,1fr)}
+  .case-brief dl>div{padding:14px 16px}
+  .case-brief dl>div+div{border-left:0;border-top:1px solid rgba(21,44,62,.12)}
+  .case-brief dd{font-size:15px}
+}
+@media(prefers-reduced-transparency:reduce){.case-brief dl{-webkit-backdrop-filter:none;backdrop-filter:none;background:#eef7f6}}
+@media(forced-colors:active){.case-brief dl{border-color:CanvasText;background:Canvas}.case-brief dl>div+div{border-color:CanvasText}}

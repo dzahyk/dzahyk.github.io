@@ -17,5 +17,5 @@ html.canvas-cursor .pointer-cursor{display:block}html.canvas-cursor .pointer-cur
 @keyframes hint-in{from{opacity:0}to{opacity:1}}
 @media(max-width:1000px) and (min-width:701px){.hero-type h1{font-size:10.4vw}}
 @media(max-width:700px){.hero-type h1{font-size:18vw}.type-hint{font-size:11px}}
-@media(pointer:coarse),(hover:none){.type-hint,.pointer-cursor{display:none!important}}
+@media(pointer:coarse),(hover:none){.pointer-cursor{display:none!important}.hero-type{touch-action:pan-y;-webkit-tap-highlight-color:transparent}}
 @media(prefers-reduced-motion:reduce){.hero-type.is-particle-ready #heroParticles,.hero-handoff,.type-hint,.pointer-cursor{display:none!important}.hero-type.is-particle-ready h1{opacity:1}.wave-letter{transform:none!important}.nav-intro-running .hero-type,.nav-intro-running .type-hint{opacity:1;transform:none;animation:none!important}}

@@ -10,6 +10,7 @@
   <meta property="og:description" content="One definition per KPI, and proof that the SQL, the BI model and the dashboard all report the same number.">
   <meta property="og:site_name" content="Daffa Zahy Khairy">
   <meta property="og:url" content="https://dzahyk.github.io/case-opsdw.html">
+  <link rel="canonical" href="https://dzahyk.github.io/case-opsdw.html">
   <meta property="og:image" content="https://dzahyk.github.io/assets/og/case-opsdw.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -17,14 +18,14 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://dzahyk.github.io/assets/og/case-opsdw.jpg">
   <title>OpsDW — Case study</title>
+  <link rel="preload" href="assets/water-caustics.jpg" as="image" fetchpriority="high">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Hanken+Grotesk:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="layout.css">
-  <link rel="stylesheet" href="background.css">
-  <link rel="stylesheet" href="case-study.css">
-  <link rel="stylesheet" href="depth-ambient.css">
+  <link rel="stylesheet" href="site-b032c9cccc.css">
+  <link rel="stylesheet" href="print.css" media="print">
+  <script src="page-transitions.js"></script>
 </head>
 <body class="case-page">
   <a class="skip-link" href="#caseMain">Skip to content</a>
@@ -45,6 +46,13 @@
         <div><dt>Status</dt><dd>Built · tested locally · not deployed, no public repo</dd></div>
       </dl>
     </section>
+
+    <aside class="case-brief page-width" aria-labelledby="briefTitle"><h2 class="case-brief-label" id="briefTitle">In 30 seconds</h2><dl>
+      <div><dt>The problem</dt><dd>SQL, a BI model and a dashboard can each report a different number for the same KPI.</dd></div>
+      <div><dt>What it proves</dt><dd>11 KPIs × 24 months × 7 city views: 1,848 cells reconciled, 0 mismatches. 54 tests and a data-quality gate that can fail.</dd></div>
+      <div><dt>Not proven yet</dt><dd>No .pbix, and the DAX has never been run. No scheduler, deployment or public repository.</dd></div>
+      <div><dt>Most relevant for</dt><dd>Data engineering · analytics engineering · BI</dd></div>
+    </dl></aside>
 
     <figure class="case-image page-width">
       <div class="case-image-wrap"><img src="assets/projects/opsdw.webp" width="1600" height="1000" alt="Delivery operations KPI dashboard labelled Synthetic data: city and month filters, eight KPI tiles such as GMV Rp 167.7M and order completion rate 92.6 percent for December 2025, and charts of monthly GMV, completion and on-time rate, and P90 delivery time" decoding="async" fetchpriority="high"></div>

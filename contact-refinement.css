@@ -62,3 +62,29 @@
 }
 @media(prefers-reduced-transparency:reduce){.atlas-panel{background:#12384b}.atlas-viewport{background:#164252}}
 @media(forced-colors:active){.atlas-panel,.atlas-viewport{background:Canvas;color:CanvasText}.atlas-panel .map-panel-head h2,.atlas-panel .map-panel-head>p,.atlas-location-title h3,.atlas-location-copy>p,.atlas-location-controls>span,.atlas-panel .map-panel-foot{color:CanvasText}}
+
+/* ---------- Form states: inline errors, length, sending, sent ---------- */
+.brief-form [aria-invalid="true"]{border-color:#a83e1d!important;box-shadow:0 0 0 3px rgba(168,62,29,.14)!important}
+.brief-error{display:flex;align-items:center;gap:6px;margin-top:-2px;color:#8f3317;font-size:13px;font-weight:600}
+.brief-error::before{content:'!';display:grid;place-items:center;flex:none;width:16px;height:16px;border-radius:50%;background:#a83e1d;color:#fff;font:700 11px/1 var(--mono)}
+.brief-count{justify-self:end;margin-top:-4px;color:#4e6873;font:500 11px/1.3 var(--mono);font-variant-numeric:tabular-nums}
+.brief-count[data-near="true"]{color:#8f3317}
+.brief-form-status a{color:inherit;font-weight:700;text-underline-offset:3px}
+.brief-form-status[data-tone="busy"]{color:#27465a}
+.brief-form[aria-busy="true"] .brief-submit{position:relative;cursor:progress}
+.brief-form[aria-busy="true"] .brief-submit::after{content:'';width:16px;height:16px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:brief-spin 800ms linear infinite}
+@keyframes brief-spin{to{transform:rotate(360deg)}}
+.brief-form.is-sent>:not(.brief-sent):not(.brief-form-head):not(.brief-form-status){display:none!important}
+.brief-form.is-sent .brief-form-status{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.brief-sent{display:grid;justify-items:start;gap:10px;padding:clamp(18px,3vw,32px) 0;outline:none}
+.brief-sent[hidden]{display:none}
+.brief-sent-mark{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#1f6b45;color:#fff;font-size:22px;font-weight:700;animation:brief-sent-in 520ms cubic-bezier(.2,1.5,.4,1) both}
+.brief-sent h3{margin:6px 0 0;font-size:clamp(26px,2.6vw,34px);letter-spacing:-.035em}
+.brief-sent p{max-width:46ch;margin:0;color:#27465a;font-size:16px;line-height:1.5;overflow-wrap:anywhere}
+.brief-again{min-height:44px;margin-top:8px;padding:0 18px;border:1px solid var(--ink);border-radius:999px;background:transparent;color:var(--ink);font:600 14px/1 var(--sans);cursor:pointer}
+.brief-again:hover{background:var(--ink);color:#fff}
+.brief-again:focus-visible{outline:2px solid #a83e1d;outline-offset:3px}
+@keyframes brief-sent-in{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.brief-sent-mark{animation:none}.brief-form[aria-busy="true"] .brief-submit::after{animation:none;border-top-color:rgba(255,255,255,.35)}}
+@media(forced-colors:active){.brief-form [aria-invalid="true"]{border-color:Mark!important}.brief-error::before,.brief-sent-mark{forced-color-adjust:none;background:CanvasText;color:Canvas}}
+.brief-fields-pair{align-items:start}

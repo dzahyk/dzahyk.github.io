@@ -109,6 +109,8 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const fine = matchMedia('(hover: hover) and (pointer: fine)');
   const canAnimate = () => fine.matches && !reduced.matches;
+  // The particle heading itself also runs on touch screens; the custom cursor, hand-off and wave headings stay pointer-only.
+  const canField = () => !reduced.matches;
   const root = document.getElementById('heroType');
   const canvas = document.getElementById('heroParticles');
   const ctx = canvas.getContext('2d');
@@ -161,7 +163,7 @@
   }
   function tick(time) {
     frame = 0;
-    if (!canAnimate() || !inView || document.hidden || !field.length) return;
+    if (!canField() || !inView || document.hidden || !field.length) return;
     const elapsed = previousTime ? (time - previousTime) / (1000 / 60) : 1;
     previousTime = time;
     const radius = gestureRadius(clamp(width * .105, 70, 112), pointer);
@@ -174,9 +176,23 @@
     else previousTime = 0;
   }
   function wake() {
-    if (canAnimate() && inView && !document.hidden && field.length && !frame) {
+    if (canField() && inView && !document.hidden && field.length && !frame) {
       frame = requestAnimationFrame(tick);
     }
+  }
+  // Touch screens: say how to play, and send one ripple through the letters once so the field reads as interactive.
+  let touchHinted = false;
+  function hintTouch() {
+    const hint = root.querySelector('.type-hint');
+    if (hint) hint.textContent = 'TAP THE LETTERS ↗';
+    if (touchHinted) return;
+    touchHinted = true;
+    const delay = document.documentElement.classList.contains('nav-intro-running') ? 3200 : 1200;
+    setTimeout(() => {
+      if (!canField() || !inView || !field.length) return;
+      ripples.push({ x: width * .32, y: height * .5, start: performance.now() });
+      wake();
+    }, delay);
   }
   function resetPointer() {
     pointer.active = false; pointer.down = false; pointer.vx = 0; pointer.vy = 0; lastPointerAt = 0; wake();
@@ -238,7 +254,7 @@
     stop();
     ripples = [];
     root.classList.remove('is-particle-ready');
-    if (!ctx || !canAnimate()) { field = []; return; }
+    if (!ctx || !canField()) { field = []; return; }
     width = Math.round(root.clientWidth); height = Math.round(root.clientHeight);
     if (width < 1 || height < 1) return;
     const density = Math.min(devicePixelRatio || 1, 2);
@@ -275,11 +291,13 @@
     draw();
     // Only replace the visual heading once the first complete canvas is ready.
     root.classList.add('is-particle-ready');
+    if (!fine.matches) hintTouch();
     wake();
   }
 
   root.addEventListener('pointermove', event => {
-    if (!canAnimate() || document.documentElement.classList.contains('nav-intro-running') || event.pointerType === 'touch') return;
+    // A finger only steers the dots while it is down; a vertical swipe still scrolls (touch-action: pan-y).
+    if (!canField() || document.documentElement.classList.contains('nav-intro-running') || (event.pointerType === 'touch' && !pointer.down)) return;
     const bounds = root.getBoundingClientRect();
     const x = event.clientX - bounds.left;
     const y = event.clientY - bounds.top;
@@ -293,7 +311,7 @@
     pointer.active = true; wake();
   }, { passive: true });
   root.addEventListener('pointerdown', event => {
-    if (!canAnimate() || !ctx || event.pointerType === 'touch' || document.documentElement.classList.contains('nav-intro-running')) return;
+    if (!canField() || !ctx || document.documentElement.classList.contains('nav-intro-running')) return;
     const bounds = root.getBoundingClientRect();
     pointer.x = event.clientX - bounds.left;
     pointer.y = event.clientY - bounds.top;
@@ -305,7 +323,7 @@
   }, { passive: true });
   root.addEventListener('pointerleave', resetPointer);
   root.addEventListener('pointercancel', resetPointer);
-  addEventListener('pointerup', () => { pointer.down = false; wake(); }, { passive: true });
+  addEventListener('pointerup', event => { pointer.down = false; if (event.pointerType === 'touch') resetPointer(); else wake(); }, { passive: true });
   addEventListener('blur', resetPointer);
   // Stop painting offscreen and while the tab is hidden; restart only when needed.
   new IntersectionObserver(entries => {

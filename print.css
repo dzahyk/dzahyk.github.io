@@ -1,0 +1,30 @@
+/* Print / "Save as PDF": a plain document. Linked with media="print", so screens never load these rules.
+   No water, no glass, no motion; every revealed state is shown; external links print their address. */
+@page{margin:16mm 14mm}
+html,body{background:#fff!important;color:#111!important}
+body::before,body::after,.depth-rays,.depth-motes,.entry-screen,.skip-link,.site-header,.case-header,.menu-toggle,.mobile-menu,
+.project-viewer,.skill-peek,.nav-lens,.process-water-surface,.process-rail,.process-node,.back-top,.role-lane-tabs,
+.project-handoff,.project-open-label,.case-bottom-next,.work-progress,.more-work-head p::after{display:none!important}
+*,*::before,*::after{animation:none!important;transition:none!important;box-shadow:none!important;text-shadow:none!important;
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+/* Entrance and scroll states: print the finished page. */
+.reveal,.project-art,.project-caption,.case-entry,.project-proof,.heading-line>span,.skill-row *,.skill-tally li,[style*="--p"]{opacity:1!important;translate:none!important;transform:none!important;filter:none!important;clip-path:none!important;-webkit-mask-image:none!important;mask-image:none!important}
+main,section,footer,[class*="footer"],[class*="bottom"]{background:none!important;color:#111!important}
+h1,h2,h3,h4,p,li,dd,dt,td,th,span,strong,em,a{color:#111!important}
+.case-kicker,.case-section-label,.case-facts dt,.case-brief dt,.case-honesty,.case-next-index{color:#7a2e14!important}
+a{text-decoration:underline}
+a[href^="http"]::after{content:" (" attr(href) ")";font-size:.85em;word-break:break-all}
+img{max-width:100%!important;height:auto!important}
+.case-chip,.level,.role-lane-tabs button{background:none!important;border:1px solid #999!important;color:#111!important}
+figure,table,.case-brief dl>div,.case-decisions li,.project-card,.role-picks li,.cred-card,.skill-row,.case-quote{break-inside:avoid}
+h1,h2,h3{break-after:avoid}
+/* Glass panels become ruled boxes. */
+.case-brief dl,.role-lanes,.role-picks a,.cred-card,.case-check,.case-decision-band{background:none!important;border:1px solid #999!important}
+.case-brief dl{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.case-decision-band,.case-bottom,.case-check{color:#111!important}
+/* Homepage: the pinned chapter and swipe row lay out as plain flow. */
+.process.section-space{height:auto!important}
+.process-sticky{position:static!important;min-height:0!important}
+.more-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;overflow:visible!important}
+.role-lane-panel[hidden]{display:block!important}
+.role-lanes.is-tabbed .role-lane-title{display:block!important}

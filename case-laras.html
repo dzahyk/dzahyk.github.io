@@ -10,6 +10,7 @@
   <meta property="og:description" content="Which customer gets which offer, at what cost — and whether a randomized test really showed that it pays.">
   <meta property="og:site_name" content="Daffa Zahy Khairy">
   <meta property="og:url" content="https://dzahyk.github.io/case-laras.html">
+  <link rel="canonical" href="https://dzahyk.github.io/case-laras.html">
   <meta property="og:image" content="https://dzahyk.github.io/assets/og/case-laras.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -17,14 +18,14 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://dzahyk.github.io/assets/og/case-laras.jpg">
   <title>LARAS — Case study</title>
+  <link rel="preload" href="assets/water-caustics.jpg" as="image" fetchpriority="high">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Hanken+Grotesk:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="layout.css">
-  <link rel="stylesheet" href="background.css">
-  <link rel="stylesheet" href="case-study.css">
-  <link rel="stylesheet" href="depth-ambient.css">
+  <link rel="stylesheet" href="site-b032c9cccc.css">
+  <link rel="stylesheet" href="print.css" media="print">
+  <script src="page-transitions.js"></script>
 </head>
 <body class="case-page">
   <a class="skip-link" href="#caseMain">Skip to content</a>
@@ -45,6 +46,13 @@
         <div><dt>Status</dt><dd>Built · tested locally · not deployed, no public repo</dd></div>
       </dl>
     </section>
+
+    <aside class="case-brief page-width" aria-labelledby="briefTitle"><h2 class="case-brief-label" id="briefTitle">In 30 seconds</h2><dl>
+      <div><dt>The problem</dt><dd>Which customer gets which offer, at what cost, and whether a randomized test really showed that it pays.</dd></div>
+      <div><dt>What it proves</dt><dd>Ranker vs popularity offline: NDCG@5 0.818 → 0.911, 95% CI [+0.079, +0.105]. 107 Python, 125 web unit and 88 browser tests.</dd></div>
+      <div><dt>Not proven yet</dt><dd>Not deployed. The offline gain is not a causal result. No SSO, drift detection or external audit.</dd></div>
+      <div><dt>Most relevant for</dt><dd>Applied AI · experimentation · data engineering</dd></div>
+    </dl></aside>
 
     <figure class="case-image page-width">
       <div class="case-image-wrap"><img src="assets/projects/laras.webp" width="1600" height="1000" alt="LARAS product page: the headline “Test which offers pay for themselves before you scale them.” above a four-step strip — eligible audience, ranked offer in budget, randomized assignment, evidence with an interval — and an experiment readout labelled Illustrative · Synthetic data" decoding="async" fetchpriority="high"></div>

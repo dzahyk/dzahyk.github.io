@@ -11,6 +11,7 @@
   <meta property="og:description" content="Purchase order, delivery note and invoice, checked against each other before anyone pays.">
   <meta property="og:site_name" content="Daffa Zahy Khairy">
   <meta property="og:url" content="https://dzahyk.github.io/case-vera.html">
+  <link rel="canonical" href="https://dzahyk.github.io/case-vera.html">
   <meta property="og:image" content="https://dzahyk.github.io/assets/og/case-vera.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -18,14 +19,14 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://dzahyk.github.io/assets/og/case-vera.jpg">
   <title>Vera — Case study</title>
+  <link rel="preload" href="assets/water-caustics.jpg" as="image" fetchpriority="high">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Hanken+Grotesk:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="layout.css">
-  <link rel="stylesheet" href="background.css">
-  <link rel="stylesheet" href="case-study.css">
-  <link rel="stylesheet" href="depth-ambient.css">
+  <link rel="stylesheet" href="site-b032c9cccc.css">
+  <link rel="stylesheet" href="print.css" media="print">
+  <script src="page-transitions.js"></script>
 </head>
 <body class="case-page">
   <a class="skip-link" href="#caseMain">Skip to content</a>
@@ -40,6 +41,13 @@
       <div class="case-meta"><span class="case-chip" data-case-position>07 / 08</span><span class="case-chip">Three-way match</span><span class="case-chip">Synthetic data</span></div>
       <dl class="case-facts"><div><dt>Role</dt><dd>Spec review, frontend build, QA</dd></div><div><dt>Stack</dt><dd>HTML, CSS, JavaScript, IndexedDB, service worker</dd></div><div><dt>Timeline</dt><dd>November 2026</dd></div><div><dt>Status</dt><dd>Frontend demo · 13 domain tests</dd></div></dl>
     </section>
+
+    <aside class="case-brief page-width" aria-labelledby="briefTitle"><h2 class="case-brief-label" id="briefTitle">In 30 seconds</h2><dl>
+      <div><dt>The problem</dt><dd>An invoice can be paid before anyone checks it against the purchase order and the delivery note.</dd></div>
+      <div><dt>What it proves</dt><dd>Approval with a checklist and reason, CSV export, offline reload and rejection of an invalid CSV, checked with Playwright. 13 domain tests.</dd></div>
+      <div><dt>Not proven yet</dt><dd>A frontend only: no OCR, server-side roles, or ERP, email and bank connections.</dd></div>
+      <div><dt>Most relevant for</dt><dd>Business analysis · finance operations</dd></div>
+    </dl></aside>
     <figure class="case-image page-width">
       <div class="case-image-wrap"><img src="assets/projects/vera.webp" width="1600" height="1000" alt="Vera landing page: the headline “Verifikasi tagihan, dengan bukti yang jelas.” beside an illustration of a PO, delivery note and invoice, one mismatched row circled in amber and a green approval seal" decoding="async" fetchpriority="high"></div>
       <figcaption><span>Landing page — “Verifikasi tagihan, dengan bukti yang jelas.” means “Verify invoices, with clear evidence.” The live page scans the table, flags the mismatch, then stamps the approval.</span><span data-case-position>07 / 08</span></figcaption>

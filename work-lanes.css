@@ -71,6 +71,17 @@
   .role-picks em{font-size:10.5px}
   .role-lanes-note{font-size:10.5px}
 }
+/* ---------- 4. Phones: smaller projects become one swipeable row; How I work pins for less scroll ---------- */
+@media(max-width:600px){
+  .more-work-head p::after{content:'Swipe →';display:block;margin-top:8px;color:#a83e1d;font:500 11px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+  .more-grid{display:flex;gap:12px;margin-inline:calc(-1 * var(--gutter));padding:4px var(--gutter) 14px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);scrollbar-width:thin}
+  .more-grid>.more-card{flex:0 0 min(78%,300px);scroll-snap-align:start}
+  .more-grid:focus-visible{outline:2px solid #a83e1d;outline-offset:-2px;border-radius:12px}
+}
+@media(max-width:700px) and (min-height:621px){
+  /* 360svh made the four steps a ~3,000px pin on a phone; the same four arrivals fit in 230svh. */
+  .process.section-space{height:230svh}
+}
 @media(prefers-reduced-motion:reduce){
   .role-lane-panel.is-entering li{animation:none}
   .role-lane-tabs button,.role-picks a,.role-picks a::after,.cred-paper-link{transition:none}
