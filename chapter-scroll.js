@@ -39,24 +39,8 @@
   }
   const clamp = value => Math.max(0, Math.min(1, value));
   let frame = 0;
-  // A dive, not a dimmer: sunlit turquoise near the surface, teal, open blue, then navy at the floor.
-  const DEPTH_STOPS = [
-    [0, 26, 132, 164, 0],
-    [.22, 20, 116, 148, .14],
-    [.45, 14, 82, 116, .36],
-    [.68, 9, 48, 78, .62],
-    [.85, 6, 30, 54, .8],
-    [1, 4, 20, 40, .9]
-  ];
-  function depthGrade(depth) {
-    let index = 1;
-    while (index < DEPTH_STOPS.length - 1 && depth > DEPTH_STOPS[index][0]) index++;
-    const from = DEPTH_STOPS[index - 1], to = DEPTH_STOPS[index];
-    const t = clamp((depth - from[0]) / (to[0] - from[0]));
-    const ease = t * t * (3 - 2 * t);
-    const mix = channel => from[channel] + (to[channel] - from[channel]) * ease;
-    return `rgba(${Math.round(mix(1))},${Math.round(mix(2))},${Math.round(mix(3))},${mix(4).toFixed(3)})`;
-  }
+  // The palette lives in water-depth.js so the homepage and case studies share one dive.
+  const depthGrade = depth => (window.waterDepth ? window.waterDepth.grade(depth) : `rgba(8,32,50,${(.8 * depth ** 1.65).toFixed(3)})`);
   function range(top, start, end) { return clamp((start - top) / Math.max(1, start - end)); }
   function measureProcessRail() {
     if (!processRoute || processNodes.length < 2 || processNodes.some(node => !node)) return;

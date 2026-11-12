@@ -1,9 +1,5 @@
 /* Scroll chapters share one physical clock: the browser's native scroll position. */
-body::before{
-  background-image:linear-gradient(var(--water-depth-tint,rgba(8,32,50,0)),var(--water-depth-tint,rgba(8,32,50,0))),linear-gradient(rgba(221,243,248,.39),rgba(221,243,248,.39)),url('assets/water-caustics.jpg');
-}
-body::after{filter:brightness(var(--water-light,1))}
-@media(max-width:700px){body::before{background-image:linear-gradient(var(--water-depth-tint,rgba(8,32,50,0)),var(--water-depth-tint,rgba(8,32,50,0))),linear-gradient(rgba(231,247,250,.49),rgba(231,247,250,.49)),url('assets/water-caustics.jpg')}}
+/* The depth tint layer on body::before now lives in depth-ambient.css (shared with case studies). */
 
 /* A visual index gives the Work section a purpose without adding another card. */
 .work-progress{display:flex;align-items:center;gap:12px;margin:-8px 0 20px;color:#27465a;font:500 12px/1.5 var(--mono);letter-spacing:.04em;text-transform:uppercase}

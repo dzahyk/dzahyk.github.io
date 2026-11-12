@@ -1,5 +1,11 @@
 /* Depth ambient: sun shafts near the surface, suspended motes in deeper water.
    Both layers are injected by depth-ambient.js and sit between the water and the page. */
+/* The water tint deepens with --water-depth-tint (written by chapter-scroll.js or water-depth.js). */
+body::before{
+  background-image:linear-gradient(var(--water-depth-tint,rgba(8,32,50,0)),var(--water-depth-tint,rgba(8,32,50,0))),linear-gradient(rgba(221,243,248,.39),rgba(221,243,248,.39)),url('assets/water-caustics.jpg');
+}
+body::after{filter:brightness(var(--water-light,1))}
+@media(max-width:700px){body::before{background-image:linear-gradient(var(--water-depth-tint,rgba(8,32,50,0)),var(--water-depth-tint,rgba(8,32,50,0))),linear-gradient(rgba(231,247,250,.49),rgba(231,247,250,.49)),url('assets/water-caustics.jpg')}}
 .depth-rays,.depth-motes{position:fixed;inset:0;z-index:0;pointer-events:none}
 .depth-rays{
   overflow:hidden;
