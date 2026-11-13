@@ -347,7 +347,7 @@
 
   // Native blue SVG pointer + a contextual label, updated only after pointer input.
   const tag = document.getElementById('pointerCursor');
-  let cursorFrame = 0, cursorX = 0, cursorY = 0, cursorState = 'You', pressed = false;
+  let cursorFrame = 0, cursorX = 0, cursorY = 0, cursorState = '', pressed = false;
   function hideTag() {
     cancelAnimationFrame(cursorFrame); cursorFrame = 0;
     tag.classList.remove('is-visible');
@@ -371,8 +371,9 @@
     const target = event.target instanceof Element ? event.target : null;
     const action = target?.closest('a,button,summary');
     const context = target?.closest('[data-cursor]');
-    cursorState = action ? action.dataset.cursor || 'Click' : context?.dataset.cursor || 'You';
+    cursorState = action ? action.dataset.cursor || 'Click' : context?.dataset.cursor || '';
     if (cursorState === 'Drag' && pressed) cursorState = 'Dragging';
+    if (!cursorState) { hideTag(); return; } // no label over plain text; only over things you can act on
     if (!cursorFrame) cursorFrame = requestAnimationFrame(paintTag);
   }
   addEventListener('pointermove', updateTag, { passive: true });

@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=DM+Mono:wght@400;500&amp;family=Hanken+Grotesk:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site-975ab63b96.css">
+  <link rel="stylesheet" href="site-9c19e2a6cb.css">
   <link rel="stylesheet" href="print.css" media="print">
   <script src="page-transitions.js"></script>
 </head>
@@ -92,7 +92,6 @@
           <div class="hero-type" id="heroType" data-cursor="Play">
             <h1 id="heroTitle"><span class="hero-line">SHOW THE</span><span class="hero-line">NUMBERS.</span></h1>
             <canvas id="heroParticles" aria-hidden="true"></canvas>
-            <span class="type-hint" aria-hidden="true">MOVE YOUR CURSOR ↗</span>
           </div>
           <div class="hero-actions">
             <a class="button" href="#work">Explore work <span aria-hidden="true">↘</span></a>
@@ -121,11 +120,11 @@
       <div class="page-width">
         <div class="section-heading section-heading--split reveal">
           <h2 id="workTitle">Selected work</h2>
-          <p>Four flagship builds first.<br>Every label says how far each one was tested.</p>
+          
         </div>
         <div class="role-lanes reveal" data-role-lanes>
-          <p class="role-lanes-label" id="roleLanesLabel">Hiring for <span aria-hidden="true">→</span> three to read first</p>
-          <div class="role-lane-tabs" role="tablist" aria-labelledby="roleLanesLabel">
+          
+          <div class="role-lane-tabs" role="tablist" aria-label="Projects by role">
             <button type="button" role="tab" id="laneTab-ba" aria-controls="lane-ba" aria-selected="true">Business analysis</button>
             <button type="button" role="tab" id="laneTab-ai" aria-controls="lane-ai" aria-selected="false" tabindex="-1">AI automation</button>
             <button type="button" role="tab" id="laneTab-bi" aria-controls="lane-bi" aria-selected="false" tabindex="-1">Data analyst / BI</button>
@@ -143,7 +142,7 @@
           <div class="role-lane-panel" id="lane-ai" role="tabpanel" aria-labelledby="laneTab-ai">
             <h3 class="role-lane-title">AI automation</h3>
             <ol class="role-picks">
-              <li><a href="case-karsa.html?role=ai"><strong>Karsa</strong><span>Extraction measured on a held-out set; the release gate fails and the app says so.</span><em>24 / 24 dev · 1 / 36 held out</em></a></li>
+              <li><a href="case-karsa.html?role=ai"><strong>Karsa</strong><span>Extraction measured on a held-out set; the release gate fails and the app says so.</span><em>1 / 36, then 21 / 50 held out</em></a></li>
               <li><a href="case-decision-hub.html?role=ai"><strong>Decision Hub</strong><span>The model fills seven fields and has no price field; a manager approves one exact quote.</span><em>0 of 60 cases sent personal data</em></a></li>
               <li><a href="demos/karsa-brief-checker/"><strong>Karsa brief checker</strong><span>Paste a brief and run the rule-based extractor in your browser; every value shows the words it came from.</span><em>Live demo · 21 of 50 unseen briefs fully right</em></a></li>
             </ol>
@@ -205,11 +204,11 @@
               <span class="project-art"><img class="project-image" src="assets/projects/karsa-landing.webp" width="1600" height="1000" alt="Karsa product page: the headline “What gets approved is what runs.” beside green and frosted glass panels, with light threads converging into a copper beam" loading="lazy" decoding="async"><span class="project-handoff" aria-hidden="true"><img src="assets/pixel-guide.svg" width="40" height="56" alt=""><span>After the yes</span></span><span class="project-open-label" aria-hidden="true">View project ↗</span></span>
               <span class="project-caption"><span><strong>Karsa</strong><span class="project-discipline">AI workflow orchestration</span></span><span class="project-number">Prototype / 04</span></span>
             </button>
-            <p class="project-proof"><strong>AI extraction: 24 / 24 on dev, 1 / 36 held out · release gate fails</strong><span>Synthetic data · rule-based baseline · runs locally</span></p>
+            <p class="project-proof"><strong>AI extraction: 1 / 36, then 21 / 50 held out · gate fails</strong><span>Synthetic data · rule-based baseline · runs locally</span></p>
             <a class="case-entry" href="case-karsa.html">Read the Karsa case study <span aria-hidden="true">↗</span></a>
           </article>
         </div>
-        <div class="work-group-head reveal"><h3>More built work.</h3><p>More prototypes on synthetic data, each with its own case study and tests.</p></div>
+        <div class="work-group-head reveal"><h3>More built work.</h3></div>
         <div class="project-grid project-grid--more">
           <article class="project-card reveal" data-project="retentionos">
             <button class="project-open" type="button" data-open="retentionos" data-cursor="View" aria-label="View RetentionOS, churn early warning prototype">
@@ -241,7 +240,7 @@
           </article>
         </div>
         <div class="more-work">
-          <div class="more-work-head reveal"><h3>Smaller projects.</h3><p>Coursework, a capstone, and side projects — smaller, but each one shipped or is in progress.</p></div>
+          <div class="more-work-head reveal"><h3>Smaller projects.</h3></div>
           <ul class="more-grid" role="list">
             <li class="more-card reveal"><div class="media-frame more-evidence" role="img" aria-label="No screenshot published yet. Evidence: 58 unit and contract tests re-run on 12 November 2026; 12 of 12 browser tests in the last recorded run, 11 November 2026"><span class="more-evidence-note">No screenshot yet</span><span class="more-evidence-figure">12 / 12</span><span>browser tests, last recorded run · 11 Nov 2026</span><span>58 unit + contract tests re-run · 12 Nov 2026</span></div><span class="more-tag">Built · tested locally · synthetic data</span><h4>SignalOps</h4><p>A data-reliability console: CSV and REST ingestion, quality checks, order–payment–activation reconciliation, and incidents that close only on fresh passing evidence. Local build only; not deployed.</p></li>
             <li class="more-card reveal"><figure class="media-frame"><img src="assets/more/intellitix.webp" width="912" height="570" alt="The IntelliTix team at the faculty computing exhibition with the app on two screens" loading="lazy" decoding="async"></figure><span class="more-tag">Capstone · Business analyst</span><h4>IntelliTix</h4><p>An IT change-request platform with an AI chatbot assistant; selected for the faculty’s computing exhibition, Jan 2026.</p></li>
@@ -261,7 +260,7 @@
       <div class="page-width">
         <div class="section-heading section-heading--split reveal">
           <h2 id="skillsTitle">Skills in practice.</h2>
-          <p>Each skill points to where I used it and what proves it. The level says how far that proof goes.</p>
+          
         </div>
         <div class="skill-key reveal" aria-hidden="true"><span>Capability &amp; tools</span><span>Applied in</span><span>Proof</span><span>Level</span></div>
         <ol class="skill-list" role="list">
@@ -346,7 +345,7 @@
             </dl>
           </li>
         </ol>
-        <p class="skill-note reveal">Built · tested locally: runs end to end on my laptop with recorded test runs; not deployed. Prototype: a working demo with automated tests on synthetic or simulated data. The newer builds were implemented with AI coding agents under my direction; each case study states my role.</p>
+        <p class="skill-note reveal">Built · tested locally: runs end to end with recorded tests, not deployed. Prototype: a working demo on synthetic data. Newer builds were implemented with AI coding agents under my direction.</p>
       </div>
     </section>
 
@@ -354,7 +353,7 @@
       <div class="page-width">
         <div class="section-heading section-heading--split reveal">
           <h2 id="experienceTitle">Where I have worked.</h2>
-          <p>An internship in telecom analytics, three semesters of teaching, and a game I am building on my own.</p>
+          
         </div>
         <ol class="timeline" role="list">
           <li class="timeline-row reveal" id="exp-telkomsel">
@@ -407,7 +406,7 @@
       <div class="page-width">
         <div class="section-heading section-heading--split reveal">
           <h2 id="credentialsTitle">On paper.</h2>
-          <p>A published paper, a completed degree, and the courses behind the work.</p>
+          
         </div>
         <div class="cred-grid">
           <article class="cred-card reveal" id="paper">
@@ -420,7 +419,7 @@
           <article class="cred-card reveal">
             <span class="profile-label">Education</span>
             <h3>Telkom University</h3>
-            <p>Bachelor of Informatics, School of Computing. Capstone IntelliTix — an IT change-request platform with an AI chatbot — was selected for the faculty’s computing exhibition in January 2026, with me as business analyst.</p>
+            <p>Bachelor of Informatics, School of Computing.</p>
             <ul class="cred-meta" role="list"><li>2022 – 2026</li><li>Graduation ceremony 25 Nov 2026</li><li>GPA 3.69 / 4.00</li><li>English test 513</li></ul>
           </article>
         </div>
@@ -460,7 +459,7 @@
   </main>
   <footer class="contact" id="contact" aria-labelledby="contactTitle">
     <div class="page-width">
-      <div class="contact-context"><span class="contact-availability" data-availability>Open to business analyst, data and applied AI roles and internships</span><span class="contact-depth-label">SEA FLOOR / IDEAS MEET HERE</span></div>
+      
       <div class="contact-main reveal"><div><h2 class="giant-word" id="contactTitle">Need an analyst<br>who builds?</h2><a class="contact-email" href="contact.html#projectBrief">Send me a message <span aria-hidden="true">↗</span></a><ul class="profile-links" data-profile-links role="list"></ul></div><p class="contact-location">Based in <span data-location>Bandung, Indonesia</span></p></div>
       <div class="pixel-stage" role="img" aria-label="Ilustrasi pixel art studio tepi air. Tiga karakter bertopi, berkacamata, dan memakai beanie berjalan lalu bergantian berbicara tentang proyek dan visual. Pejalan kaki kecil berlalu-lalang di latar.">
         <canvas class="footer-pixels" id="footerPixels" aria-hidden="true"></canvas>
@@ -471,7 +470,7 @@
     </div>
   </footer>
   <canvas class="hero-handoff" id="heroHandoff" aria-hidden="true"></canvas>
-  <span class="pointer-cursor" id="pointerCursor" aria-hidden="true">You</span>
+  <span class="pointer-cursor" id="pointerCursor" aria-hidden="true"></span>
   <dialog id="caseDialog" aria-labelledby="caseTitle"><div class="dialog-inner"><h2 id="caseTitle">Project details</h2></div></dialog>
   <script src="config.js"></script>
   <script src="projects.js"></script>
