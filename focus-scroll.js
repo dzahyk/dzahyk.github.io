@@ -3,8 +3,8 @@
       visible between the sticky header and 85% of the viewport, with its centre nearest a
       reading line at 45%. Its neighbours in that section are gently de-emphasised
       (focus-scroll.css, wide screens with a mouse only). body.has-focus is set while any
-      item is in focus. A deliberate mouse move or a keyboard focus takes over the spotlight
-      until the reader scrolls on.
+      item is in focus. With a mouse, only the item under the cursor (or holding keyboard focus)
+      is spotlit: nothing steps back while the cursor is off the items. Touch keeps the scroll pick.
    2. Count-up: elements with [data-countup] count their numbers up from 0 once, when they
       come into view. The HTML already holds the final text and stays in the accessibility
       tree; the moving digits are an aria-hidden overlay that is removed when it lands.
@@ -34,6 +34,10 @@
   let sectionWatch = null;
   let frame = 0, dirty = false, running = false;
   let pointerTarget = null, pointerAnchorY = 0, keyTarget = null;
+  // With a mouse the spotlight follows the cursor only: nothing steps back until the cursor rests
+  // on an item, and scrolling under a still cursor hands the light to whatever item is now under it.
+  const mouseMode = matchMedia('(hover: hover) and (pointer: fine)');
+  let pointerX = 0, pointerY = 0, pointerInside = false, lastHit = 0, graceTimer = 0;
   const focused = new Set();
   const dimmed = new Set();
 
@@ -101,6 +105,8 @@
     const visible = measured.map(item => item.element);
     const chosen = [keyTarget, pointerTarget].find(target => target && visible.includes(target));
     if (chosen) return { focus: [chosen], count: measured.length };
+    // Mouse: no cursor on an item in this section means no spotlight here at all.
+    if (mouseMode.matches) return { focus: [], count: measured.length };
     // A sticky chapter (How I work) already knows which step is current.
     // It keeps the focus only while it is still being read (not once it has gone under the header).
     const current = !section.classList.contains('is-static') && measured.find(item => item.value > -Infinity && item.element.classList.contains('is-current'))?.element;
@@ -117,7 +123,8 @@
     frame = 0;
     if (!running) return;
     if (dirty) collect();
-    if (pointerTarget && Math.abs(scrollY - pointerAnchorY) > 80) pointerTarget = null;
+    if (mouseMode.matches) pointerTarget = hoverTarget();
+    else if (pointerTarget && Math.abs(scrollY - pointerAnchorY) > 80) pointerTarget = null;
     const viewport = innerHeight || 1;
     const line = viewport * FOCUS_LINE;
     const band = { top: headerBottom(viewport), bottom: viewport * BAND_END };
@@ -138,6 +145,20 @@
     body.classList.toggle('has-focus', nextFocus.size > 0);
   }
   function schedule() { if (running && !frame) frame = requestAnimationFrame(update); }
+
+  // The item under the cursor right now (also after a scroll, when no pointermove fires).
+  function hoverTarget() {
+    const under = pointerInside ? document.elementFromPoint(pointerX, pointerY) : null;
+    const hit = under ? under.closest(TARGETS) : null;
+    if (hit) { lastHit = performance.now(); return hit; }
+    // Crossing the gap between two cards must not flash the whole section back to full strength.
+    if (pointerInside && pointerTarget && performance.now() - lastHit < 180) {
+      clearTimeout(graceTimer);
+      graceTimer = setTimeout(schedule, 190);
+      return pointerTarget;
+    }
+    return null;
+  }
 
   function clearSpotlight() {
     focused.forEach(element => element.classList.remove('is-focus'));
@@ -187,14 +208,19 @@
     }).observe(main, { childList: true, subtree: true });
   }
 
-  // A deliberate mouse move puts the spotlight on the hovered item; scrolling hands it back.
+  // The mouse puts the spotlight on the hovered item (see hoverTarget); leaving it clears the light.
   document.addEventListener('pointermove', event => {
     if (event.pointerType !== 'mouse' || !running) return;
+    pointerX = event.clientX; pointerY = event.clientY; pointerInside = true;
     const target = event.target instanceof Element ? event.target.closest(TARGETS) : null;
     pointerAnchorY = scrollY;
-    if (target !== pointerTarget) { pointerTarget = target; schedule(); }
+    if (target !== pointerTarget) { if (!mouseMode.matches) pointerTarget = target; schedule(); }
   }, { passive: true });
-  document.documentElement.addEventListener('mouseleave', () => { if (pointerTarget) { pointerTarget = null; schedule(); } });
+  document.documentElement.addEventListener('mouseleave', () => {
+    pointerInside = false;
+    if (pointerTarget) { pointerTarget = null; schedule(); }
+  });
+  mouseMode.addEventListener?.('change', schedule);
   // Keyboard focus keeps the spotlight on the item that holds it.
   document.addEventListener('focusin', event => {
     if (!running || !(event.target instanceof Element)) return;
