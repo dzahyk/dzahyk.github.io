@@ -1,116 +1,62 @@
-/* Skills ledger. Adds, in order of reading:
-   1. a tally of proof levels counted from the badges already in the table (no new claims);
-   2. a column key that is ruled, then labelled, as it scrolls in;
-   3. rows that reveal claim → where → proof and then stamp their level, driven by scroll position;
-   4. on fine pointers, a preview of the case study behind each project link.
-   Everything is enhancement: without this script the table renders as written in index.html. */
+/* Skills grid. Adds two things on top of the cards written in index.html:
+   1. a tally of proof levels, counted from the level badges already on the cards (no new claims);
+      its numbers carry data-countup, so focus-scroll.js animates them with the rest of the page;
+   2. on fine pointers, a preview of the case study behind each project pill.
+   Everything is enhancement: without this script the cards render as written, proof collapsed in <details>. */
 (() => {
   const section = document.getElementById('skills');
   if (!section) return;
   const list = section.querySelector('.skill-list');
-  const key = section.querySelector('.skill-key');
   const heading = section.querySelector('.section-heading');
-  const rows = [...section.querySelectorAll('.skill-row')];
-  if (!list || !rows.length) return;
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const clamp = value => Math.max(0, Math.min(1, value));
-  const range = (top, start, end) => clamp((start - top) / Math.max(1, start - end));
+  if (!list || !list.querySelector('.skill-row')) return;
 
   /* 1. Tally ------------------------------------------------------------------------------- */
   const LEVELS = ['built', 'proto', 'paper', 'work'];
+  // A visible caption says what is being counted: skills per proof level, not products.
+  const tallyWrap = document.createElement('div');
+  tallyWrap.className = 'skill-tally-wrap';
+  const caption = document.createElement('p');
+  caption.className = 'skill-tally-caption';
+  caption.id = 'skillTallyCaption';
+  caption.textContent = 'Proof badges across 10 skills';
   const tally = document.createElement('ul');
   tally.className = 'skill-tally';
   tally.setAttribute('role', 'list');
-  tally.setAttribute('aria-label', 'Proof levels across these skills');
-  const counters = [];
-  LEVELS.forEach((level, index) => {
+  tally.setAttribute('aria-labelledby', caption.id);
+  LEVELS.forEach(level => {
     const badges = [...list.querySelectorAll(`.level--${level}`)];
     if (!badges.length) return;
-    const labels = [...new Set(badges.map(badge => badge.textContent.trim()))];
+    // Short labels ("Built", not "Built · tested locally"): the cards already carry the full badge.
+    const labels = [...new Set(badges.map(badge => badge.textContent.split('·')[0].trim()))];
     const item = document.createElement('li');
     item.className = `tally--${level}`;
-    item.style.setProperty('--n', index);
     const count = document.createElement('b');
     count.textContent = String(badges.length);
+    count.setAttribute('data-countup', '');
     const label = document.createElement('span');
     const swatch = document.createElement('i');
     swatch.setAttribute('aria-hidden', 'true');
     label.append(swatch, document.createTextNode(labels.join(' / ')));
     item.append(count, label);
     tally.append(item);
-    counters.push({ node: count, target: badges.length });
   });
-  (heading || key || list).after(tally);
-
-  function countUp() {
-    tally.classList.add('is-counted');
-    const started = performance.now();
-    const DURATION = 950;
-    const step = () => {
-      const t = clamp((performance.now() - started) / DURATION);
-      const eased = 1 - (1 - t) ** 3;
-      counters.forEach(({ node, target }) => { node.textContent = String(Math.round(target * eased)); });
-      if (t < 1) setTimeout(step, 32);
-    };
-    step();
-  }
-  if (!reduced.matches && 'IntersectionObserver' in window) {
-    tally.classList.add('is-armed');
-    counters.forEach(({ node }) => { node.textContent = '0'; });
-    const watch = new IntersectionObserver(entries => {
-      if (!entries.some(entry => entry.isIntersecting)) return;
-      watch.disconnect();
-      countUp();
-    }, { threshold: .6 });
-    watch.observe(tally);
+  // The split heading has an empty right column: the tally sits there, beside the title.
+  if (tally.children.length) {
+    tallyWrap.append(caption, tally);
+    if (heading) heading.append(tallyWrap); else list.before(tallyWrap);
   }
 
-  /* 2 + 3. Ruled key and staged rows --------------------------------------------------------- */
-  function stamp(row) { row.classList.add('is-stamped'); }
-  if (!reduced.matches) {
-    section.classList.add('is-staged');
-    // The ledger replaces the generic fade for these elements.
-    key?.classList.remove('reveal');
-    rows.forEach(row => row.classList.remove('reveal'));
-  } else {
-    rows.forEach(stamp);
-  }
-  let frame = 0, active = false;
-  function update() {
-    frame = 0;
-    if (!section.classList.contains('is-staged')) return;
-    const viewport = innerHeight || 1;
-    if (key) key.style.setProperty('--ledger', range(key.getBoundingClientRect().top, viewport * .92, viewport * .6).toFixed(3));
-    rows.forEach(row => {
-      const progress = range(row.getBoundingClientRect().top, viewport * .96, viewport * .5);
-      row.style.setProperty('--p', progress.toFixed(3));
-      if (progress > .8 && !row.classList.contains('is-stamped')) stamp(row);
-    });
-  }
-  const schedule = () => { if (active && !frame) frame = requestAnimationFrame(update); };
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver(entries => {
-      active = entries.some(entry => entry.isIntersecting);
-      if (active) schedule();
-    }, { rootMargin: '20% 0px 20% 0px' }).observe(section);
-  } else { active = true; }
-  addEventListener('scroll', schedule, { passive: true });
-  addEventListener('resize', schedule, { passive: true });
-  section.addEventListener('focusin', event => { const row = event.target.closest('.skill-row'); if (row) stamp(row); });
-  reduced.addEventListener('change', () => {
-    if (reduced.matches) { section.classList.remove('is-staged'); rows.forEach(stamp); }
-  });
-  update();
-
-  /* 4. Case-study preview on project links (fine pointers only) ------------------------------- */
+  /* 2. Case-study preview on project pills (fine pointers only) ------------------------------ */
   const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
   const projects = window.portfolioProjects || [];
-  function previewFor(href) {
+  function previewFor(link) {
+    const href = link.getAttribute('href');
     const project = projects.find(item => item.caseUrl === href);
     const card = project && document.querySelector(`.project-card[data-project="${project.id}"] img`);
-    if (card?.getAttribute('src')) return { src: card.getAttribute('src'), name: project.name };
-    const slug = href.replace(/^case-|\.html$/g, '');
-    return { src: `assets/projects/${slug}.webp`, name: project?.name || slug };
+    const src = card?.getAttribute('src') || link.querySelector('img')?.getAttribute('src')
+      || `assets/projects/${href.replace(/^case-|\.html$/g, '')}.webp`;
+    const name = project?.name || link.textContent.replace(/[→↓]/g, '').trim();
+    return { src, name };
   }
   const peek = document.createElement('figure');
   peek.className = 'skill-peek';
@@ -131,7 +77,9 @@
   }
   function show(link, x, y) {
     if (!peekMounted) { document.body.append(peek); peekMounted = true; }
-    const { src, name } = previewFor(link.getAttribute('href'));
+    // A link that already shows a large preview (wide card, one project) needs no floating copy.
+    if ((link.querySelector('img')?.offsetWidth || 0) > 60) return;
+    const { src, name } = previewFor(link);
     if (peekImage.getAttribute('src') !== src) peekImage.src = src;
     peekCaption.textContent = `${name} case study`;
     place(x, y);
@@ -139,17 +87,12 @@
   }
   const hide = () => peek.classList.remove('is-on');
   const peekLinks = [...section.querySelectorAll('.skill-where a[href^="case-"]')];
-  // Warm the thumbnails once the pointer enters the section, so a preview never opens empty.
-  section.addEventListener('pointerenter', () => {
-    if (!finePointer.matches) return;
-    new Set(peekLinks.map(link => previewFor(link.getAttribute('href')).src)).forEach(src => { const image = new Image(); image.decoding = 'async'; image.src = src; });
-  }, { once: true });
   peekLinks.forEach(link => {
     link.addEventListener('pointerenter', event => { if (finePointer.matches && event.pointerType === 'mouse') show(link, event.clientX, event.clientY); });
     link.addEventListener('pointermove', event => { if (peek.classList.contains('is-on')) place(event.clientX, event.clientY); });
     link.addEventListener('pointerleave', hide);
     link.addEventListener('focus', () => {
-      if (!finePointer.matches) return;
+      if (!finePointer.matches || !link.matches(':focus-visible')) return;
       const box = link.getBoundingClientRect();
       show(link, box.right, box.top);
     });

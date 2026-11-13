@@ -14,6 +14,10 @@
   const processNodes = processSteps.map(step => step.querySelector('.process-node'));
   let processThresholds = processSteps.map((_, index) => index / Math.max(1, processSteps.length - 1));
   let processVisual = null;
+  // Scroll distance before the pin during which the route is already fully on screen. The steps start
+  // lighting there, so a short (~190svh) chapter still gives each of the four arrivals its own beat.
+  let processLead = 0;
+  const PROCESS_START = .04, PROCESS_SPAN = .82;
   const counter = document.getElementById('workCounter');
   const breathTitle = document.getElementById('breathTitle');
   const breathLine = breathTitle?.querySelector('span');
@@ -58,6 +62,9 @@
     processRoute.style.setProperty('--rail-cross', `${(vertical ? start : centers[0].y).toFixed(2)}px`);
     processRoute.style.setProperty('--rail-length', `${length.toFixed(2)}px`);
     processThresholds = centers.map(center => clamp(((vertical ? center.y : center.x) - start) / length));
+    // The route's place inside the sticky panel is fixed, and the panel rides the section top until it pins.
+    const sticky = process.querySelector('.process-sticky') || process;
+    processLead = Math.max(0, (innerHeight || 1) * .92 - (bounds.bottom - sticky.getBoundingClientRect().top));
   }
   function update() {
     frame = 0;
@@ -94,12 +101,14 @@
       process.classList.toggle('is-static', staticProcess);
       const passage = Math.max(1, rect.height - viewport);
       const chapter = clamp(-rect.top / passage);
+      // The steps run on a longer clock that starts once the whole route is readable, before the pin.
+      const route = clamp((processLead - rect.top) / (passage + processLead));
       const waterStrength = staticProcess ? .5 : Math.min(1, chapter / .17, (1 - chapter) / .17);
       process.style.setProperty('--process-water-strength', waterStrength.toFixed(3));
       process.style.setProperty('--process-water-x', `${((chapter - .5) * 68).toFixed(1)}px`);
       process.style.setProperty('--process-water-y', `${((chapter - .5) * -46).toFixed(1)}px`);
       // The line travels during the held interval, with a short pause at either end.
-      const target = staticProcess ? 1 : clamp((chapter - .10) / .80);
+      const target = staticProcess ? 1 : clamp((route - PROCESS_START) / PROCESS_SPAN);
       const visible = rect.bottom > 0 && rect.top < viewport;
       if (processVisual === null || staticProcess || !visible) processVisual = target;
       else {
@@ -108,14 +117,14 @@
       }
       process.style.setProperty('--process-progress', target.toFixed(4));
       process.style.setProperty('--process-visual-progress', processVisual.toFixed(4));
-      process.style.setProperty('--process-bead-scale', !staticProcess && chapter > .10 && chapter < .91 ? '1' : '0');
+      process.style.setProperty('--process-bead-scale', !staticProcess && route > PROCESS_START && route < PROCESS_START + PROCESS_SPAN + .01 ? '1' : '0');
       let active = 0;
       processThresholds.forEach((threshold, index) => {
         if (processVisual + .002 >= threshold) active = index;
       });
       processSteps.forEach((step, index) => {
         step.classList.toggle('is-current', index === active);
-        step.classList.toggle('is-arrived', staticProcess || (chapter >= .10 && processVisual + .002 >= processThresholds[index]));
+        step.classList.toggle('is-arrived', staticProcess || (route >= PROCESS_START && processVisual + .002 >= processThresholds[index]));
       });
       if (visible && !staticProcess && processVisual !== target) schedule();
     }

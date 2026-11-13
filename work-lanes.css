@@ -1,10 +1,12 @@
 /* Selected work, made scannable for one role at a time:
    1. role lanes: three case studies to read first (tabs only once work-lanes.js adds .is-tabbed);
    2. a proof line on each flagship card, with its honest scope underneath;
-   3. the paper link on the "On paper" publication card (hidden until config.js has paperUrl). */
+   3. the paper link on the "On paper" publication card (hidden until config.js has paperUrl);
+   5. project cards that invite a click: a hook line, an emphasised proof, a solid case-study pill,
+      and a screenshot that zooms and pans under the pointer (see the end of this file). */
 
 /* ---------- 1. Role lanes ---------- */
-.role-lanes{position:relative;display:grid;grid-template-columns:minmax(0,1fr);align-items:center;gap:16px 28px;margin:0 0 clamp(40px,4.4vw,64px);padding:clamp(18px,2vw,26px);border:1px solid rgba(255,255,255,.72);border-radius:clamp(18px,2vw,26px);background:linear-gradient(140deg,rgba(255,255,255,.5),rgba(236,248,248,.28));-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);box-shadow:0 18px 40px rgba(8,32,50,.08),inset 0 1px 0 rgba(255,255,255,.7)}
+.role-lanes{position:relative;display:grid;grid-template-columns:minmax(0,1fr);align-items:center;gap:16px 28px;margin:0 0 clamp(36px,3.4vw,48px);padding:clamp(16px,1.6vw,22px);border:1px solid rgba(255,255,255,.72);border-radius:clamp(18px,2vw,26px);background:linear-gradient(140deg,rgba(255,255,255,.5),rgba(236,248,248,.28));-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);box-shadow:0 18px 40px rgba(8,32,50,.08),inset 0 1px 0 rgba(255,255,255,.7)}
 .role-lanes-label{margin:0;color:#27465a;font:500 12px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase}
 .role-lanes-label span{color:#a83e1d}
 .role-lane-tabs{display:flex;flex-wrap:wrap;justify-self:start;gap:4px;padding:4px;border-radius:999px;background:rgba(21,44,62,.07)}
@@ -19,9 +21,9 @@
 .role-lane-panel[hidden]{display:none}
 .role-picks{counter-reset:pick;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,1.2vw,16px);margin:0;padding:0;list-style:none}
 .role-picks li{counter-increment:pick;min-width:0}
-.role-picks a{position:relative;display:grid;grid-template-rows:auto 1fr auto;gap:8px;height:100%;padding:16px 16px 14px;border:1px solid rgba(21,44,62,.12);border-radius:16px;background:rgba(255,255,255,.42);color:var(--ink);text-decoration:none;transition:background-color 240ms ease,border-color 240ms ease,translate 320ms var(--ease-out),box-shadow 320ms var(--ease-out)}
-.role-picks a::before{content:counter(pick,decimal-leading-zero);position:absolute;top:16px;right:16px;color:#a83e1d;font:500 12px/1 var(--mono)}
-.role-picks a::after{content:'↗';position:absolute;right:16px;bottom:14px;color:#27465a;font:500 14px/1 var(--mono);transition:translate 320ms var(--ease-out),color 240ms ease}
+.role-picks a{position:relative;display:grid;grid-template-rows:auto 1fr auto;gap:8px;height:100%;padding:14px 16px 12px;border:1px solid rgba(21,44,62,.12);border-radius:16px;background:rgba(255,255,255,.42);color:var(--ink);text-decoration:none;transition:background-color 240ms ease,border-color 240ms ease,translate 320ms var(--ease-out),box-shadow 320ms var(--ease-out)}
+.role-picks a::before{content:counter(pick,decimal-leading-zero);position:absolute;top:14px;right:16px;color:#a83e1d;font:500 12px/1 var(--mono)}
+.role-picks a::after{content:'↗';position:absolute;right:16px;bottom:12px;color:#27465a;font:500 14px/1 var(--mono);transition:translate 320ms var(--ease-out),color 240ms ease}
 .role-picks strong{padding-right:28px;font-size:21px;font-weight:800;line-height:1.1;letter-spacing:-.035em}
 .role-picks span{color:#27465a;font-size:15px;line-height:1.45}
 .role-picks em{display:flex;align-items:center;gap:7px;padding-right:24px;color:#163448;font:500 11.5px/1.35 var(--mono);font-style:normal;letter-spacing:.03em;text-transform:uppercase}
@@ -36,10 +38,13 @@
 .role-lane-panel.is-entering li:nth-child(3){animation-delay:120ms}
 @keyframes lane-pick{from{opacity:0;translate:0 10px}to{opacity:1;translate:none}}
 
-/* ---------- 2. Proof line on flagship cards ---------- */
+/* ---------- 2. Proof line on project cards ---------- */
 .project-proof{display:grid;gap:4px;margin:12px 0 0;padding:2px 0 2px 12px;border-left:2px solid #a83e1d}
 .project-proof strong{color:var(--ink);font-size:15px;font-weight:700;line-height:1.35;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
-.project-proof span{color:#27465a;font:500 11px/1.45 var(--mono);letter-spacing:.04em;text-transform:uppercase}
+.project-proof>span{color:#27465a;font:500 11px/1.45 var(--mono);letter-spacing:.04em;text-transform:uppercase}
+.project-proof strong span{font:inherit;color:inherit;letter-spacing:inherit;text-transform:none}
+/* Only short number spans stay on one line; the proof sentence around them wraps at its spaces. */
+.project-proof span[data-countup]{white-space:nowrap}
 .project-card .project-proof{transition:opacity 360ms ease-out,translate 620ms var(--ease-out);transition-delay:calc(var(--reveal-delay,0ms) + 125ms)}
 .motion-ready .project-card:not(.visible) .project-proof{opacity:0;translate:0 5px;transition-delay:0ms}
 .reveal-instant .project-proof{transition:none!important}
@@ -70,7 +75,7 @@
   .role-picks a::before{top:13px;right:12px}
   .role-picks a::after{right:12px;bottom:12px}
   .role-picks strong{font-size:18px}
-  .role-picks span{font-size:13.5px;line-height:1.4}
+  .role-picks span{font-size:14px;line-height:1.4}
   .role-picks em{font-size:10.5px}
   .role-lanes-note{font-size:10.5px}
 }
@@ -99,4 +104,136 @@
   .role-lane-tabs button{border:1px solid ButtonText}
   .role-lane-tabs button[aria-selected="true"]{background:Highlight;color:HighlightText;forced-color-adjust:none}
   .project-proof{border-left-color:CanvasText}
+}
+
+/* ---------- 5. Project cards that invite a click ----------
+   Order on every card: screenshot, name, hook (the problem in one line), proof (one real number and its
+   honest scope), then a solid "Read the case study" pill. The hook highlight and the proof chip switch on
+   with pointer hover, keyboard focus inside the card, or the homepage spotlight (.is-focus from
+   focus-scroll.js); on touch screens they are simply on. Opacity/filter dimming belongs to focus-scroll.css. */
+
+/* Wide screens: name and discipline share one line, the index sits at its right end. Two lines less
+   under every flagship screenshot; a narrow card simply wraps the discipline under the name. */
+@media(min-width:701px){
+  #work .project-grid--flagship .project-caption{flex-direction:row;justify-content:space-between;align-items:baseline;gap:16px;margin-top:12px}
+  #work .project-grid--flagship .project-caption>span:first-child{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px;min-width:0}
+  #work .project-grid--flagship .project-discipline{margin:0;color:#27465a}
+  #work .project-grid--flagship .project-number{padding-top:0;color:#27465a}
+}
+
+/* Hook: the problem the project answers, set larger than anything else in the card's text. */
+#work .project-hook{margin:10px 0 0;color:var(--ink);font-size:clamp(20px,1.7vw,24px);font-weight:750;line-height:1.2;letter-spacing:-.03em;text-wrap:balance}
+#work .project-grid--more .project-hook{font-size:clamp(17px,1.3vw,19px);line-height:1.25;letter-spacing:-.02em}
+#work .project-hook>span{padding-inline:1px;background:linear-gradient(transparent 58%,rgba(222,128,80,.36) 58%,rgba(222,128,80,.36) 94%,transparent 94%) no-repeat 0 0/0% 100%;-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-size 720ms var(--ease-out)}
+#work .project-card .project-hook{transition:opacity 360ms ease-out,translate 620ms var(--ease-out);transition-delay:calc(var(--reveal-delay,0ms) + 110ms)}
+.motion-ready #work .project-card:not(.visible) .project-hook{opacity:0;translate:0 6px;transition-delay:0ms}
+.reveal-instant .project-hook{transition:none!important}
+
+/* Proof: the number reads first; a glass chip appears behind it when the card is in focus. */
+#work .project-proof{margin-top:10px;padding:7px 12px 7px 13px;border-radius:0 12px 12px 0;background-color:rgba(255,255,255,0);transition:opacity 360ms ease-out,translate 620ms var(--ease-out),background-color 360ms ease,box-shadow 360ms ease;transition-delay:calc(var(--reveal-delay,0ms) + 125ms),calc(var(--reveal-delay,0ms) + 125ms),0ms,0ms}
+#work .project-proof strong{font-size:16px}
+#work .project-grid--more .project-proof strong{font-size:15px}
+#work .project-proof>span{font-size:11.5px}
+.motion-ready #work .project-card:not(.visible) .project-proof{transition-delay:0ms}
+
+/* Case-study pill: a real link, high contrast, its arrow turns to point the way on hover. */
+#work .case-entry{display:inline-flex;align-items:center;gap:10px;min-height:44px;margin-top:12px;padding:5px 5px 5px 18px;border:1px solid #152c3e;border-radius:999px;background:#152c3e;color:#f4faf9;font:600 15px/1.2 var(--sans);letter-spacing:-.005em;text-decoration:none;box-shadow:0 10px 22px rgba(8,32,50,.16),inset 0 1px 0 rgba(255,255,255,.12);transition:opacity 360ms ease-out,translate 620ms var(--ease-out),background-color 220ms ease,box-shadow 280ms ease,gap 280ms var(--ease-out);transition-delay:calc(var(--reveal-delay,0ms) + 150ms),calc(var(--reveal-delay,0ms) + 150ms),0ms,0ms,0ms}
+#work .case-entry-arrow{display:grid;place-items:center;flex:none;width:34px;height:34px;border-radius:50%;background:#a83e1d;color:#fff;font:500 16px/1 var(--mono);transition:rotate 360ms var(--ease-out),translate 360ms var(--ease-out)}
+#work .case-entry:hover,#work .case-entry:focus-visible{gap:14px;background:#0a1b28;color:#fff;box-shadow:0 14px 28px rgba(8,32,50,.24),inset 0 1px 0 rgba(255,255,255,.14)}
+#work .case-entry:hover .case-entry-arrow,#work .case-entry:focus-visible .case-entry-arrow{rotate:45deg;translate:2px 0}
+#work .case-entry:active{translate:0 1px}
+#work .project-grid--more{align-items:stretch}
+#work .project-grid--more .project-card{display:flex;flex-direction:column}
+#work .project-grid--more .project-card .case-entry{align-self:flex-start;margin-top:auto}
+#work .project-grid--more .project-proof{margin-bottom:16px}
+#work .more-card .case-entry{align-self:flex-start;margin-top:12px;min-height:44px;font-size:14px;padding-left:16px}
+#work .more-card .case-entry-arrow{width:30px;height:30px;font-size:14px}
+
+/* Screenshot: zooms in a little and follows the pointer, like scanning the UI. work-lanes.js sets
+   --pan-x/--pan-y from -1 to 1 on fine pointers; keyboard focus plays one slow scan instead. */
+#work .project-image{transition:transform 800ms var(--ease-out),translate 900ms var(--ease-out),filter var(--media-focus-time,600ms) var(--focus-ease,ease)}
+body.chapter-scroll-active #work .project-card .project-art .project-image{transition:transform 800ms var(--ease-out),translate 900ms var(--ease-out)}
+@media(hover:hover) and (pointer:fine){
+  #work .project-card:hover .project-art .project-image{transform:scale(1.07);translate:calc(var(--pan-x,0) * -3%) calc(var(--pan-y,0) * -3%)}
+}
+#work .project-card:has(:focus-visible) .project-art .project-image{transform:scale(1.07);animation:work-scan 5.5s var(--ease-out) 250ms both}
+@keyframes work-scan{0%{translate:0 0}45%{translate:2.6% 2.2%}100%{translate:-2.6% -2.2%}}
+
+/* Emphasis: hover, keyboard focus inside the card, or the scroll spotlight. */
+@media(hover:hover){
+  #work .project-card:hover .project-hook>span{background-size:100% 100%}
+  #work .project-card:hover .project-proof{background-color:rgba(255,255,255,.58);box-shadow:0 10px 24px rgba(8,32,50,.08)}
+}
+#work .project-card:has(:focus-visible) .project-hook>span,
+#work .project-card.is-focus .project-hook>span{background-size:100% 100%}
+#work .project-card:has(:focus-visible) .project-proof,
+#work .project-card.is-focus .project-proof{background-color:rgba(255,255,255,.58);box-shadow:0 10px 24px rgba(8,32,50,.08)}
+#work .project-card.is-focus .project-proof strong{color:#0d2233}
+/* Touch screens have no hover: the hook and proof are always in their emphasised state. */
+@media(hover:none){
+  #work .project-hook>span{background-size:100% 100%}
+  #work .project-proof{background-color:rgba(255,255,255,.5)}
+}
+
+@media(max-width:700px){
+  #work .project-hook{margin-top:10px;font-size:20px}
+  #work .project-grid--more .project-hook{font-size:18px}
+  #work .project-proof{margin-top:10px}
+  #work .project-proof strong{font-size:15px}
+  #work .case-entry{margin-top:14px}
+}
+@media(max-width:600px){
+  #work .more-card p{font-size:14px}
+}
+
+/* ---------- 6. Less to scroll on phones ----------
+   The role tabs above already say which discipline each project serves, so on phones a card keeps
+   only its name, hook, proof and pill. The four "More built work" cards share one swipeable row, the
+   same pattern as "Smaller projects": the next card peeks in at the right edge. */
+@media(max-width:700px){
+  #work .project-card .project-number,
+  #work .project-card .project-discipline{display:none}
+  #work .project-caption{margin-top:10px}
+  #work .project-grid--more{display:flex;gap:14px;margin-inline:calc(-1 * var(--gutter));padding:4px var(--gutter) 16px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);scrollbar-width:thin}
+  #work .project-grid--more>.project-card{flex:0 0 min(82%,340px);scroll-snap-align:start}
+  #work .project-grid--more .project-proof{margin-bottom:14px}
+}
+
+/* Between the three groups of #work: 64px of air is enough to read as a new group (it was 86px). */
+#work .work-group-head,#work .more-work{margin-top:clamp(48px,4.4vw,64px)}
+
+/* ---------- 7. Smaller projects: nine cards, no orphan row ----------
+   Three columns on wide screens (3 x 3). With two columns the ninth card spans the row,
+   picture left and text right. */
+@media(min-width:901px){
+  #work .more-grid{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:24px}
+  /* A slightly wider crop (screenshots are pinned top-left, so headers stay in view): about 80px less to scroll. */
+  #work .more-card .media-frame{aspect-ratio:1.8}
+  #work .section-heading{margin-bottom:24px}
+  #work .work-progress{margin-bottom:14px}
+}
+@media(min-width:601px) and (max-width:900px){
+  #work .more-grid>.more-card:last-child:nth-child(odd){grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto 1fr;align-content:start;column-gap:clamp(16px,2.4vw,24px)}
+  #work .more-grid>.more-card:last-child:nth-child(odd)>.media-frame{grid-column:1;grid-row:1/span 4;align-self:start}
+  #work .more-grid>.more-card:last-child:nth-child(odd)>:not(.media-frame){grid-column:2}
+}
+@media(prefers-reduced-motion:reduce){
+  #work .project-hook>span,#work .project-proof,#work .case-entry,#work .case-entry-arrow,#work .project-card .project-hook{transition:none!important}
+  .motion-ready #work .project-card:not(.visible) .project-hook{opacity:1;translate:none}
+  #work .project-image,#work .project-card:hover .project-art .project-image,#work .project-card:has(:focus-visible) .project-art .project-image{transform:none!important;translate:none!important;animation:none!important;transition:none!important}
+  #work .case-entry:hover .case-entry-arrow,#work .case-entry:focus-visible .case-entry-arrow{rotate:45deg;translate:none}
+  #work .case-entry:active{translate:none}
+}
+@media(forced-colors:active){
+  #work .case-entry{border:1px solid LinkText;background:Canvas;color:LinkText}
+  #work .case-entry-arrow{background:Canvas;color:LinkText;border:1px solid LinkText}
+  #work .project-hook>span{background:none}
+  #work .project-proof{background:none;box-shadow:none}
+}
+@media print{
+  #work .project-hook{opacity:1!important;translate:none!important}
+  #work .project-hook>span{background:none}
+  #work .case-entry{background:none;color:#000;border-color:#000;box-shadow:none}
+  #work .case-entry-arrow{background:none;color:#000}
+  #work .project-grid--more{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));margin-inline:0;padding:0;overflow:visible}
 }

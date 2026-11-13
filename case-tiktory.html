@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Hanken+Grotesk:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site-b032c9cccc.css">
+  <link rel="stylesheet" href="site-49c237f215.css">
   <link rel="stylesheet" href="print.css" media="print">
   <script src="page-transitions.js"></script>
 </head>
@@ -41,39 +41,41 @@
       <div class="case-meta"><span class="case-chip" data-case-position>08 / 08</span><span class="case-chip">Field expansion planning</span><span class="case-chip">Simulated data</span></div>
       <dl class="case-facts"><div><dt>Role</dt><dd>Full-stack — backend, map interface, QA</dd></div><div><dt>Stack</dt><dd>FastAPI, SQLite, Leaflet, vanilla JavaScript</dd></div><div><dt>Timeline</dt><dd>November 2026</dd></div><div><dt>Status</dt><dd>Local demo · 31 API tests</dd></div></dl>
     </section>
-
-    <aside class="case-brief page-width" aria-labelledby="briefTitle"><h2 class="case-brief-label" id="briefTitle">In 30 seconds</h2><dl>
-      <div><dt>The problem</dt><dd>An analyst, a surveyor and a manager deciding where the next network point goes, without one shared map.</dd></div>
-      <div><dt>What it proves</dt><dd>31 API tests covering roles, photo privacy, GPS accuracy, approval, audit and the ROI model.</dd></div>
-      <div><dt>Not proven yet</dt><dd>No field test with a real camera and GPS, no offline sync, load test or organisation sign-in. Simulated data.</dd></div>
-      <div><dt>Most relevant for</dt><dd>Business analysis · geospatial product</dd></div>
-    </dl></aside>
     <figure class="case-image page-width">
       <div class="case-image-wrap"><img src="assets/projects/tiktory.webp" width="1600" height="1000" alt="Tiktory landing page: an isometric neighbourhood with three hexagonal zones fills a framed window, with the name TIKTORY set large across the bottom" decoding="async" fetchpriority="high"></div>
-      <figcaption><span>Landing page — the city fills a framed window that opens to the edges as you scroll; the headline “Titik yang tepat. Ekspansi yang terukur.” (“The right point. Measured expansion.”) follows below. The illustration is conceptual.</span><span data-case-position>08 / 08</span></figcaption>
+      <figcaption><span>Landing page — “Titik yang tepat. Ekspansi yang terukur.” means “The right point. Measured expansion.” The illustration is conceptual.</span><span data-case-position>08 / 08</span></figcaption>
     </figure>
+    <section class="case-stats page-width" aria-label="Key numbers"><div class="case-stat"><strong data-countup>3</strong><span>roles on one map: analyst, surveyor, manager</span></div><div class="case-stat"><strong data-countup>352</strong><span>simulated demand points</span></div><div class="case-stat"><strong data-countup>31</strong><span>API tests on a temporary database</span></div></section>
+
+    <aside class="case-brief page-width" aria-labelledby="briefTitle"><h2 class="case-brief-label" id="briefTitle">In 30 seconds</h2><dl>
+      <div><dt>The problem</dt><dd>Choosing the next network point across spreadsheets and chat, without one shared map.</dd></div>
+      <div><dt>What it proves</dt><dd>31 API tests covering roles, photo privacy, GPS accuracy, approval, audit and the ROI model.</dd></div>
+      <div><dt>Not proven yet</dt><dd>No field test with a real camera and GPS; no offline sync, load test or organisation sign-in.</dd></div>
+      <div><dt>Most relevant for</dt><dd>Business analysis · geospatial product</dd></div>
+    </dl></aside>
     <section class="case-story page-width" aria-labelledby="problemTitle"><span class="case-section-label">THE HAND-OFFS</span><div>
       <h2 id="problemTitle">Opening a new network point is a chain of hand-offs.</h2>
-      <p>An analyst spots demand, a surveyor checks the street, and a manager approves the spend — usually across spreadsheets and chat. Tiktory keeps the map, the cost estimate, the survey evidence, and the decision in one trail.</p>
-    
-      <p>Each hand-off has its own question:</p>
-      <div class="case-table-wrap"><table class="case-table">
-        <thead><tr><th scope="col">User</th><th scope="col">Main question</th></tr></thead>
-        <tbody>
-          <tr><td>Analyst</td><td>Where is demand strong enough to justify a new point?</td></tr>
-          <tr><td>Surveyor</td><td>Is the location actually buildable?</td></tr>
-          <tr><td>Manager</td><td>Is the estimate sound — approve or defer?</td></tr>
-        </tbody>
-      </table></div>
+      <p>An analyst spots demand, a surveyor checks the street, and a manager approves the spend, usually across spreadsheets and chat. Tiktory keeps the map, the cost estimate, the survey evidence and the decision in one trail.</p>
+      <details class="case-more"><summary>Each hand-off’s question</summary>
+        <div class="case-table-wrap"><table class="case-table">
+          <thead><tr><th scope="col">User</th><th scope="col">Main question</th></tr></thead>
+          <tbody>
+            <tr><td>Analyst</td><td>Where is demand strong enough to justify a new point?</td></tr>
+            <tr><td>Surveyor</td><td>Is the location actually buildable?</td></tr>
+            <tr><td>Manager</td><td>Is the estimate sound — approve or defer?</td></tr>
+          </tbody>
+        </table></div>
+      </details>
     </div></section>
     <section class="case-story page-width" aria-labelledby="builtTitle"><span class="case-section-label">THE APP</span><div>
       <h2 id="builtTitle">Map, survey, decision.</h2>
-      <p>Demand hexagons and a cost simulator for the analyst, a mobile checklist with photo and GPS for the surveyor, and approve-or-defer with an audit history for the manager — plus a landing page that explains the limits of the demo. Its hero frames the illustrated city in a window that opens to the edges as you scroll, with zone labels that use the same words as the map legend in the app.</p>
+      <p>Demand hexagons and a cost simulator for the analyst, a mobile checklist with photo and GPS for the surveyor, and approve-or-defer with an audit history for the manager.</p>
       <div class="case-gallery">
-        <figure><img src="assets/projects/tiktory-overview.webp" width="1600" height="1000" alt="Tiktory command center: demand hexagons over a street map of Medan beside a cost simulator" loading="lazy" decoding="async"><figcaption>Command center: simulated demand for four areas in Medan and the cost simulator. Basemap © Esri.</figcaption></figure>
-        <figure class="case-shot--portrait"><img src="assets/projects/tiktory-surveyor.webp" width="390" height="1079" alt="Surveyor checklist and photo capture on a phone" loading="lazy" decoding="async"><figcaption>Surveyor checklist on a phone; the draft survives a refresh.</figcaption></figure>
-        <figure class="case-shot--portrait"><img src="assets/projects/tiktory-approval.webp" width="390" height="1074" alt="Manager approval dialog on a phone" loading="lazy" decoding="async"><figcaption>Manager approval with an explicit confirmation.</figcaption></figure>
+        <figure><img src="assets/projects/tiktory-overview.webp" width="1600" height="1000" alt="Tiktory command center: demand hexagons over a street map of Medan beside a cost simulator" loading="lazy" decoding="async"><figcaption>Command center: simulated demand for four areas in Medan, and the cost simulator. Basemap © Esri.</figcaption></figure>
+        <figure class="case-shot--portrait"><img src="assets/projects/tiktory-surveyor.webp" width="390" height="1079" alt="Surveyor checklist and photo capture on a phone" loading="lazy" decoding="async"><figcaption>Surveyor checklist; the draft survives a refresh.</figcaption></figure>
+        <figure class="case-shot--portrait"><img src="assets/projects/tiktory-approval.webp" width="390" height="1074" alt="Manager approval dialog on a phone" loading="lazy" decoding="async"><figcaption>Manager approval with explicit confirmation.</figcaption></figure>
       </div>
+      <details class="case-more"><summary>The landing page</summary><p>A landing page explains the limits of the demo. Its hero frames the illustrated city in a window that opens to the edges as you scroll, with zone labels that use the same words as the map legend in the app.</p></details>
     </div></section>
     <section class="case-story page-width" aria-labelledby="resultsTitle"><span class="case-section-label">ONE DEFAULT POINT</span><div>
       <h2 id="resultsTitle">64 ports, 500 metres, 4.1 months to pay back.</h2>
@@ -86,20 +88,21 @@
           <tr><td>Simulated demand points on the map</td><td class="num">352</td></tr>
         </tbody>
       </table></div>
-      <p class="case-table-note">Illustrative model: Rp20 million + Rp320 thousand per port + Rp16,040 per metre of radius. Cable routes, operating cost, tax, and churn are not included.</p>
+      <p class="case-table-note">Illustrative model: Rp20 million + Rp320 thousand per port + Rp16,040 per metre of radius. Cable routes, operating cost, tax and churn are not included.</p>
     </div></section>
     <section class="case-decision-band" aria-labelledby="decisionsTitle"><div class="page-width">
-      <div class="case-decision-heading"><div><span class="case-section-label">GUARDRAILS</span><h2 id="decisionsTitle">A demo that does not pretend.</h2></div><p>Each decision keeps a demo from looking more certain than it is.</p></div>
+      <div class="case-decision-heading"><div><span class="case-section-label">GUARDRAILS</span><h2 id="decisionsTitle">A demo that does not pretend.</h2></div><p>Each keeps the demo from looking more certain than it is.</p></div>
       <ol class="case-decisions">
-        <li><span>01</span><h3>Server-side roles, even in a demo</h3><p>Signed HttpOnly session cookies and role checks on the backend: the wrong role is rejected and cross-origin POSTs are refused.</p></li>
-        <li><span>02</span><h3>Evidence labelled as simulated</h3><p>Demo GPS and sample photos are marked as simulations, never as verified presence, and distant coordinates are rejected.</p></li>
+        <li><span>01</span><h3>Server-side roles, even in a demo</h3><p>Signed HttpOnly session cookies and backend role checks: the wrong role is rejected and cross-origin POSTs are refused.</p></li>
+        <li><span>02</span><h3>Evidence labelled as simulated</h3><p>Demo GPS and sample photos are marked as simulations, never as verified presence. Distant coordinates are rejected.</p></li>
         <li><span>03</span><h3>No duplicate proposals</h3><p>A proposal within 100 m, or overlapping an existing coverage circle by more than 30%, is rejected; a retry returns the saved result.</p></li>
-        <li><span>04</span><h3>Payback before operating cost</h3><p>The simulator offers conservative, base, and optimistic conversion, and labels payback as before operating cost.</p></li>
+        <li><span>04</span><h3>Payback before operating cost</h3><p>Conservative, base and optimistic conversion scenarios, with payback labelled as before operating cost.</p></li>
       </ol>
     </div></section>
     <section class="case-check page-width" aria-labelledby="checkTitle"><div><span class="case-section-label">TESTS &amp; LIMITS</span><h2 id="checkTitle">31 API tests on a temporary database.</h2></div><div>
-      <p>The tests cover session and role checks, cross-site origins, photo privacy, the required checklist, GPS distance and accuracy, approval confirmation, audit, retries, duplicates, coverage overlap, and the ROI model. The full flow was checked in the browser on desktop and a 390 px phone.</p>
+      <p>The full flow was checked in the browser on desktop and a 390 px phone.</p>
       <ul><li><strong>Not yet:</strong> a physical camera and GPS in the field, offline sync, load testing, or organisation sign-in.</li><li>Hexagons approximate H3 resolution 8 and are not official boundaries. Basemap: Esri World Street Map.</li></ul>
+      <details class="case-more"><summary>What the 31 tests cover</summary><p>Session and role checks, cross-site origins, photo privacy, the required checklist, GPS distance and accuracy, approval confirmation, audit, retries, duplicates, coverage overlap, and the ROI model.</p></details>
       <span class="case-honesty">Prototype on simulated data. Not affiliated with any network operator; no real survey or build is claimed.</span>
     </div></section>
   </main>
@@ -108,6 +111,7 @@
   <script src="config.js"></script>
   <script src="projects.js"></script>
   <script src="case-study.js"></script>
+  <script src="case-focus.js"></script>
   <script src="water-depth.js"></script>
   <script src="depth-ambient.js"></script>
 </body>

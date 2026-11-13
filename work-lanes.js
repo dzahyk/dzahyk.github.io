@@ -68,3 +68,36 @@
     });
   });
 })();
+/* Project screenshots follow a fine pointer: --pan-x/--pan-y (-1 to 1) drive a small translate in
+   work-lanes.css while the card is hovered. One rAF per frame at most; nothing runs on touch or with
+   reduced motion, and the variables are cleared when the pointer leaves. */
+(() => {
+  const arts = document.querySelectorAll('#work .project-card .project-art');
+  if (!arts.length) return;
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  arts.forEach(art => {
+    let frame = 0;
+    let x = 0;
+    let y = 0;
+    art.addEventListener('pointermove', event => {
+      if (event.pointerType !== 'mouse' || !fine.matches || reduced.matches) return;
+      const box = art.getBoundingClientRect();
+      if (!box.width || !box.height) return;
+      x = Math.max(-1, Math.min(1, ((event.clientX - box.left) / box.width) * 2 - 1));
+      y = Math.max(-1, Math.min(1, ((event.clientY - box.top) / box.height) * 2 - 1));
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        art.style.setProperty('--pan-x', x.toFixed(3));
+        art.style.setProperty('--pan-y', y.toFixed(3));
+      });
+    }, { passive: true });
+    art.addEventListener('pointerleave', () => {
+      if (frame) cancelAnimationFrame(frame);
+      frame = 0;
+      art.style.removeProperty('--pan-x');
+      art.style.removeProperty('--pan-y');
+    });
+  });
+})();

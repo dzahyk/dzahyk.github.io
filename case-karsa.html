@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Hanken+Grotesk:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site-b032c9cccc.css">
+  <link rel="stylesheet" href="site-49c237f215.css">
   <link rel="stylesheet" href="print.css" media="print">
   <script src="page-transitions.js"></script>
 </head>
@@ -38,7 +38,7 @@
     <section class="case-hero page-width" aria-labelledby="caseTitle">
       <span class="case-kicker">AI + workflow orchestration / prototype</span>
       <div class="case-hero-row"><h1 id="caseTitle">Karsa</h1><p>What happens after the deal desk says yes: execution, recovery, and an AI step measured on cases it never saw.</p></div>
-      <div class="case-meta"><span class="case-chip" data-case-position>06 / 08</span><span class="case-chip">B2B Deal Desk</span><span class="case-chip">Formerly DecisionFlow AI</span><span class="case-chip">Synthetic data</span><a class="case-chip" href="https://dzahyk.github.io/karsa/" style="color:inherit;text-decoration:none">Product page ↗</a></div>
+      <div class="case-meta"><span class="case-chip" data-case-position>04 / 08</span><span class="case-chip">B2B Deal Desk</span><span class="case-chip">Formerly DecisionFlow AI</span><span class="case-chip">Synthetic data</span><a class="case-chip" href="https://dzahyk.github.io/karsa/" style="color:inherit;text-decoration:none">Product page ↗</a></div>
       <dl class="case-facts">
         <div><dt>Role</dt><dd>Solo — spec review, UX, backend, AI integration, evaluation, testing</dd></div>
         <div><dt>Stack</dt><dd>FastAPI, SQLAlchemy + Alembic, React + TypeScript, Playwright, Claude API (optional)</dd></div>
@@ -47,96 +47,128 @@
       </dl>
     </section>
 
+    <figure class="case-image page-width">
+      <div class="case-image-wrap"><img src="assets/projects/decisionflow.webp" width="1600" height="1000" alt="Approval review for a synthetic webinar campaign: decision summary with fee, margin and delivery, the change from version 1 to 2 with the previous reviewer's note, options considered and a fit-gap list" decoding="async" fetchpriority="high"></div>
+      <figcaption><span>Approval review: the decision, what changed and why, and its evidence.</span><span data-case-position>04 / 08</span></figcaption>
+    </figure>
+
+    <section class="case-stats page-width" aria-label="Key numbers">
+      <div class="case-stat"><strong data-countup>24 / 24</strong><span>dev cases passed, used to write the rules</span></div>
+      <div class="case-stat"><strong data-countup>1 / 36</strong><span>held-out briefs passed, run 1</span></div>
+      <div class="case-stat"><strong data-countup>21 / 50</strong><span>held-out briefs passed after a rewrite; gate failed</span></div>
+      <div class="case-stat"><strong data-countup>1 / 6</strong><span>new prompt-injection phrasings flagged</span></div>
+    </section>
+
     <aside class="case-brief page-width" aria-labelledby="briefTitle"><h2 class="case-brief-label" id="briefTitle">In 30 seconds</h2><dl>
-      <div><dt>The problem</dt><dd>Approval is where most tools stop; the follow-up work is copied by hand, if it happens at all.</dd></div>
-      <div><dt>What it proves</dt><dd>Extraction rules score 24 / 24 on dev but 1 / 36 on a held-out set, so the release gate fails and the app shows it. 51 backend + 16 browser tests.</dd></div>
-      <div><dt>Not proven yet</dt><dd>No live Claude evaluation, SSO, real CRM or tracker connectors, hosted app, or real users.</dd></div>
+      <div><dt>The problem</dt><dd>Approval is where most tools stop; CRM and tracker follow-up is copied by hand.</dd></div>
+      <div><dt>What it proves</dt><dd>It scores its own extraction rules on unseen briefs and shows the failed release gate.</dd></div>
+      <div><dt>Not proven yet</dt><dd>No live Claude evaluation, SSO, real connectors, hosted app or real users.</dd></div>
       <div><dt>Most relevant for</dt><dd>Business analysis · applied AI · workflow automation</dd></div>
     </dl></aside>
 
-    <figure class="case-image page-width">
-      <div class="case-image-wrap"><img src="assets/projects/decisionflow.webp" width="1600" height="1000" alt="Approval review for a synthetic webinar campaign: decision summary with fee, margin and delivery, the change from version 1 to 2 with the previous reviewer's note, options considered and a fit-gap list" decoding="async" fetchpriority="high"></div>
-      <figcaption><span>Approval review — the approver sees the decision, what changed since the last version and why, and the evidence behind it. Synthetic data.</span><span data-case-position>06 / 08</span></figcaption>
-    </figure>
-
     <section class="case-story page-width" aria-labelledby="problemTitle"><span class="case-section-label">AFTER APPROVAL</span><div>
       <h2 id="problemTitle">Approval is where most tools stop.</h2>
-      <p>This is my second build on the deal-desk problem. <a href="case-decision-hub.html">Decision Hub</a> ends at a final proposal; Karsa follows the request into the CRM and project tracker, and checks whether the extraction step holds up on briefs it has never seen.</p>
-      <p>B2B requests arrive as emails, PDFs and chat messages. Targets, budgets and lead definitions are incomplete or contradictory, costs live in spreadsheets, approval happens in a chat, and the follow-up work in the CRM and project tracker is copied by hand — if it happens at all.</p>
-      <p>An LLM speeds up reading the brief, but adds new risks: invented values, misread numbers, instructions hidden in documents, and actions that silently never happen. The goal: one request in; out comes a decision package with sources, cost, risks and an approver — and execution of exactly what was approved, with proof.</p>
+      <p>My second deal-desk build. <a href="case-decision-hub.html">Decision Hub</a> stops at the proposal; Karsa follows the request into the CRM and project tracker.</p>
+      <p>One request in; out comes a package with sources, cost, risks and an approver. Then only what was approved runs, with proof.</p>
       <blockquote class="case-quote"><span class="case-quote-label">From the product spec</span><p>AI proposes, business rules calculate, people authorize, the system executes in a bounded way, and evaluators check the results.</p></blockquote>
+      <details class="case-more"><summary>Why this is hard</summary>
+        <p>B2B requests arrive as emails, PDFs and chat messages. Targets, budgets and lead definitions are incomplete or contradictory, costs live in spreadsheets, approval happens in a chat, and the follow-up work in the CRM and project tracker is copied by hand — if it happens at all.</p>
+        <p>An LLM speeds up reading the brief, but adds new risks: invented values, misread numbers, instructions hidden in documents, and actions that silently never happen.</p>
+      </details>
     </div></section>
     <section class="case-story page-width" aria-labelledby="resultsTitle"><span class="case-section-label">EVALUATION</span><div>
       <h2 id="resultsTitle">1 of 36, then 21 of 50 on new briefs. Still below the gate.</h2>
-      <div class="case-table-wrap"><table class="case-table">
-        <thead><tr><th scope="col">Check</th><th scope="col" class="num">Result</th></tr></thead>
-        <tbody>
-          <tr><td>Backend tests (pricing, approval rules, concurrency, tenancy, outbox, uploads, DB triggers)</td><td class="num">51 passing</td></tr>
-          <tr><td>Browser tests (full journey, sign-in and tenancy, mobile dual approval, keyboard-only reject)</td><td class="num">16 passing</td></tr>
-          <tr><td>Pages scanned with axe (WCAG 2.2 A/AA), no serious issues</td><td class="num">12</td></tr>
-          <tr><td>Pricing equal to hand-computed values</td><td class="num">60 / 60</td></tr>
-          <tr><td>Run 1 · original rules on the dev split (used while writing them)</td><td class="num">24 / 24</td></tr>
-          <tr><td>Run 1 · original rules on held-out v1 (36 new briefs)</td><td class="num">1 / 36 · F1 0.78</td></tr>
-          <tr><td>Run 2 · revised rules on held-out v2 (50 briefs frozen before the revision)</td><td class="num">21 / 50 · 95% CI 29–56%</td></tr>
-          <tr><td>Run 2 · original rules on the same v2 set, for comparison</td><td class="num">4 / 50</td></tr>
-          <tr><td>Run 2 · lead definition found when stated (recall)</td><td class="num">0.14 → 0.84</td></tr>
-          <tr><td>Run 2 · new prompt-injection phrasings flagged</td><td class="num">1 / 6</td></tr>
-          <tr><td>Release gate (≥ 70% pass, every injection caught), both runs</td><td class="num">Failed</td></tr>
-        </tbody>
-      </table></div>
-      <p class="case-table-note">Synthetic data and automated tests only. The extractor is a rule-based baseline, not an LLM; the optional Claude provider is built but not yet evaluated live. For run 2, the v2 set and the gate were committed before the rules changed, the revision used only the dev split and held-out v1, and v2 was scored once. I wrote v2 myself and no second person has checked its labels yet, so read it as my own measurement, not an independent audit.</p>
-      <p><a href="karsa-docs/eval-results.html">Read the full evaluation report</a> (protocol, field-level F1, error taxonomy) or <a href="demos/karsa-brief-checker/">try the extractor yourself</a>. It runs the exact rule file that was scored, in your browser, with an example that it misses.</p>
+      <p>The gate: ≥ 70% passed and every injection caught. Both runs fail it.</p>
+      <p class="case-table-note">Synthetic data. A rule-based baseline, not an LLM. I labelled v2 myself; it is not an independent audit.</p>
+      <p><a href="karsa-docs/eval-results.html">Read the evaluation report</a> or <a href="demos/karsa-brief-checker/">try the extractor yourself</a>: the exact scored rule file, in your browser, with an example it misses.</p>
+      <details class="case-more"><summary>All results and how they were run</summary>
+        <div class="case-table-wrap"><table class="case-table">
+          <thead><tr><th scope="col">Check</th><th scope="col" class="num">Result</th></tr></thead>
+          <tbody>
+            <tr><td>Backend tests (pricing, approval rules, concurrency, tenancy, outbox, uploads, DB triggers)</td><td class="num">51 passing</td></tr>
+            <tr><td>Browser tests (full journey, sign-in and tenancy, mobile dual approval, keyboard-only reject)</td><td class="num">16 passing</td></tr>
+            <tr><td>Pages scanned with axe (WCAG 2.2 A/AA), no serious issues</td><td class="num">12</td></tr>
+            <tr><td>Pricing equal to hand-computed values</td><td class="num">60 / 60</td></tr>
+            <tr><td>Run 1 · original rules on the dev split (used while writing them)</td><td class="num">24 / 24</td></tr>
+            <tr><td>Run 1 · original rules on held-out v1 (36 new briefs)</td><td class="num">1 / 36 · F1 0.78</td></tr>
+            <tr><td>Run 2 · revised rules on held-out v2 (50 briefs frozen before the revision)</td><td class="num">21 / 50 · 95% CI 29–56%</td></tr>
+            <tr><td>Run 2 · original rules on the same v2 set, for comparison</td><td class="num">4 / 50</td></tr>
+            <tr><td>Run 2 · lead definition found when stated (recall)</td><td class="num">0.14 → 0.84</td></tr>
+            <tr><td>Run 2 · new prompt-injection phrasings flagged</td><td class="num">1 / 6</td></tr>
+            <tr><td>Release gate (≥ 70% pass, every injection caught), both runs</td><td class="num">Failed</td></tr>
+          </tbody>
+        </table></div>
+        <p class="case-table-note">Synthetic data and automated tests only. The optional Claude provider is built but not yet evaluated live. For run 2, the v2 set and the gate were committed before the rules changed, the revision used only the dev split and held-out v1, and v2 was scored once. No second person has checked the v2 labels yet. The full report covers the protocol, field-level F1 and an error taxonomy.</p>
+      </details>
     </div></section>
     <section class="case-decision-band" aria-labelledby="decisionsTitle"><div class="page-width">
       <div class="case-decision-heading"><div><span class="case-section-label">DESIGN RULES</span><h2 id="decisionsTitle">Every step can say no.</h2></div><p>Each rule stops the model, or the system, from making a business call or a silent change.</p></div>
       <ol class="case-decisions">
-        <li><span>01</span><h3>A source, or visibly missing</h3><p>Every extracted value carries its exact quote and character range (or PDF page). “To be determined” becomes Missing; two budgets become Conflicting. Client answers need a checkable reference, and an analyst's note is labelled apart from the client's own words.</p></li>
-        <li><span>02</span><h3>Approving is not executing</h3><p>A package is frozen with a SHA-256 hash and approval binds to it; any change creates a new version. Below-floor margins need a written exception and two different approvers. Execution needs a separate authorization of each sandbox action.</p></li>
-        <li><span>03</span><h3>Failures stay visible</h3><p>Work runs through a transactional outbox and a worker with leases. Writes are idempotent, so retries never duplicate. An unknown outcome disables blind retry until someone checks the target; escalations and cancellations land in an exception queue.</p></li>
-        <li><span>04</span><h3>Measure on held-out data</h3><p>The rules scored 24/24 on the cases used to write them, but 1/36 on new briefs. Rewritten and tested on 50 more, they reach 21/50 and still miss 5 of 6 new injection phrasings. The release gate fails, and the app shows it instead of the flattering number.</p></li>
+        <li><span>01</span><h3>A source, or visibly missing</h3><p>Every value quotes its source. “To be determined” becomes Missing; two budgets become Conflicting. Nothing is guessed.</p></li>
+        <li><span>02</span><h3>Approving is not executing</h3><p>Approval binds to one hashed package version. Below-floor margins need two different approvers, and each sandbox action needs its own authorization.</p></li>
+        <li><span>03</span><h3>Failures stay visible</h3><p>Writes go through an outbox, so retries never duplicate. An unknown outcome blocks blind retry until someone checks the target.</p></li>
+        <li><span>04</span><h3>Measure on held-out data</h3><p>24/24 on the cases the rules were written on, 1/36 on new ones, 21/50 after a rewrite. The app shows the failed gate.</p></li>
       </ol>
+      <details class="case-more"><summary>The rules in full</summary>
+        <p><strong>01.</strong> Every extracted value carries its exact quote and character range (or PDF page). “To be determined” becomes Missing; two budgets become Conflicting. Client answers need a checkable reference, and an analyst's note is labelled apart from the client's own words.</p>
+        <p><strong>02.</strong> A package is frozen with a SHA-256 hash and approval binds to it; any change creates a new version. Below-floor margins need a written exception and two different approvers. Execution needs a separate authorization of each sandbox action.</p>
+        <p><strong>03.</strong> Work runs through a transactional outbox and a worker with leases. Writes are idempotent, so retries never duplicate. An unknown outcome disables blind retry until someone checks the target; escalations and cancellations land in an exception queue.</p>
+        <p><strong>04.</strong> Rewritten and tested on 50 more briefs, the rules reach 21/50 and still miss 5 of 6 new injection phrasings. The release gate fails, and the app shows it instead of the flattering number.</p>
+      </details>
     </div></section>
     <section class="case-story page-width" aria-labelledby="usersTitle"><span class="case-section-label">ROLES</span><div>
       <h2 id="usersTitle">Seven roles, because approving and executing are different jobs.</h2>
-      <div class="case-table-wrap"><table class="case-table">
-        <thead><tr><th scope="col">User</th><th scope="col">What they do in the app</th></tr></thead>
-        <tbody>
-          <tr><td>Deal desk analyst</td><td>Checks AI-drafted fields against the source, asks the client, prices the deal, freezes the package.</td></tr>
-          <tr><td>Commercial approver</td><td>Reads the summary, the changes and the evidence; approves, rejects or requests changes.</td></tr>
-          <tr><td>Second approver</td><td>Confirms high-risk deals; the first approver cannot approve twice.</td></tr>
-          <tr><td>Automation engineer</td><td>Runs the approved workflow, retries safely, reconciles unknown outcomes, clears the exception queue.</td></tr>
-          <tr><td>AI evaluation analyst</td><td>Runs the benchmark, reads failures and adjudicates them.</td></tr>
-          <tr><td>Transformation lead</td><td>Compares cycle time and adoption against a manual baseline.</td></tr>
-          <tr><td>Auditor and admin</td><td>Read the append-only audit log; manage rate cards and connectors.</td></tr>
-        </tbody>
-      </table></div>
+      <details class="case-more"><summary>All seven roles</summary>
+        <div class="case-table-wrap"><table class="case-table">
+          <thead><tr><th scope="col">User</th><th scope="col">What they do in the app</th></tr></thead>
+          <tbody>
+            <tr><td>Deal desk analyst</td><td>Checks AI-drafted fields against the source, asks the client, prices the deal, freezes the package.</td></tr>
+            <tr><td>Commercial approver</td><td>Reads the summary, the changes and the evidence; approves, rejects or requests changes.</td></tr>
+            <tr><td>Second approver</td><td>Confirms high-risk deals; the first approver cannot approve twice.</td></tr>
+            <tr><td>Automation engineer</td><td>Runs the approved workflow, retries safely, reconciles unknown outcomes, clears the exception queue.</td></tr>
+            <tr><td>AI evaluation analyst</td><td>Runs the benchmark, reads failures and adjudicates them.</td></tr>
+            <tr><td>Transformation lead</td><td>Compares cycle time and adoption against a manual baseline.</td></tr>
+            <tr><td>Auditor and admin</td><td>Read the append-only audit log; manage rate cards and connectors.</td></tr>
+          </tbody>
+        </table></div>
+      </details>
     </div></section>
     <section class="case-story page-width" aria-labelledby="builtTitle"><span class="case-section-label">THE APP</span><div>
       <h2 id="builtTitle">Intake to a verified write in a sandbox CRM.</h2>
-      <p>Cases from pasted text or uploaded PDF and email, evidence-linked requirements, clarifications, deterministic pricing with capacity checks, frozen decision packages, single and dual approval, separate authorization, an asynchronous sandbox workflow with recovery, an evaluation lab, impact measurement, sign-in with tenants and roles, and an append-only audit log.</p>
+      <p>Evidence-linked requirements, deterministic pricing, frozen packages, dual approval, sandbox execution with recovery, an evaluation lab and an append-only audit log.</p>
       <div class="case-gallery">
-        <figure><img src="assets/projects/decisionflow-evidence.webp" width="1600" height="1000" alt="Requirements table with Geography marked Missing and the phrase 'to be determined' highlighted in the original brief" loading="lazy" decoding="async"><figcaption>Evidence: selecting a requirement highlights its exact source text; nothing missing is guessed.</figcaption></figure>
-        <figure><img src="assets/projects/decisionflow-pricing.webp" width="1600" height="1000" alt="Feasibility and pricing: inputs, calculated variable cost, total cost and a 22 percent gross margin, with a clarification-required badge" loading="lazy" decoding="async"><figcaption>Pricing: integer-rupiah formulas with a trace. A 22% margin still cannot be approved while key facts are missing.</figcaption></figure>
-        <figure><img src="assets/projects/decisionflow-dual-approval.webp" width="1600" height="1000" alt="High-risk package showing two approver slots, the first filled with a note and the second waiting, plus the margin exception request" loading="lazy" decoding="async"><figcaption>Two-person rule: a below-floor margin needs a written exception and two different approvers.</figcaption></figure>
-        <figure><img src="assets/projects/decisionflow-execution.webp" width="1600" height="1000" alt="Execution timeline with the tracker step in unknown outcome, a check-target-system button and blind retry disabled" loading="lazy" decoding="async"><figcaption>Unknown outcome: a timeout after commit disables blind retry until the target system is checked.</figcaption></figure>
-        <figure><img src="assets/projects/decisionflow-evaluation.webp" width="1600" height="1000" alt="Evaluation lab with a failed release gate, 1 of 36 held-out cases passing, field F1 0.78 and failures by category" loading="lazy" decoding="async"><figcaption>Evaluation: the held-out split is the honest score; the release gate fails and says why.</figcaption></figure>
-        <figure><img src="assets/projects/decisionflow-impact.webp" width="1600" height="1000" alt="Impact page with median cycle time for baseline, assisted and concurrent manual cases, adoption by people and by cases, and a cycle-time chart" loading="lazy" decoding="async"><figcaption>Impact: baseline vs assisted with a concurrent manual group, sample sizes and a causation caveat (synthetic cohort).</figcaption></figure>
-        <figure><img src="assets/projects/decisionflow-exceptions.webp" width="1600" height="1000" alt="Workflows page with an exception queue entry, runs ready to start and the list of execution runs" loading="lazy" decoding="async"><figcaption>Exception queue: escalations and cancellations stay open until a person resolves them.</figcaption></figure>
-        <figure><img src="assets/projects/decisionflow-audit.webp" width="1600" height="1000" alt="Audit log listing sign-ins, approvals and workflow events with request IDs" loading="lazy" decoding="async"><figcaption>Audit: append-only at the database level, with request IDs that match the server logs.</figcaption></figure>
-        <figure class="case-shot--portrait"><img src="assets/projects/decisionflow-mobile.webp" width="780" height="1688" alt="Mobile approval screen with two approver slots and sticky Request changes, Reject and Approve buttons" loading="lazy" decoding="async"><figcaption>Mobile approval on a 390 px screen: sticky actions and 44 px touch targets.</figcaption></figure>
+        <figure><img src="assets/projects/decisionflow-evidence.webp" width="1600" height="1000" alt="Requirements table with Geography marked Missing and the phrase 'to be determined' highlighted in the original brief" loading="lazy" decoding="async"><figcaption>Evidence: each requirement highlights its source text.</figcaption></figure>
+        <figure><img src="assets/projects/decisionflow-dual-approval.webp" width="1600" height="1000" alt="High-risk package showing two approver slots, the first filled with a note and the second waiting, plus the margin exception request" loading="lazy" decoding="async"><figcaption>Two-person rule for below-floor margins.</figcaption></figure>
+        <figure><img src="assets/projects/decisionflow-execution.webp" width="1600" height="1000" alt="Execution timeline with the tracker step in unknown outcome, a check-target-system button and blind retry disabled" loading="lazy" decoding="async"><figcaption>Unknown outcome: blind retry is off until the target is checked.</figcaption></figure>
+        <figure><img src="assets/projects/decisionflow-evaluation.webp" width="1600" height="1000" alt="Evaluation lab with a failed release gate, 1 of 36 held-out cases passing, field F1 0.78 and failures by category" loading="lazy" decoding="async"><figcaption>Evaluation lab: the held-out score and why the gate fails.</figcaption></figure>
       </div>
+      <details class="case-more"><summary>Full feature list and 5 more screens</summary>
+        <p>Cases from pasted text or uploaded PDF and email, evidence-linked requirements, clarifications, deterministic pricing with capacity checks, frozen decision packages, single and dual approval, separate authorization, an asynchronous sandbox workflow with recovery, an evaluation lab, impact measurement, sign-in with tenants and roles, and an append-only audit log.</p>
+        <div class="case-gallery">
+          <figure><img src="assets/projects/decisionflow-pricing.webp" width="1600" height="1000" alt="Feasibility and pricing: inputs, calculated variable cost, total cost and a 22 percent gross margin, with a clarification-required badge" loading="lazy" decoding="async"><figcaption>Pricing: integer-rupiah formulas with a trace. A 22% margin still cannot be approved while key facts are missing.</figcaption></figure>
+          <figure><img src="assets/projects/decisionflow-impact.webp" width="1600" height="1000" alt="Impact page with median cycle time for baseline, assisted and concurrent manual cases, adoption by people and by cases, and a cycle-time chart" loading="lazy" decoding="async"><figcaption>Impact: baseline vs assisted with a concurrent manual group, sample sizes and a causation caveat (synthetic cohort).</figcaption></figure>
+          <figure><img src="assets/projects/decisionflow-exceptions.webp" width="1600" height="1000" alt="Workflows page with an exception queue entry, runs ready to start and the list of execution runs" loading="lazy" decoding="async"><figcaption>Exception queue: escalations and cancellations stay open until a person resolves them.</figcaption></figure>
+          <figure><img src="assets/projects/decisionflow-audit.webp" width="1600" height="1000" alt="Audit log listing sign-ins, approvals and workflow events with request IDs" loading="lazy" decoding="async"><figcaption>Audit: append-only at the database level, with request IDs that match the server logs.</figcaption></figure>
+          <figure class="case-shot--portrait"><img src="assets/projects/decisionflow-mobile.webp" width="780" height="1688" alt="Mobile approval screen with two approver slots and sticky Request changes, Reject and Approve buttons" loading="lazy" decoding="async"><figcaption>Mobile approval on a 390 px screen: sticky actions and 44 px touch targets.</figcaption></figure>
+        </div>
+      </details>
     </div></section>
     <section class="case-check page-width" aria-labelledby="checkTitle"><div><span class="case-section-label">LIMITS</span><h2 id="checkTitle">Stale approvals get a 409. Frozen packages refuse edits.</h2></div><div>
-      <p>Stale approvals return 409 and self-review 403; editing a frozen package is refused by a database trigger and, with the trigger removed, still stopped by the hash check; a crashed worker's job is re-claimed without a duplicate write; the full journey runs in a real browser against the real worker, on desktop and at 390 px.</p>
-      <ul><li><strong>Not yet:</strong> a live Claude evaluation, SSO/MFA, real CRM or tracker connectors, OCR, a hosted version of the full app, manual screen-reader testing, a second person checking the v2 labels, or real users.</li><li>Two held-out runs show a pattern list does not generalise to new phrasing, and that injection detection cannot rest on it. The next step is to run the Claude provider on dev, v1 and v2 under the same gate; any further rule change needs a new v3 set.</li><li>The business-analysis pack (BRD, 24 functional requirements with acceptance criteria, AS-IS/TO-BE BPMN, traceability, scripted UAT, a change-impact example) is <a href="karsa-docs/index.html">published here</a>.</li></ul>
+      <p>Self-review returns 403. Without the database trigger, the hash check still blocks edits. A crashed worker's job is re-claimed, never written twice.</p>
+      <ul><li><strong>Not yet:</strong> a live Claude evaluation, SSO/MFA, real CRM or tracker connectors, OCR, a hosted full app, manual screen-reader tests, a second labeller for v2, or real users.</li><li>The business-analysis pack (BRD, 24 requirements, BPMN, traceability, UAT) is <a href="karsa-docs/index.html">published here</a>.</li></ul>
+      <details class="case-more"><summary>What the two runs taught, and what is next</summary>
+        <p>The full journey runs in a real browser against the real worker, on desktop and at 390 px. The BA pack has 24 functional requirements with acceptance criteria, AS-IS/TO-BE BPMN, scripted UAT and a change-impact example.</p>
+        <p>Two held-out runs show a pattern list does not generalise to new phrasing, and that injection detection cannot rest on it. The next step is to run the Claude provider on dev, v1 and v2 under the same gate; any further rule change needs a new v3 set.</p>
+      </details>
       <span class="case-honesty">Synthetic tenants and cases; no client, user or business result is claimed.</span>
     </div></section>
   </main>
-  <footer class="case-bottom"><div class="page-width case-bottom-inner"><div><span class="case-section-label">HIRING / NEXT</span><h2>Need an analyst<br>who builds?</h2><a href="contact.html">Get in touch ↗</a></div><div class="case-bottom-next"><span class="case-next-index">NEXT PROJECT</span><a data-case-next href="case-vera.html">Vera ↗</a></div></div></footer>
+  <footer class="case-bottom"><div class="page-width case-bottom-inner"><div><span class="case-section-label">HIRING / NEXT</span><h2>Need an analyst<br>who builds?</h2><a href="contact.html">Get in touch ↗</a></div><div class="case-bottom-next"><span class="case-next-index">NEXT PROJECT</span><a data-case-next href="case-retentionos.html">RetentionOS ↗</a></div></div></footer>
   <div class="case-page-footer page-width"><span data-brand>DAFFA ZAHY KHAIRY</span><span>Prototypes on synthetic data · © <span data-year>2026</span></span></div>
   <script src="config.js"></script>
   <script src="projects.js"></script>
   <script src="case-study.js"></script>
+  <script src="case-focus.js"></script>
   <script src="water-depth.js"></script>
   <script src="depth-ambient.js"></script>
 </body>

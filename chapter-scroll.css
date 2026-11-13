@@ -53,8 +53,9 @@ body.chapter-scroll-active .services .services-heading>p,body.chapter-scroll-act
 /* Light copy over mid-blue water: a soft navy shadow keeps small text legible without a panel. */
 body.chapter-scroll-active .services .services-heading h2,body.chapter-scroll-active .services .services-heading>p,body.chapter-scroll-active .process-heading h2,body.chapter-scroll-active .process-heading>p,body.chapter-scroll-active .process-list h3,body.chapter-scroll-active .process-list p,body.chapter-scroll-active .process-number{text-shadow:0 1px 2px rgba(8,32,50,.45),0 0 14px rgba(8,32,50,.38)}
 
-/* The route stays in view for four readable beats. The moving bead is its physical edge. */
-.process.section-space{height:360svh;min-height:0;padding:0;scroll-margin-top:0}
+/* The route stays in view for four readable beats. The moving bead is its physical edge.
+   190svh (was 360svh): chapter-scroll.js starts the steps once the route is on screen, before the pin. */
+.process.section-space{height:190svh;min-height:0;padding:0;scroll-margin-top:0}
 .process-sticky{position:sticky;top:0;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:clamp(112px,14svh,166px);padding-bottom:clamp(42px,8svh,88px);isolation:isolate}
 /* A local caustic layer becomes visible inside the held chapter, then recedes before either edge. */
 .process-water-surface{position:absolute;top:0;bottom:0;left:calc((100% - 100vw)/2);width:100vw;z-index:0;overflow:clip;pointer-events:none}

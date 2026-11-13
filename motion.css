@@ -63,7 +63,7 @@
 /* Text uses a clear fade/lift; optical focus is reserved for project images. */
 :root{--focus-ease:cubic-bezier(.6,.01,.4,1);--media-focus-time:800ms}
 .motion-ready .reveal{
-  --reveal-travel:10px;--reveal-settle:680ms;--reveal-opacity:420ms;
+  --reveal-travel:8px;--reveal-settle:460ms;--reveal-opacity:300ms;
   opacity:0;translate:0 var(--reveal-travel);filter:none;
   transition:opacity var(--reveal-opacity) cubic-bezier(.22,.61,.36,1),translate var(--reveal-settle) cubic-bezier(.16,1,.3,1);
   transition-delay:var(--reveal-delay,0ms);
@@ -78,19 +78,33 @@
   transition-delay:var(--reveal-delay,0ms),var(--reveal-delay,0ms),0ms,0ms,0ms;
 }
 .motion-ready .marquee-heading.reveal{--reveal-travel:6px}
+/* Cards that carry a photo keep the photo and its frame on screen the whole
+   time; only their words fade and lift. A fast scroll can never land on an
+   empty frame. Without :has() support the whole card fades, as before. */
+.motion-ready .reveal:has(img):not(.project-card){opacity:1;translate:none}
+.motion-ready .reveal:has(img):not(.project-card)>:not(:has(img)):not(img,figure,.media-frame){
+  transition:opacity var(--reveal-opacity) cubic-bezier(.22,.61,.36,1),translate var(--reveal-settle) cubic-bezier(.16,1,.3,1);
+  transition-delay:calc(var(--reveal-delay,0ms) + 40ms);
+}
+.motion-ready .reveal:has(img):not(.project-card):not(.visible)>:not(:has(img)):not(img,figure,.media-frame){opacity:0;translate:0 var(--reveal-travel)}
+.motion-ready .reveal:has(img):not(.project-card):focus-within>*{opacity:1;translate:none;transition:none}
+/* A picture still on its way shows a slow sheen in its frame, not a blank box. */
+.img-pending{background-image:linear-gradient(105deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.55) 50%,rgba(255,255,255,0) 70%);background-size:220% 100%;background-repeat:no-repeat;animation:img-pending-sheen 1400ms ease-in-out infinite}
+@keyframes img-pending-sheen{from{background-position:130% 0}to{background-position:-30% 0}}
 .motion-ready .footer-line.reveal{--reveal-travel:0px}
 .heading-line{display:block;overflow:clip;padding-bottom:.08em;margin-bottom:-.08em}
 .heading-line>span{display:block;filter:none;transition:transform 620ms var(--ease-out);transition-delay:calc(var(--line-order,0) * 55ms)}
 .motion-ready .reveal:not(.visible) .heading-line>span{transform:translateY(45%);filter:none}
 .motion-ready .visible .heading-line>span{transform:none;filter:none}
 
-/* Bound the image blur to its own clipped media; captions resolve independently. */
+/* Project art is never hidden: the card frame and its picture arrive together.
+   The scroll-linked focus (chapter-scroll sets --art-open) only softens the
+   picture slightly at the bottom edge and is sharp well before mid-screen. */
 .motion-ready .project-card.reveal,.motion-ready .project-card.reveal.visible{opacity:1;filter:none;translate:none;transform:none;transition:none}
-.project-card .project-art{transition:opacity 420ms cubic-bezier(.22,.61,.36,1);transition-delay:var(--reveal-delay,0ms)}
-.motion-ready .project-card .project-art:not(.is-seen){clip-path:inset(0);opacity:0}
-.motion-ready .project-card .project-art.is-seen{clip-path:inset(0);opacity:1}
-.project-image{filter:none;transition:transform 800ms var(--ease-out),filter var(--media-focus-time) var(--focus-ease)}
-.motion-ready .project-art:not(.is-seen) .project-image{transform:scale(1.025);filter:blur(12px)}
+.project-card .project-art{transition:none}
+.motion-ready .project-card .project-art,.motion-ready .project-card .project-art.is-seen{clip-path:inset(0);opacity:1}
+.project-image{filter:none;transition:transform 800ms var(--ease-out),filter 240ms linear}
+html body.chapter-scroll-active .project-card .project-art .project-image{filter:blur(calc(max(0, 1 - var(--art-open,1) * 2.4) * 3px))}
 .project-card .project-caption{filter:none;transition:opacity 360ms ease-out,transform 620ms var(--ease-out);transition-delay:calc(var(--reveal-delay,0ms) + 100ms)}
 .motion-ready .project-card:not(.visible) .project-caption{opacity:0;filter:none;transform:translateY(8px);transition-delay:0ms}
 .project-card .case-entry{opacity:1;translate:none;transition:opacity 360ms ease-out,translate 620ms var(--ease-out),color 220ms ease,gap 280ms var(--ease-out);transition-delay:calc(var(--reveal-delay,0ms) + 150ms),calc(var(--reveal-delay,0ms) + 150ms),0ms,0ms}
@@ -98,11 +112,11 @@
 @media(hover:hover) and (pointer:fine){.project-open:hover .project-image{transform:scale(1.025);transition-delay:0ms}}
 .project-open:focus-visible .project-image{transform:scale(1.025);transition-delay:0ms}
 /* A quick scroll can land directly in the reading area: remove stagger and catch up. */
-.motion-ready .reveal.reveal-catchup{--reveal-delay:0ms;--reveal-settle:380ms;--reveal-opacity:250ms}
+.motion-ready .reveal.reveal-catchup{--reveal-delay:0ms;--reveal-settle:320ms;--reveal-opacity:200ms}
 .reveal-catchup :is(.heading-line>span,.project-art,.project-image,.project-caption,.case-entry){transition-duration:380ms;transition-delay:0ms}
 .reveal-catchup .project-image{transition-duration:450ms}
-.reveal-instant,.reveal-instant :is(.heading-line>span,.project-art,.project-image,.project-caption,.case-entry){transition:none!important}
-@media(max-width:700px){.motion-ready .reveal{--reveal-travel:7px}.motion-ready .project-art:not(.is-seen) .project-image{filter:blur(8px)}}
+.reveal-instant,.reveal-instant:has(img):not(.project-card)>*,.reveal-instant :is(.heading-line>span,.project-art,.project-image,.project-caption,.case-entry){transition:none!important}
+@media(max-width:700px){.motion-ready .reveal{--reveal-travel:6px}}
 
 .read-word{transition:color 200ms ease}
 .motion-ready .read-word{color:var(--muted,#61717e)}
@@ -185,6 +199,9 @@
   .faq-motion .faq-answer{transition:none!important}
   .faq details::before,.faq-question,.faq-motion .faq-answer-inner{transition:none!important;animation:none!important;transform:none!important}
   .faq summary .faq-icon{transition:none!important;scale:none!important}
+  .motion-ready .reveal:has(img):not(.project-card)>*{opacity:1!important;translate:none!important;transition:none!important}
+  .img-pending{animation:none;background-image:none}
+  html body.chapter-scroll-active .project-card .project-art .project-image{filter:none}
 }
 @media(forced-colors:active){.motion-ready .about .about-ink-word{background:none!important;color:CanvasText!important;-webkit-text-fill-color:CanvasText!important;animation:none!important}}
 @media(prefers-reduced-transparency:reduce), (forced-colors:active){.nav-intro-running main::before{display:none}}

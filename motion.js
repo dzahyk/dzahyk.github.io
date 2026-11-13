@@ -248,6 +248,8 @@
     artworks.forEach(element => element.classList.add('is-seen'));
   }
   if (!reduced.matches && 'IntersectionObserver' in window) {
+    // A positive bottom margin starts the entrance just before the element
+    // scrolls in, so a fast scroll never lands on an empty, still-hidden card.
     observer = new IntersectionObserver(entries => {
       const fastScroll = performance.now() - revealScrollTime < 180 && revealScrollSpeed > 1.4;
       const rows = new Map();
@@ -272,9 +274,58 @@
           if (catchup) element.classList.add('reveal-catchup');
           revealElement(element, top < 0);
         });
-    }, { threshold: .01, rootMargin: '0px 0px -10% 0px' });
+    }, { threshold: 0, rootMargin: '0px 0px 14% 0px' });
     reveals.forEach(element => observer.observe(element));
   } else showAll();
+
+  // Jumping past content (anchor links, fast flicks, restored scroll) never
+  // crosses an observer threshold, so anything already above the viewport is
+  // shown at once instead of fading in behind the reader on the way back up.
+  let sweepFrame = 0;
+  function sweepPassedReveals() {
+    sweepFrame = 0;
+    if (!observer) return;
+    for (const element of reveals) {
+      if (element.classList.contains('visible')) continue;
+      if (element.getBoundingClientRect().bottom < 0) revealElement(element, true);
+    }
+  }
+  const scheduleSweep = () => { if (observer && !sweepFrame) sweepFrame = requestAnimationFrame(sweepPassedReveals); };
+  addEventListener('scroll', scheduleSweep, { passive: true });
+  addEventListener('hashchange', scheduleSweep);
+  addEventListener('pageshow', scheduleSweep);
+
+  // Images start loading a few screens ahead of the reader, not at the edge of
+  // the viewport. While a picture is still on its way its frame shows a quiet
+  // placeholder sheen rather than an empty box.
+  const frameOf = image => image.closest('.media-frame,.project-art,.timeline-photo') || image.parentElement;
+  const lazyImages = [...document.querySelectorAll('main img[loading="lazy"]')];
+  lazyImages.forEach(image => {
+    if (image.complete && image.naturalWidth) return;
+    const frame = frameOf(image);
+    if (!frame) return;
+    frame.classList.add('img-pending');
+    const done = () => frame.classList.remove('img-pending');
+    image.addEventListener('load', done, { once: true });
+    image.addEventListener('error', done, { once: true });
+    setTimeout(done, 8000);
+  });
+  const saveData = navigator.connection?.saveData;
+  if (!saveData && 'IntersectionObserver' in window && lazyImages.length) {
+    const ahead = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        // Pictures in the same list come too: on phones a list can be a sideways
+        // scroller whose off-screen cards never cross the observer on their own.
+        const group = entry.target.closest('ul,ol');
+        (group ? group.querySelectorAll('img[loading="lazy"]') : [entry.target]).forEach(image => {
+          image.loading = 'eager';
+          ahead.unobserve(image);
+        });
+      });
+    }, { rootMargin: '0px 0px 250% 0px' });
+    lazyImages.forEach(image => ahead.observe(image));
+  }
   reveals.forEach(element => element.addEventListener('focusin', () => revealElement(element, true)));
   // Content is never hidden by the stylesheet until enhancement is installed.
   document.documentElement.classList.add('motion-ready');

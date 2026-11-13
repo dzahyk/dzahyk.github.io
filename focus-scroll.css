@@ -1,0 +1,48 @@
+/* Homepage scroll focus: spotlight, count-up, reveal safety.
+   focus-scroll.js adds body.fs-on, .is-focus on the item being read and .fs-dim on its
+   section. Without the script none of these classes exist and nothing here applies. */
+
+/* Spotlight ------------------------------------------------------------------------------ */
+/* Only on wide screens with a mouse. Touch and narrow screens keep every item at full
+   strength; section owners may still style .is-focus there as a quiet accent. */
+@media (min-width:768px) and (hover:hover) and (prefers-reduced-motion:no-preference){
+  /* One shared, short transition once an item has arrived (never during its entrance). */
+  body.fs-on main :is(.project-card,.more-card,.skill-row,.timeline-row,.cred-card,.process-list>li):is(.reveal.visible,:not(.reveal)){
+    transition:opacity 400ms cubic-bezier(.22,.61,.36,1),translate 440ms var(--ease-out,cubic-bezier(.22,1,.36,1)),filter 400ms cubic-bezier(.22,.61,.36,1),scale 440ms var(--ease-out,cubic-bezier(.22,1,.36,1)),box-shadow 400ms ease,background-color 240ms ease,border-color 240ms ease,color 240ms ease;
+    /* Keeps the entrance stagger from motion.js (at most 160ms) on opacity and lift. */
+    transition-delay:var(--reveal-delay,0ms),var(--reveal-delay,0ms),0ms,0ms,0ms,0ms,0ms,0ms;
+  }
+  /* Neighbours step back, never below .55 opacity and never blurred. */
+  body.fs-on .fs-dim :is(.project-card,.more-card,.skill-row,.timeline-row,.cred-card,.process-list>li):is(.reveal.visible,:not(.reveal)):not(.is-focus){
+    opacity:.62;
+    filter:saturate(.72);
+  }
+  body.fs-on .fs-dim :is(.project-card,.more-card,.cred-card):is(.reveal.visible,:not(.reveal)):not(.is-focus){scale:.988}
+  /* The dark sticky chapter keeps more of its light; its steps sit on deep water. */
+  body.fs-on .fs-dim .process-list>li:is(.reveal.visible,:not(.reveal)):not(.is-focus){opacity:.66;filter:none}
+
+  /* The item in focus comes forward a touch, like glass catching the light. */
+  body.fs-on .fs-dim :is(.project-card,.more-card,.cred-card).is-focus:is(.reveal.visible,:not(.reveal)){scale:1;translate:0 -3px}
+  /* Project art is clipped by its scroll reveal, so its accent lives in work-lanes.css. */
+  body.fs-on .fs-dim .more-card.is-focus .media-frame,
+  body.fs-on .fs-dim .timeline-row.is-focus .media-frame{
+    box-shadow:0 0 0 1px rgba(255,255,255,.9),0 18px 40px -14px rgba(19,38,31,.34),0 0 34px rgba(220,246,250,.55);
+  }
+  body.fs-on main :is(.more-card .media-frame,.timeline-row .media-frame){transition:box-shadow 400ms ease}
+  /* Works on light or deep-water cards: a thin copper edge, a soft drop. */
+  body.fs-on .fs-dim .cred-card.is-focus{box-shadow:0 0 0 1px rgba(201,120,74,.5),0 22px 46px -18px rgba(4,18,28,.4)}
+}
+
+/* Count-up ------------------------------------------------------------------------------- */
+/* While a number counts, the real text keeps its place in layout and in the accessibility
+   tree (only its ink is hidden); an aria-hidden copy on top shows the moving digits. */
+.countup-live,.countup-live *{-webkit-text-fill-color:transparent}
+.countup-ghost,.countup-ghost *{-webkit-text-fill-color:currentcolor}
+.countup-ghost{
+  position:absolute;inset:0;box-sizing:border-box;margin:0;padding:inherit;
+  display:inherit;flex-direction:inherit;flex-wrap:inherit;align-items:inherit;justify-content:inherit;gap:inherit;grid-template:inherit;
+  white-space:inherit;pointer-events:none;user-select:none;-webkit-user-select:none;
+}
+@media (prefers-reduced-motion:reduce){.countup-ghost{display:none}.countup-live,.countup-live *{-webkit-text-fill-color:currentcolor}}
+@media print{.countup-ghost{display:none}.countup-live,.countup-live *{-webkit-text-fill-color:currentcolor}}
+@media (forced-colors:active){.countup-ghost{display:none}.countup-live,.countup-live *{-webkit-text-fill-color:CanvasText}}

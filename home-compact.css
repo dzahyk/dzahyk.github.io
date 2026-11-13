@@ -1,0 +1,67 @@
+/* Homepage: compact experience, process and credentials.
+   Loads after profile.css, chapter-scroll.css and work-lanes.css, so it only refines them.
+   No opacity or filter on .timeline-row, .cred-card or .process-list > li: focus-scroll.css owns dimming. */
+
+/* ---------- Experience: three short points per role instead of a paragraph ---------- */
+.experience .timeline-row{padding-block:clamp(20px,2.2vw,30px)}
+.timeline-body{align-items:start;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr)}
+.timeline-detail{font-size:inherit;line-height:inherit}
+.timeline-points{display:grid;gap:7px;margin:0;padding:0;list-style:none}
+.timeline-points li{position:relative;padding-left:20px;color:#2d4c5d;font-size:clamp(15px,1.12vw,16.5px);line-height:1.45}
+/* A small open bubble marks each point: the water motif at text size. */
+.timeline-points li::before{content:'';position:absolute;left:1px;top:.5em;width:7px;height:7px;border:1.5px solid #a83e1d;border-radius:50%;background:rgba(255,255,255,.55)}
+.timeline-points strong{color:var(--ink);font-weight:700}
+/* The game row leads with its counts, set as figures rather than prose. */
+.timeline-points .timeline-figures{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px;padding-left:0;margin-bottom:3px;color:#27465a;font:500 13px/1.6 var(--mono);letter-spacing:.01em}
+.timeline-points .timeline-figures::before{content:none}
+/* Each figure and its label wrap as one unit, so a pair never splits across lines. */
+.timeline-figures .fig{display:inline-flex;align-items:baseline;gap:5px;white-space:nowrap}
+.timeline-figures strong{color:#a83e1d;font:800 clamp(22px,1.9vw,27px)/1.05 var(--sans);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.timeline-points strong [data-countup],.timeline-points strong[data-countup]{font-variant-numeric:tabular-nums}
+.timeline-detail .timeline-tag{margin-top:12px}
+
+/* Beyond class: one short line per item. */
+.beyond-list li{padding:14px 0}
+.beyond-list strong{font-size:17px}
+.beyond-list span{margin-top:4px;font-size:15px;line-height:1.45}
+
+/* ---------- Credentials: the paper leads, the rest reads as rows ---------- */
+.cred-card#paper{border-color:rgba(244,194,138,.42);background:linear-gradient(150deg,rgba(244,194,138,.1),rgba(255,255,255,.04) 58%)}
+.cred-card#paper h3{max-width:30ch;text-wrap:balance}
+.cred-card .cred-venue{margin-top:14px;color:#f4c28a;font:500 13px/1.5 var(--mono);letter-spacing:.02em}
+.cred-card .cred-venue strong{color:#fbe3c6;font-weight:500}
+.cred-card .cred-venue abbr{text-decoration:underline dotted rgba(244,194,138,.7);text-underline-offset:3px;cursor:help}
+.cred-card .cred-summary{margin-top:10px;font-size:16px;line-height:1.5}
+.cred-lists{margin-top:clamp(26px,3vw,40px)}
+.cred-list{margin-top:10px}
+.cred-list li{gap:2px 16px;padding:10px 0}
+.cred-list strong{font-size:16px;line-height:1.35}
+.cred-note{color:#b5d3d8;font:500 12.5px/1.5 var(--mono);letter-spacing:.01em}
+
+@media(max-width:900px){
+  .timeline-body{grid-template-columns:minmax(0,1fr)}
+  .timeline-detail{margin-top:4px}
+}
+@media(max-width:600px){
+  .timeline-points li{font-size:15px}
+  .timeline-figures strong{font-size:24px}
+  .timeline-points .timeline-figures{gap:4px 14px;font-size:14px}
+  .cred-card .cred-venue{font-size:14px}
+  /* A wider crop keeps each photo as context without filling the phone screen. */
+  .timeline-photo .media-frame,.beyond-photo .media-frame{aspect-ratio:2.1}
+  .timeline-photo .media-frame>img,.beyond-photo .media-frame>img{object-position:50% 40%}
+  .experience .timeline-row{gap:12px}
+  .cred-note{font:400 14px/1.45 var(--sans)}
+}
+
+/* ---------- Process: 190svh on phones too (work-lanes.css set 230svh) ---------- */
+@media(max-width:700px) and (min-height:621px){
+  .process.section-space{height:190svh}
+}
+@media(prefers-reduced-motion:reduce){
+  .process.section-space{height:auto}
+}
+@media(forced-colors:active){
+  .timeline-points li::before{border-color:CanvasText;background:Canvas}
+  .timeline-figures strong{color:CanvasText}
+}

@@ -1,83 +1,195 @@
-/* Skills ledger: a tally of proof levels, ruled columns, then each row reads claim → proof → stamped level.
-   Every state below is gated on classes that skills-ledger.js adds, so without JS the table is simply visible.
-   Scroll progress arrives as --ledger (column key) and --p (each row), both 0–1. */
+/* Skills grid: ten glass cards, each led by one proof figure, with the full proof sentence one click away.
+   Overrides the older four-column ledger rules in profile.css. No rule here hides content: without JS the
+   cards are fully visible and the proof sits in a closed <details>. Spotlight opacity belongs to
+   focus-scroll.css; this file only adds an accent to .is-focus. */
 
-/* ---------- Tally: how far each piece of proof goes, counted ---------- */
-.skill-tally{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0 0 clamp(30px,3.4vw,48px);padding:0;border-top:1px solid var(--line)}
-.skill-tally li{display:flex;flex-direction:column;gap:10px;min-width:0;padding:18px clamp(12px,1.6vw,26px) 2px;border-left:1px solid var(--line)}
-.skill-tally li:first-child{padding-left:0;border-left:0}
-.skill-tally b{font:800 clamp(40px,4.2vw,64px)/.88 var(--sans);letter-spacing:-.045em;color:var(--ink);font-variant-numeric:tabular-nums}
-.skill-tally span{display:flex;align-items:flex-start;gap:8px;color:#27465a;font:500 11px/1.4 var(--mono);letter-spacing:.05em;text-transform:uppercase}
-.skill-tally i{flex:none;width:10px;height:10px;margin-top:2px;border-radius:3px;border:1px solid var(--line)}
+.skills .visually-hidden{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+
+/* ---------- Tally of proof levels, in the heading's right column (built by skills-ledger.js) ---------- */
+.skills .section-heading--split{align-items:end}
+.skill-tally-wrap{justify-self:end;min-width:0}
+.skills .skill-tally-caption{margin:0 0 12px;max-width:none;color:#27465a;font:500 12px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.skills .skill-tally-caption::after{content:'';display:block;width:28px;height:1px;margin-top:8px;background:var(--orange)}
+.skill-tally{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,max-content));gap:12px clamp(18px,2vw,30px);justify-content:start;margin:0;padding:0}
+.skill-tally li{display:flex;align-items:center;gap:10px;min-width:0}
+.skill-tally b{min-width:1.15em;color:var(--ink);font:800 clamp(26px,2.2vw,32px)/1 var(--sans);letter-spacing:-.04em;font-variant-numeric:tabular-nums;text-align:right}
+.skill-tally span{display:flex;align-items:center;gap:7px;color:#27465a;font:500 11px/1.35 var(--mono);letter-spacing:.04em;text-transform:uppercase}
+.skill-tally i{flex:none;width:10px;height:10px;border-radius:3px;border:1px solid var(--line)}
 .skill-tally .tally--built i{background:#152c3e;border-color:#152c3e}
 .skill-tally .tally--proto i{background:#fff}
 .skill-tally .tally--paper i{background:#a83e1d;border-color:#a83e1d}
 .skill-tally .tally--work i{background:#dcecef}
-.skill-tally.is-armed li{opacity:0;translate:0 12px;transition:opacity 520ms var(--ease-out),translate 760ms var(--ease-out);transition-delay:calc(var(--n,0) * 90ms)}
-.skill-tally.is-armed.is-counted li{opacity:1;translate:none}
+/* "PEER-REVIEWED" must not split at its hyphen. */
+.skill-tally .tally--paper span{white-space:nowrap}
 
-/* ---------- The column key is ruled, then labelled column by column ---------- */
-.skills.is-staged .skill-key{position:relative;border-bottom-color:transparent}
-.skills.is-staged .skill-key::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--ink);transform-origin:0 50%;transform:scaleX(var(--ledger,0))}
-.skills.is-staged .skill-key span{--k:clamp(0,calc((var(--ledger,0) - var(--at,0)) * 4.5),1);opacity:var(--k);translate:0 calc((1 - var(--k)) * 7px)}
-.skills.is-staged .skill-key span:nth-child(1){--at:.08}
-.skills.is-staged .skill-key span:nth-child(2){--at:.28}
-.skills.is-staged .skill-key span:nth-child(3){--at:.48}
-.skills.is-staged .skill-key span:nth-child(4){--at:.68}
-
-/* ---------- Each row: claim, tags, where, proof (line by line), then the level is stamped ---------- */
-.skills.is-staged .skill-row{
-  --cap:clamp(0,calc(var(--p,0) / .32),1);
-  --where:clamp(0,calc((var(--p,0) - .26) / .24),1);
-  --proof:clamp(0,calc((var(--p,0) - .34) / .42),1);
-  position:relative;isolation:isolate;border-bottom-color:transparent;
+/* ---------- The grid ---------- */
+.skills .skill-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.4vw,20px);margin:0;padding:0;border:0}
+.skills .skill-row{
+  --card-pad:clamp(20px,1.8vw,26px);
+  position:relative;isolation:isolate;
+  display:flex;flex-direction:column;align-items:stretch;gap:0;min-width:0;
+  padding:var(--card-pad);
+  border:1px solid rgba(255,255,255,.78);border-radius:clamp(16px,1.6vw,22px);
+  background:linear-gradient(150deg,rgba(255,255,255,.8),rgba(240,250,250,.6));
+  box-shadow:0 14px 34px rgba(8,32,50,.07),inset 0 1px 0 rgba(255,255,255,.8);
+  /* Keeps motion.js's reveal (opacity, translate + stagger delay) and adds the card's own feedback. */
+  transition:opacity var(--reveal-opacity,420ms) cubic-bezier(.22,.61,.36,1),translate var(--reveal-settle,420ms) var(--ease-out),border-color 280ms ease,box-shadow 420ms var(--ease-out);
+  transition-delay:var(--reveal-delay,0ms),var(--reveal-delay,0ms),0ms,0ms;
 }
-.skills.is-staged .skill-row::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--line);transform-origin:0 50%;transform:scaleX(var(--p,0))}
-.skills.is-staged .skill-cap h3{opacity:var(--cap);translate:0 calc((1 - var(--cap)) * 16px)}
-.skills.is-staged .skill-tags li{--t:clamp(0,calc((var(--p,0) - .16 - var(--i,0) * .05) / .16),1);opacity:var(--t);scale:calc(.86 + .14 * var(--t))}
-.skills.is-staged .skill-tags li:nth-child(2){--i:1}.skills.is-staged .skill-tags li:nth-child(3){--i:2}.skills.is-staged .skill-tags li:nth-child(n+4){--i:3}
-.skills.is-staged .skill-where dd{opacity:var(--where);translate:calc((1 - var(--where)) * -10px) 0}
-/* The proof surfaces line by line: a soft mask edge travels down the paragraph. */
-.skills.is-staged .skill-proof dd{
-  -webkit-mask-image:linear-gradient(180deg,#000 calc(var(--proof) * 130% - 30%),transparent calc(var(--proof) * 130%));
-  mask-image:linear-gradient(180deg,#000 calc(var(--proof) * 130% - 30%),transparent calc(var(--proof) * 130%));
+@supports (backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px)){
+  .skills .skill-row{background:linear-gradient(150deg,rgba(255,255,255,.66),rgba(236,248,248,.4));-webkit-backdrop-filter:blur(10px) saturate(1.12);backdrop-filter:blur(10px) saturate(1.12)}
 }
-.skills.is-staged .skill-row:not(.is-stamped) .level{opacity:0;scale:1.22}
-.skills.is-staged .skill-row.is-stamped .level{position:relative;animation:level-stamp 560ms cubic-bezier(.2,1.6,.4,1) both}
-.skills.is-staged .skill-row.is-stamped .level+.level{animation-delay:110ms}
-.skills.is-staged .skill-row.is-stamped .level::after{content:'';position:absolute;inset:-1px;border:1.5px solid #152c3e;border-radius:inherit;opacity:0;pointer-events:none;animation:level-ripple 820ms 120ms cubic-bezier(.12,.6,.25,1) both}
-.skills.is-staged .skill-row.is-stamped .level--paper::after{border-color:#a83e1d}
-@keyframes level-stamp{0%{opacity:0;scale:1.22}55%{opacity:1;scale:.95}100%{opacity:1;scale:1}}
-@keyframes level-ripple{0%{opacity:.6;transform:scale(1)}100%{opacity:0;transform:scale(1.32,1.9)}}
-/* Keyboard readers never wait for scroll. */
-.skills.is-staged .skill-row:focus-within{--p:1!important}
+/* Two cards with the strongest single figure span two columns: 3 / 2+1 / 3 / 2+1 fills four even rows.
+   Inside, the figure takes the right half so the extra width carries the number, not white space. */
+@media(min-width:1081px){
+  .skills .skill-row--wide{grid-column:span 2;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);grid-template-rows:auto auto auto 1fr auto;grid-template-areas:"levels figure" "title figure" "tags figure" "where figure" "proof proof";column-gap:clamp(24px,3vw,44px)}
+  .skills .skill-row--wide .skill-levels{grid-area:levels}
+  .skills .skill-row--wide h3{grid-area:title}
+  .skills .skill-row--wide .skill-tags{grid-area:tags}
+  .skills .skill-row--wide .skill-where{grid-area:where;align-self:end}
+  .skills .skill-row--wide .skill-proof{grid-area:proof}
+  /* A wide card that points at one project shows a real preview of it instead of a 30px dot,
+     so the left half carries a picture of the case study rather than empty space. */
+  .skills .skill-row--wide .skill-where li:only-child .skill-link{gap:14px;padding:6px 18px 6px 6px;border-radius:14px}
+  .skills .skill-row--wide .skill-where li:only-child .skill-link img{width:clamp(128px,11vw,156px);height:auto;aspect-ratio:1.6;border-radius:9px;object-position:50% 0}
+  .skills .skill-row--wide .skill-figure{grid-area:figure;align-self:center;margin:0;padding:6px 0 6px clamp(22px,2.6vw,38px);border-top:0;border-left:1px solid var(--line)}
+}
 
-/* ---------- Hover: a caustic glint crosses the row; project names preview their case study ---------- */
+/* Level badges sit on top as an eyebrow. */
+.skill-levels{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+.skills .skill-row h3{margin:0;font-size:clamp(19px,1.45vw,21px);font-weight:700;line-height:1.2;letter-spacing:-.025em;text-wrap:balance}
+
+/* The one figure each card leads with. */
+.skill-figure{display:flex;flex-direction:column;gap:6px;margin:16px 0 0;padding-top:14px;border-top:1px solid var(--line)}
+.skill-figure strong{display:block;color:var(--ink);font:800 clamp(28px,2.5vw,38px)/1.02 var(--sans);letter-spacing:-.04em;font-variant-numeric:tabular-nums;text-wrap:balance;transition:color 320ms ease}
+.skill-figure strong>[data-countup]{white-space:nowrap}
+.skill-figure-unit{font-size:.5em;font-weight:700;letter-spacing:-.01em;vertical-align:.32em;color:#27465a}
+.skill-figure>span{color:#2d4c5d;font-size:15px;line-height:1.4}
+.skill-nowrap{white-space:nowrap}
+.skills .skill-row--wide .skill-figure strong{font-size:clamp(34px,3.4vw,50px)}
+
+/* Tools. */
+.skills .skill-tags{margin:16px 0 0}
+
+/* Where it was applied: pill links to the case studies, pushed to the card's foot so rows line up. */
+.skill-where{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:auto 0 0;padding:18px 0 0}
+.skill-link{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:4px 12px 4px 4px;border:1px solid rgba(21,44,62,.34);border-radius:999px;background:rgba(255,255,255,.9);color:var(--ink);font:600 14px/1.2 var(--sans);text-decoration:none;box-shadow:0 2px 8px rgba(8,32,50,.06);transition:background-color 200ms ease,color 200ms ease,border-color 200ms ease,box-shadow 260ms var(--ease-out),translate 260ms var(--ease-out)}
+.skill-link img{flex:none;width:30px;height:30px;border-radius:999px;object-fit:cover;object-position:50% 40%;background:#dae2e4;box-shadow:inset 0 0 0 1px rgba(21,44,62,.12)}
+.skill-link-mark{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:999px;background:#a83e1d;color:#fff;font:500 9px/1 var(--mono);letter-spacing:.02em}
+.skill-link-arrow{color:var(--orange);font-weight:700;transition:translate 260ms var(--ease-out),color 200ms ease}
+a.skill-link:hover{background:var(--ink);border-color:var(--ink);color:#f1f8f7;box-shadow:0 8px 20px rgba(8,32,50,.18);translate:0 -1px}
+a.skill-link:hover .skill-link-arrow{color:#f4c28a;translate:3px 0}
+a.skill-link--page:hover .skill-link-arrow{translate:0 2px}
+a.skill-link:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.skill-link--plain{border-style:dashed;background:rgba(255,255,255,.5);font-weight:500;color:#27465a;box-shadow:none}
+
+/* The full proof sentence, collapsed. */
+.skill-proof{margin:14px 0 0;border-top:1px solid var(--line)}
+.skill-proof summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:40px;padding:10px 0 0;color:#27465a;font:500 13px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;list-style:none}
+.skill-proof summary::-webkit-details-marker{display:none}
+.skill-proof summary::after{content:'+';display:grid;place-items:center;width:24px;height:24px;border:1px solid var(--line);border-radius:999px;font:500 15px/1 var(--mono);transition:rotate 260ms var(--ease-out),background-color 200ms ease,color 200ms ease}
+.skill-proof summary:hover{color:var(--ink)}
+.skill-proof summary:hover::after{background:var(--ink);border-color:var(--ink);color:#f1f8f7}
+.skill-proof[open] summary::after{rotate:45deg}
+.skill-proof summary:focus-visible{outline:3px solid var(--orange);outline-offset:3px;border-radius:4px}
+.skill-proof p{margin:10px 0 2px;color:#2d4c5d;font-size:15px;line-height:1.55}
+/* Where supported, the proof opens with a short height transition instead of a jump. */
+@supports selector(::details-content){
+  .skill-proof{interpolate-size:allow-keywords}
+  .skill-proof::details-content{block-size:0;overflow:clip;transition:block-size 320ms var(--ease-out),content-visibility 320ms allow-discrete}
+  .skill-proof[open]::details-content{block-size:auto}
+}
+
+/* Spotlight accent only (focus-scroll.js toggles .is-focus; it owns any dimming). */
+.skills .skill-row.is-focus{border-color:rgba(168,62,29,.42);box-shadow:0 22px 48px rgba(8,32,50,.13),inset 0 1px 0 rgba(255,255,255,.85),0 0 0 1px rgba(168,62,29,.16)}
+.skills .skill-row.is-focus .skill-figure strong{color:#8f3417}
+.skills .skill-row:focus-within{border-color:rgba(21,44,62,.4)}
+
+/* One short legend line. */
+.skills .skill-note{max-width:none;margin:18px 0 0;color:var(--muted);font-size:14px;line-height:1.5}
+
+/* ---------- Hover: a caustic glint crosses the card; project pills preview their case study ---------- */
 @media(hover:hover) and (pointer:fine){
-  .skill-row{position:relative;isolation:isolate}
-  .skill-row::before{content:'';position:absolute;z-index:-1;inset:0 -14px;border-radius:14px;pointer-events:none;
-    background:linear-gradient(100deg,transparent 38%,rgba(255,255,255,.62) 50%,transparent 62%) no-repeat,rgba(255,255,255,.28);
-    background-size:260% 100%,100% 100%;background-position:130% 0,0 0;opacity:0;transition:opacity 260ms ease}
-  .skill-row:hover::before{opacity:1;animation:skill-glint 1100ms cubic-bezier(.3,.1,.2,1) both}
+  .skills .skill-row::before{content:'';position:absolute;z-index:-1;inset:0;border-radius:inherit;pointer-events:none;
+    background:linear-gradient(100deg,transparent 38%,rgba(255,255,255,.7) 50%,transparent 62%) no-repeat;
+    background-size:260% 100%;background-position:130% 0;opacity:0;transition:opacity 260ms ease}
+  .skills .skill-row:hover::before{opacity:1;animation:skill-glint 1100ms cubic-bezier(.3,.1,.2,1) both}
+  .skills .skill-row:hover{box-shadow:0 20px 44px rgba(8,32,50,.11),inset 0 1px 0 rgba(255,255,255,.85)}
 }
-@keyframes skill-glint{from{background-position:130% 0,0 0}to{background-position:-30% 0,0 0}}
+@keyframes skill-glint{from{background-position:130% 0}to{background-position:-30% 0}}
 .skill-peek{position:fixed;left:0;top:0;z-index:110;width:260px;aspect-ratio:1.6;margin:0;overflow:hidden;border:1px solid rgba(255,255,255,.85);border-radius:12px;background:#132235;box-shadow:0 18px 44px rgba(8,32,50,.28),0 2px 6px rgba(8,32,50,.12);pointer-events:none;opacity:0;transform:translate3d(var(--peek-x,0px),var(--peek-y,0px),0);scale:.92;transform-origin:0 100%;transition:opacity 180ms ease,scale 260ms var(--ease-out)}
 .skill-peek img{display:block;width:100%;height:100%;object-fit:cover;object-position:top left}
 .skill-peek figcaption{position:absolute;left:8px;bottom:8px;padding:3px 8px;border-radius:6px;background:rgba(240,249,247,.92);color:#163448;font:500 11px/1.3 var(--mono)}
 .skill-peek.is-on{opacity:1;scale:1}
 
-@media(max-width:900px){
-  .skill-tally{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .skill-tally li:nth-child(3){padding-left:0;border-left:0}
-  .skill-tally li:nth-child(n+3){margin-top:14px;border-top:1px solid var(--line)}
+/* ---------- Narrower screens ---------- */
+@media(max-width:1080px){
+  .skills .skill-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .skill-tally-wrap{justify-self:start;margin-top:20px}
 }
+@media(max-width:900px){
+  /* profile.css switches the old ledger to stacked rows here; keep the cards as cards. */
+  .skills .skill-list{border-top:0}
+  .skills .skill-row{border-top:1px solid rgba(255,255,255,.78)}
+}
+@media(max-width:700px){
+  /* Phones: ten stacked cards must stay short. Title and badges share a line when they fit,
+     the figure sits beside its label, tools become one quiet line, project pills wrap. */
+  .skills .skill-list{grid-template-columns:minmax(0,1fr);gap:12px}
+  .skills .skill-row{--card-pad:16px;flex-direction:row;flex-wrap:wrap;align-items:center;column-gap:10px;border-radius:18px}
+  .skills .skill-row>*{flex:1 0 100%;min-width:0}
+  .skills .skill-row>h3{order:-1;flex:0 1 auto;font-size:18px}
+  .skills .skill-row>.skill-levels{flex:0 1 auto;gap:4px;margin:4px 0 0}
+  .skills .level{padding:3px 6px;font-size:10.5px}
+
+  .skill-figure{flex-direction:row;flex-wrap:wrap;align-items:baseline;column-gap:10px;row-gap:2px;margin:10px 0 0;padding-top:10px}
+  .skill-figure strong,.skills .skill-row--wide .skill-figure strong{flex:0 1 auto;font-size:clamp(25px,7.4vw,30px)}
+  .skill-figure>span{flex:1 1 9.5em;font-size:14px;line-height:1.35}
+
+  /* Tools as one line of mono text; the whole list returns when the card's proof is opened. */
+  .skills .skill-tags{display:block;margin:8px 0 0;white-space:normal;color:#27465a;font:500 12px/1.45 var(--mono)}
+  .skills .skill-tags li{display:inline;padding:0;border:0;border-radius:0;background:none;font:inherit}
+  .skills .skill-tags li+li::before{content:'·';content:'·' / '';margin:0 .45em;color:#6b8291}
+  .skills .skill-row:has(.skill-proof[open]) .skill-tags{white-space:normal}
+
+  /* Project pills wrap at full card width so every case-study link stays whole and tappable;
+     the Proof toggle takes its own full-width row underneath. */
+  .skill-where{flex-wrap:wrap;gap:6px;margin:0;padding:10px 0 0;overflow:visible}
+  .skills .skill-row>.skill-where{flex:1 1 100%}
+  .skill-link{min-height:36px;padding:3px 10px 3px 3px;gap:6px;white-space:nowrap}
+  .skill-link img,.skill-link-mark{width:28px;height:28px}
+
+  .skill-proof{margin-top:12px}
+  .skill-proof summary{min-height:40px;padding:8px 0 0;font-size:12px}
+  .skill-proof p{margin-top:8px;font-size:14.5px}
+
+  .skill-tally{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px}
+  .skill-tally b{font-size:24px;text-align:left}
+  .skill-tally span{font-size:11px}
+  .skills .skill-tally-caption{margin-bottom:10px;font-size:11.5px}
+  .skills .section-heading{margin-bottom:24px}
+  .skills .skill-note{margin-top:14px}
+}
+
+@media(max-width:380px){
+  /* Smallest phones: drop the pill thumbnails so two project links share a line. */
+  .skill-link img,.skill-link-mark{display:none}
+  .skill-link{padding:3px 12px}
+}
+
+/* ---------- Preferences ---------- */
 @media(prefers-reduced-motion:reduce){
-  .skill-tally.is-armed li{opacity:1;translate:none;transition:none}
-  .skills.is-staged .skill-row{--p:1!important}
-  .skills.is-staged .skill-key{--ledger:1!important}
-  .skills.is-staged .skill-row .level{animation:none!important;opacity:1;scale:1}
-  .skills.is-staged .skill-row .level::after{display:none}
-  .skill-row:hover::before{animation:none}
+  .skills .skill-row,.skill-link,.skill-link-arrow,.skill-proof summary::after,.skill-figure strong{transition:none}
+  a.skill-link:hover,a.skill-link:hover .skill-link-arrow{translate:none}
+  .skills .skill-row:hover::before{animation:none;opacity:0}
+  .skill-proof::details-content{transition:none}
   .skill-peek{transition:none}
 }
-@media(forced-colors:active){.skill-row::before,.skill-peek{display:none}.skills.is-staged .skill-row .level{opacity:1;scale:1;animation:none}}
+@media(prefers-reduced-transparency:reduce){
+  .skills .skill-row{background:#f7fbfb;-webkit-backdrop-filter:none;backdrop-filter:none}
+}
+@media(forced-colors:active){
+  .skills .skill-row{background:Canvas;border:1px solid CanvasText;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .skills .skill-row::before,.skill-peek{display:none}
+  .skill-link{border:1px solid LinkText}
+}

@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Hanken+Grotesk:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site-b032c9cccc.css">
+  <link rel="stylesheet" href="site-49c237f215.css">
   <link rel="stylesheet" href="print.css" media="print">
   <script src="page-transitions.js"></script>
 </head>
@@ -41,86 +41,108 @@
       <div class="case-meta"><span class="case-chip" data-case-position>03 / 08</span><span class="case-chip">B2B Deal Desk</span><span class="case-chip">Synthetic data</span><a class="case-chip" href="https://dzahyk.github.io/decision-hub/" style="color:inherit;text-decoration:none">Product page ↗</a><a class="case-chip" href="https://github.com/dzahyk/decision-hub" style="color:inherit;text-decoration:none">Source code ↗</a></div>
       <dl class="case-facts"><div><dt>Role</dt><dd>Solo — requirements, UX, backend, AI integration, testing</dd></div><div><dt>Stack</dt><dd>FastAPI, PostgreSQL, React + TypeScript, Claude API (optional)</dd></div><div><dt>Timeline</dt><dd>November 2026</dd></div><div><dt>Status</dt><dd>Prototype · 101 backend tests + 5 browser journeys</dd></div></dl>
     </section>
+    <figure class="case-image page-width">
+      <div class="case-image-wrap"><img src="assets/projects/decision-hub.webp" width="1600" height="1000" alt="Decision Hub product page: the headline “The model has no price field.” beside a sample brief with four quoted phrases and the rule-priced quote built from them, $102,300 at a 41.54% margin" decoding="async" fetchpriority="high"></div>
+      <figcaption><span>Product page: the app’s own output for its sample brief.</span><span data-case-position>03 / 08</span></figcaption>
+    </figure>
+    <section class="case-stats page-width" aria-label="Key numbers">
+      <div class="case-stat"><strong data-countup>7</strong><span>fields the model may fill; none is a price</span></div>
+      <div class="case-stat"><strong data-countup>0 of 60</strong><span>evaluation cases sent personal data to the model provider</span></div>
+      <div class="case-stat"><strong data-countup>96.7%</strong><span>fields exactly right (rule-based baseline)</span></div>
+      <div class="case-stat"><strong data-countup>20.8%</strong><span>valid briefs still priced differently</span></div>
+    </section>
 
     <aside class="case-brief page-width" aria-labelledby="briefTitle"><h2 class="case-brief-label" id="briefTitle">In 30 seconds</h2><dl>
-      <div><dt>The problem</dt><dd>Briefs arrive as free text, prices are worked out by hand, and approval happens in a chat with no record.</dd></div>
-      <div><dt>What it proves</dt><dd>The model has no price field. 0 of 60 evaluation cases sent personal data to the provider. 101 backend tests, 5 browser journeys.</dd></div>
+      <div><dt>The problem</dt><dd>Free-text briefs, prices worked out by hand, approval in a chat with no record.</dd></div>
+      <div><dt>What it proves</dt><dd>Code, not the model, sets the price, and a manager signs one exact quote revision.</dd></div>
       <div><dt>Not proven yet</dt><dd>No live Claude evaluation, no hosted demo of the app, no real users.</dd></div>
       <div><dt>Most relevant for</dt><dd>Business analysis · applied AI</dd></div>
     </dl></aside>
-    <figure class="case-image page-width">
-      <div class="case-image-wrap"><img src="assets/projects/decision-hub.webp" width="1600" height="1000" alt="Decision Hub product page: the headline “The model has no price field.” beside a sample brief with four quoted phrases and the rule-priced quote built from them, $102,300 at a 41.54% margin" decoding="async" fetchpriority="high"></div>
-      <figcaption><span>Product page: the hero is the app’s own output for its sample brief, with each quoted phrase numbered and carried into the quote</span><span data-case-position>03 / 08</span></figcaption>
-    </figure>
     <section class="case-story page-width" aria-labelledby="problemTitle"><span class="case-section-label">THE BRIEF</span><div>
       <h2 id="problemTitle">A quote is only as good as the brief behind it.</h2>
-      <p>In a B2B deal desk, sales sends campaign briefs as free text: an email, a chat message, notes from a call. Key details are often missing, the analyst re-types the rest into a spreadsheet, prices are worked out by hand, and approval happens in a separate chat with no record of what was approved.</p>
-      <p>The goal: one brief in, and out comes validated requirements, a quote that follows the pricing policy, a human decision on that exact quote, and a final proposal anyone can trace back to its source.</p>
-      <p>It stops at that proposal. <a href="case-karsa.html">Karsa</a>, built later, takes the same problem past approval: into execution, recovery, and evaluation on unseen briefs.</p>
+      <p>Sales sends briefs as free text. Details are missing, the analyst re-types the rest into a spreadsheet, prices are worked out by hand, and approval happens in a chat with no record.</p>
+      <p>Goal: one brief in; out come validated requirements, a policy-priced quote, a human decision on that exact quote, and a traceable proposal. <a href="case-karsa.html">Karsa</a>, built later, takes the problem past approval.</p>
       <blockquote class="case-quote"><span class="case-quote-label">From the product spec</span><p>AI does not decide the price and may not change the rate card; every final decision passes through a person.</p></blockquote>
     </div></section>
     <section class="case-decision-band" aria-labelledby="decisionsTitle"><div class="page-width">
-      <div class="case-decision-heading"><div><span class="case-section-label">WHERE THE MODEL STOPS</span><h2 id="decisionsTitle">The model has no price field.</h2></div><p>It fills seven fields. Anything with money or approval in it is code or a person.</p></div>
+      <div class="case-decision-heading"><div><span class="case-section-label">WHERE THE MODEL STOPS</span><h2 id="decisionsTitle">The model has no price field.</h2></div><p>Anything with money or approval in it is code or a person.</p></div>
       <ol class="case-decisions">
-        <li><span>01</span><h3>The model proposes, code decides</h3><p>The model may only fill seven requirement fields; its output schema has no price, discount or approval field. A deterministic engine prices the quote on a versioned rate card.</p></li>
-        <li><span>02</span><h3>Every value must show its source</h3><p>Each field quotes the sentence it came from. A quote that is not in the brief is downgraded to “verify”, and missing information stays missing instead of being guessed.</p></li>
+        <li><span>01</span><h3>The model proposes, code decides</h3><p>The model fills only seven requirement fields; its output schema has no price, discount or approval field. A deterministic engine prices on a versioned rate card.</p></li>
+        <li><span>02</span><h3>Every value must show its source</h3><p>Each field quotes its source sentence. A quote not found in the brief is downgraded to “verify”; missing information stays missing, never guessed.</p></li>
         <li><span>03</span><h3>Approval belongs to one revision</h3><p>A manager approves a specific quote revision. Editing a field or re-pricing voids it, and nobody can approve a request they created.</p></li>
         <li><span>04</span><h3>Personal data stays on the server</h3><p>Emails, phone numbers, ID numbers and named contacts are replaced with placeholders before any model call, then restored locally for the analyst.</p></li>
       </ol>
     </div></section>
     <section class="case-story page-width" aria-labelledby="usersTitle"><span class="case-section-label">ROLES</span><div>
       <h2 id="usersTitle">Who touches a quote.</h2>
-      <div class="case-table-wrap"><table class="case-table">
-        <thead><tr><th scope="col">User</th><th scope="col">What they do in the app</th></tr></thead>
-        <tbody>
-          <tr><td>Sales</td><td>Pastes the brief as received; sees only their own requests.</td></tr>
-          <tr><td>Deal-desk analyst</td><td>Checks the extracted fields, fixes gaps, prices the quote, issues the final proposal.</td></tr>
-          <tr><td>Operations</td><td>Confirms whether off-catalog work, like explainer videos, can be delivered.</td></tr>
-          <tr><td>Deal-desk manager</td><td>Approves or rejects one exact quote revision, with a reason when policy flags apply.</td></tr>
-          <tr><td>Auditor</td><td>Reads the full history of every brief and quote.</td></tr>
-        </tbody>
-      </table></div>
+      <p>Five roles. Whoever creates a request can never approve it.</p>
+      <details class="case-more"><summary>All five roles</summary>
+        <div class="case-table-wrap"><table class="case-table">
+          <thead><tr><th scope="col">User</th><th scope="col">What they do in the app</th></tr></thead>
+          <tbody>
+            <tr><td>Sales</td><td>Pastes the brief as received; sees only their own requests.</td></tr>
+            <tr><td>Deal-desk analyst</td><td>Checks the extracted fields, fixes gaps, prices the quote, issues the final proposal.</td></tr>
+            <tr><td>Operations</td><td>Confirms whether off-catalog work, like explainer videos, can be delivered.</td></tr>
+            <tr><td>Deal-desk manager</td><td>Approves or rejects one exact quote revision, with a reason when policy flags apply.</td></tr>
+            <tr><td>Auditor</td><td>Reads the full history of every brief and quote.</td></tr>
+          </tbody>
+        </table></div>
+      </details>
     </div></section>
     <section class="case-story page-width" aria-labelledby="builtTitle"><span class="case-section-label">THE WORKFLOW</span><div>
       <h2 id="builtTitle">Intake to a final, hashed proposal.</h2>
-      <p>Intake, AI-assisted extraction with source quotes, validation, analyst corrections as new revisions, deterministic pricing with policy flags, operations and manager review, an exactly-once final proposal, mock email and CRM notifications, a dashboard built from the audit trail, and an evaluation set for the extraction step.</p>
+      <p>Source-quoted extraction, corrections as new revisions, rule-based pricing with policy flags, manager review, and a proposal issued exactly once.</p>
       <div class="case-gallery">
-        <figure><img src="assets/projects/decision-hub-workspace.webp" width="1600" height="1000" alt="Workspace with the original brief, the extracted fields, and the decision inspector side by side" loading="lazy" decoding="async"><figcaption>Workspace: the original brief, extracted fields and the decision inspector. Hovering a field highlights its source sentence.</figcaption></figure>
-        <figure><img src="assets/projects/decision-hub-pricing.webp" width="1600" height="1000" alt="A quote with an off-catalog item flagged for operations and the operations note shown to the manager" loading="lazy" decoding="async"><figcaption>Policy flags: off-catalog explainer videos go to operations before the manager can approve.</figcaption></figure>
-        <figure><img src="assets/projects/decision-hub-approvals.webp" width="1600" height="1000" alt="Approvals queue showing which role must act next on each quote" loading="lazy" decoding="async"><figcaption>Approvals queue: each quote shows whose turn it is and why.</figcaption></figure>
-        <figure><img src="assets/projects/decision-hub-overview.webp" width="1600" height="1000" alt="Overview dashboard with lead times, rejection rate, extraction cost and notifications" loading="lazy" decoding="async"><figcaption>Overview: every number is computed from the audit trail and the model-call log.</figcaption></figure>
-        <figure><img src="assets/projects/decision-hub-proposal.webp" width="1600" height="1000" alt="Final proposal document citing quote, requirement and rate card versions and the approving manager" loading="lazy" decoding="async"><figcaption>Final proposal: cites its quote, requirement and rate-card versions; the document is hashed.</figcaption></figure>
-        <figure class="case-shot--portrait"><img src="assets/projects/decision-hub-mobile.webp" width="647" height="1400" alt="Decision Hub request page on a phone" loading="lazy" decoding="async"><figcaption>The request page on a 390 px phone screen.</figcaption></figure>
+        <figure><img src="assets/projects/decision-hub-workspace.webp" width="1600" height="1000" alt="Workspace with the original brief, the extracted fields, and the decision inspector side by side" loading="lazy" decoding="async"><figcaption>Workspace: hovering a field highlights its source sentence.</figcaption></figure>
+        <figure><img src="assets/projects/decision-hub-pricing.webp" width="1600" height="1000" alt="A quote with an off-catalog item flagged for operations and the operations note shown to the manager" loading="lazy" decoding="async"><figcaption>Policy flags: off-catalog work goes to operations first.</figcaption></figure>
+        <figure><img src="assets/projects/decision-hub-approvals.webp" width="1600" height="1000" alt="Approvals queue showing which role must act next on each quote" loading="lazy" decoding="async"><figcaption>Approvals queue: whose turn it is, and why.</figcaption></figure>
+        <figure><img src="assets/projects/decision-hub-proposal.webp" width="1600" height="1000" alt="Final proposal document citing quote, requirement and rate card versions and the approving manager" loading="lazy" decoding="async"><figcaption>Final proposal: cites every version it used; the document is hashed.</figcaption></figure>
       </div>
+      <details class="case-more"><summary>Full feature list and 2 more screens</summary>
+        <p>Intake, AI-assisted extraction with source quotes, validation, analyst corrections as new revisions, deterministic pricing with policy flags, operations and manager review, an exactly-once final proposal, mock email and CRM notifications, a dashboard built from the audit trail, and an evaluation set for the extraction step.</p>
+        <p>The workspace shows the original brief, extracted fields and the decision inspector side by side. Off-catalog explainer videos go to operations before the manager can approve. The proposal cites its quote, requirement and rate-card versions.</p>
+        <div class="case-gallery">
+          <figure><img src="assets/projects/decision-hub-overview.webp" width="1600" height="1000" alt="Overview dashboard with lead times, rejection rate, extraction cost and notifications" loading="lazy" decoding="async"><figcaption>Overview: every number is computed from the audit trail and the model-call log.</figcaption></figure>
+          <figure class="case-shot--portrait"><img src="assets/projects/decision-hub-mobile.webp" width="647" height="1400" alt="Decision Hub request page on a phone" loading="lazy" decoding="async"><figcaption>The request page on a 390 px phone screen.</figcaption></figure>
+        </div>
+      </details>
     </div></section>
     <section class="case-story page-width" aria-labelledby="resultsTitle"><span class="case-section-label">TESTS &amp; EVALUATION</span><div>
       <h2 id="resultsTitle">96.7% of fields right, 20.8% of briefs still priced wrong.</h2>
-      <div class="case-table-wrap"><table class="case-table">
-        <thead><tr><th scope="col">Check</th><th scope="col" class="num">Result</th></tr></thead>
-        <tbody>
-          <tr><td>Backend tests (pricing oracle, approvals, concurrency, redaction)</td><td class="num">101 passing</td></tr>
-          <tr><td>Browser journeys with WCAG 2.2 AA scans</td><td class="num">5 / 5, 3 runs</td></tr>
-          <tr><td>Labelled synthetic briefs in the evaluation set</td><td class="num">60</td></tr>
-          <tr><td>Rule-based baseline: field-level exact match</td><td class="num">96.7%</td></tr>
-          <tr><td>Rule-based baseline: valid briefs that would be priced differently</td><td class="num">20.8%</td></tr>
-          <tr><td>Personal data reaching the extraction provider</td><td class="num">0 of 60 cases</td></tr>
-          <tr><td>Pricing time, p95 over 1,000 quotes</td><td class="num">0.014 ms</td></tr>
-          <tr><td>Lighthouse accessibility, desktop and mobile</td><td class="num">100</td></tr>
-        </tbody>
-      </table></div>
-      <p class="case-table-note">The baseline is the free rule-based extractor, not an LLM. Its high field score with a 20.8% pricing gap is why the evaluation reports business impact, not just accuracy. The Claude run is built but not yet measured.</p>
+      <p>Scored on 60 labelled synthetic briefs. A high field score can hide a pricing gap, so the evaluation reports business impact, not just accuracy.</p>
+      <p class="case-table-note">The baseline is a free rule-based extractor, not an LLM. The Claude run is built, not yet measured.</p>
+      <details class="case-more"><summary>All test and evaluation results</summary>
+        <div class="case-table-wrap"><table class="case-table">
+          <thead><tr><th scope="col">Check</th><th scope="col" class="num">Result</th></tr></thead>
+          <tbody>
+            <tr><td>Backend tests (pricing oracle, approvals, concurrency, redaction)</td><td class="num">101 passing</td></tr>
+            <tr><td>Browser journeys with WCAG 2.2 AA scans</td><td class="num">5 / 5, 3 runs</td></tr>
+            <tr><td>Labelled synthetic briefs in the evaluation set</td><td class="num">60</td></tr>
+            <tr><td>Rule-based baseline: field-level exact match</td><td class="num">96.7%</td></tr>
+            <tr><td>Rule-based baseline: valid briefs that would be priced differently</td><td class="num">20.8%</td></tr>
+            <tr><td>Personal data reaching the extraction provider</td><td class="num">0 of 60 cases</td></tr>
+            <tr><td>Pricing time, p95 over 1,000 quotes</td><td class="num">0.014 ms</td></tr>
+            <tr><td>Lighthouse accessibility, desktop and mobile</td><td class="num">100</td></tr>
+          </tbody>
+        </table></div>
+      </details>
     </div></section>
     <section class="case-check page-width" aria-labelledby="checkTitle"><div><span class="case-section-label">LIMITS</span><h2 id="checkTitle">Six finalize clicks, one proposal.</h2></div><div>
-      <p>Prices are checked against hand-calculated values; self-approval, stale approvals and six simultaneous finalize clicks are tested; notification retries are fault-injected; and the dashboard is reconciled against raw audit events. Deliberately breaking a rule makes the matching test fail.</p>
-      <ul><li><strong>Not yet:</strong> a live Claude evaluation, a hosted interactive demo (the product page is public; the app runs locally with Docker), or real users. CI runs all tests, the browser journeys and the Docker build on every push.</li><li>The generated half of the evaluation set shares phrasing patterns, so the 12 hand-written hard cases are what separate good extractors from weak ones. Name redaction only catches names after cues such as “Contact:”.</li></ul>
+      <p>Prices match hand-calculated values. Self-approval, stale approvals and six simultaneous finalize clicks are tested; breaking a rule on purpose fails its test.</p>
+      <ul><li><strong>Not yet:</strong> a live Claude evaluation, a hosted interactive demo (the product page is public; the app runs locally with Docker), or real users.</li><li>Name redaction only catches names after cues such as “Contact:”.</li></ul>
+      <details class="case-more"><summary>More on testing and the evaluation set</summary>
+        <p>Notification retries are fault-injected, and the dashboard is reconciled against raw audit events. CI runs all tests, the browser journeys and the Docker build on every push.</p>
+        <p>The generated half of the evaluation set shares phrasing patterns, so the 12 hand-written hard cases are what separate good extractors from weak ones.</p>
+      </details>
       <span class="case-honesty">Synthetic briefs only; no client or deal-desk team has used it.</span>
     </div></section>
   </main>
-  <footer class="case-bottom"><div class="page-width case-bottom-inner"><div><span class="case-section-label">HIRING / NEXT</span><h2>Need an analyst<br>who builds?</h2><a href="contact.html">Get in touch ↗</a></div><div class="case-bottom-next"><span class="case-next-index">NEXT PROJECT</span><a data-case-next href="case-retentionos.html">RetentionOS ↗</a></div></div></footer>
+  <footer class="case-bottom"><div class="page-width case-bottom-inner"><div><span class="case-section-label">HIRING / NEXT</span><h2>Need an analyst<br>who builds?</h2><a href="contact.html">Get in touch ↗</a></div><div class="case-bottom-next"><span class="case-next-index">NEXT PROJECT</span><a data-case-next href="case-karsa.html">Karsa ↗</a></div></div></footer>
   <div class="case-page-footer page-width"><span data-brand>DAFFA ZAHY KHAIRY</span><span>Prototypes on synthetic data · © <span data-year>2026</span></span></div>
   <script src="config.js"></script>
   <script src="projects.js"></script>
   <script src="case-study.js"></script>
+  <script src="case-focus.js"></script>
   <script src="water-depth.js"></script>
   <script src="depth-ambient.js"></script>
 </body>
