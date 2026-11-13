@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+  xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Defs_asis" targetNamespace="https://github.com/dzahyk/karsa">
+ <bpmn:collaboration id="Collab_asis">
+  <bpmn:participant id="Participant_asis" name="AS-IS (assumed): manual deal desk" processRef="Process_asis" />
+ </bpmn:collaboration>
+ <bpmn:process id="Process_asis" isExecutable="false">
+  <bpmn:laneSet id="LaneSet_asis">
+   <bpmn:lane id="Lane_A" name="Analyst"><bpmn:flowNodeRef>S</bpmn:flowNodeRef><bpmn:flowNodeRef>A1</bpmn:flowNodeRef><bpmn:flowNodeRef>A2</bpmn:flowNodeRef></bpmn:lane>
+   <bpmn:lane id="Lane_M" name="Manager"><bpmn:flowNodeRef>M1</bpmn:flowNodeRef></bpmn:lane>
+   <bpmn:lane id="Lane_O" name="Ops"><bpmn:flowNodeRef>O1</bpmn:flowNodeRef><bpmn:flowNodeRef>O2</bpmn:flowNodeRef><bpmn:flowNodeRef>E</bpmn:flowNodeRef></bpmn:lane>
+  </bpmn:laneSet>
+  <bpmn:startEvent id="S" name="Brief by email/chat"><bpmn:outgoing>Flow_0</bpmn:outgoing></bpmn:startEvent>
+  <bpmn:task id="A1" name="Retype numbers into a spreadsheet"><bpmn:incoming>Flow_0</bpmn:incoming><bpmn:outgoing>Flow_1</bpmn:outgoing></bpmn:task>
+  <bpmn:task id="A2" name="Price in own spreadsheet"><bpmn:incoming>Flow_1</bpmn:incoming><bpmn:outgoing>Flow_2</bpmn:outgoing></bpmn:task>
+  <bpmn:task id="M1" name="Approve in chat"><bpmn:incoming>Flow_2</bpmn:incoming><bpmn:outgoing>Flow_3</bpmn:outgoing></bpmn:task>
+  <bpmn:task id="O1" name="Type deal into CRM"><bpmn:incoming>Flow_3</bpmn:incoming><bpmn:outgoing>Flow_4</bpmn:outgoing></bpmn:task>
+  <bpmn:task id="O2" name="Create project in tracker"><bpmn:incoming>Flow_4</bpmn:incoming><bpmn:outgoing>Flow_5</bpmn:outgoing></bpmn:task>
+  <bpmn:endEvent id="E" name="Deal live"><bpmn:incoming>Flow_5</bpmn:incoming></bpmn:endEvent>
+  <bpmn:sequenceFlow id="Flow_0" sourceRef="S" targetRef="A1" />
+  <bpmn:sequenceFlow id="Flow_1" sourceRef="A1" targetRef="A2" />
+  <bpmn:sequenceFlow id="Flow_2" sourceRef="A2" targetRef="M1" />
+  <bpmn:sequenceFlow id="Flow_3" sourceRef="M1" targetRef="O1" />
+  <bpmn:sequenceFlow id="Flow_4" sourceRef="O1" targetRef="O2" />
+  <bpmn:sequenceFlow id="Flow_5" sourceRef="O2" targetRef="E" />
+  <bpmn:textAnnotation id="Note_0"><bpmn:text>PP1: no source per value</bpmn:text></bpmn:textAnnotation>
+  <bpmn:association id="Assoc_0" sourceRef="A1" targetRef="Note_0" />
+  <bpmn:textAnnotation id="Note_1"><bpmn:text>PP2: formulas differ</bpmn:text></bpmn:textAnnotation>
+  <bpmn:association id="Assoc_1" sourceRef="A2" targetRef="Note_1" />
+  <bpmn:textAnnotation id="Note_2"><bpmn:text>PP3: approval not tied to values</bpmn:text></bpmn:textAnnotation>
+  <bpmn:association id="Assoc_2" sourceRef="M1" targetRef="Note_2" />
+  <bpmn:textAnnotation id="Note_3"><bpmn:text>PP4: timeout → duplicate</bpmn:text></bpmn:textAnnotation>
+  <bpmn:association id="Assoc_3" sourceRef="O1" targetRef="Note_3" />
+ </bpmn:process>
+ <bpmndi:BPMNDiagram id="Diagram_asis">
+  <bpmndi:BPMNPlane id="Plane_asis" bpmnElement="Collab_asis">
+   <bpmndi:BPMNShape id="Participant_asis_di" bpmnElement="Participant_asis" isHorizontal="true"><dc:Bounds x="30" y="30" width="1120" height="450" /></bpmndi:BPMNShape>
+   <bpmndi:BPMNShape id="Lane_A_di" bpmnElement="Lane_A" isHorizontal="true"><dc:Bounds x="60" y="30" width="1090" height="150" /></bpmndi:BPMNShape>
+   <bpmndi:BPMNShape id="Lane_M_di" bpmnElement="Lane_M" isHorizontal="true"><dc:Bounds x="60" y="180" width="1090" height="150" /></bpmndi:BPMNShape>
+   <bpmndi:BPMNShape id="Lane_O_di" bpmnElement="Lane_O" isHorizontal="true"><dc:Bounds x="60" y="330" width="1090" height="150" /></bpmndi:BPMNShape>
+   <bpmndi:BPMNShape id="S_di" bpmnElement="S"><dc:Bounds x="127" y="87" width="36" height="36" /></bpmndi:BPMNShape>
+   <bpmndi:BPMNShape id="A1_di" bpmnElement="A1"><dc:Bounds x="235" y="73" width="120" height="64" /></bpmndi:BPMNShape>
+   <bpmndi:BPMNShape id="A2_di" bpmnElement="A2"><dc:Bounds x="385" y="73" width="120" height="64" /></bpmndi:BPMNShape>
+   <bpmndi:BPMNShape id="M1_di" bpmnElement="M1"><dc:Bounds x="535" y="223" width="120" height="64" /></bpmndi:BPMNShape>
+   <bpmndi:BPMNShape id="O1_di" bpmnElement="O1"><dc:Bounds x="685" y="373" width="120" height="64" /></bpmndi:BPMNShape>
+   <bpmndi:BPMNShape id="O2_di" bpmnElement="O2"><dc:Bounds x="835" y="373" width="120" height="64" /></bpmndi:BPMNShape>
+   <bpmndi:BPMNShape id="E_di" bpmnElement="E"><dc:Bounds x="1027" y="387" width="36" height="36" /></bpmndi:BPMNShape>
+   <bpmndi:BPMNEdge id="Flow_0_di" bpmnElement="Flow_0"><di:waypoint x="163" y="105" /><di:waypoint x="235" y="105" /></bpmndi:BPMNEdge>
+   <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1"><di:waypoint x="355" y="105" /><di:waypoint x="385" y="105" /></bpmndi:BPMNEdge>
+   <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2"><di:waypoint x="445" y="137" /><di:waypoint x="445" y="255" /><di:waypoint x="535" y="255" /></bpmndi:BPMNEdge>
+   <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3"><di:waypoint x="595" y="287" /><di:waypoint x="595" y="405" /><di:waypoint x="685" y="405" /></bpmndi:BPMNEdge>
+   <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4"><di:waypoint x="805" y="405" /><di:waypoint x="835" y="405" /></bpmndi:BPMNEdge>
+   <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5"><di:waypoint x="955" y="405" /><di:waypoint x="1027" y="405" /></bpmndi:BPMNEdge>
+   <bpmndi:BPMNShape id="Note_0_di" bpmnElement="Note_0"><dc:Bounds x="235" y="151" width="140" height="40" /></bpmndi:BPMNShape>
+   <bpmndi:BPMNShape id="Note_1_di" bpmnElement="Note_1"><dc:Bounds x="385" y="151" width="140" height="40" /></bpmndi:BPMNShape>
+   <bpmndi:BPMNShape id="Note_2_di" bpmnElement="Note_2"><dc:Bounds x="535" y="301" width="140" height="40" /></bpmndi:BPMNShape>
+   <bpmndi:BPMNShape id="Note_3_di" bpmnElement="Note_3"><dc:Bounds x="685" y="451" width="140" height="40" /></bpmndi:BPMNShape>
+  </bpmndi:BPMNPlane>
+ </bpmndi:BPMNDiagram>
+</bpmn:definitions>

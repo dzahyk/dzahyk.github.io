@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Business Requirements Document — Karsa deal desk — Karsa documentation</title>
+<meta name="description" content="Karsa business requirements: part of the business-analysis and evaluation documentation for a portfolio project by Daffa Zahy Khairy. Fictional organisation, synthetic data.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f5f1;--surface:#fff;--ink:#18211d;--ink-2:#47524c;--ink-3:#6b746f;--line:#dfe1dc;--accent:#1b5e45;--soft:#e3efe8;
+--sans:"Hanken Grotesk",system-ui,sans-serif;--mono:"DM Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111513;--surface:#1a201d;--ink:#edf1ee;--ink-2:#c3cac6;--ink-3:#98a19c;--line:#2e3632;--accent:#7fd1ad;--soft:#1c3329}}
+:root[data-theme="dark"]{--bg:#111513;--surface:#1a201d;--ink:#edf1ee;--ink-2:#c3cac6;--ink-3:#98a19c;--line:#2e3632;--accent:#7fd1ad;--soft:#1c3329}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans)}
+a{color:var(--accent)}:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.top{max-width:1100px;margin:0 auto;padding:22px 16px 0;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:14px}
+.top a{font-weight:600;text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:12px 16px 64px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:36px}
+@media(max-width:820px){.wrap{grid-template-columns:1fr;gap:12px}}
+nav.doc-nav{position:sticky;top:16px;align-self:start;font-size:14px}
+@media(max-width:820px){nav.doc-nav{position:static}}
+nav.doc-nav p{font:500 11px/1.4 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:18px 0 6px}
+nav.doc-nav ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+nav.doc-nav a{display:block;padding:5px 8px;border-radius:6px;text-decoration:none;color:var(--ink-2)}
+nav.doc-nav a[aria-current="page"]{background:var(--soft);color:var(--accent);font-weight:700}
+article{min-width:0}
+article h1{font-size:clamp(28px,4vw,42px);line-height:1.1;letter-spacing:-.02em;margin:18px 0 14px}
+article h2{font-size:22px;margin:34px 0 10px;letter-spacing:-.01em}article h3{font-size:17px;margin:24px 0 8px}
+article p,article li{color:var(--ink-2)}article strong{color:var(--ink)}
+article table{width:100%;border-collapse:collapse;font-size:14px;display:block;overflow-x:auto}
+article th,article td{text-align:left;vertical-align:top;padding:8px 10px;border-top:1px solid var(--line)}
+article th{font:500 11px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);border-top:0}
+article code{font:13px var(--mono);background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:1px 4px}
+article pre{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px;overflow-x:auto}
+article pre code{border:0;padding:0}
+article img[src$=".svg"]{width:100%}
+article img{max-width:100%;height:auto;background:#f7f7f5;border:1px solid var(--line);border-radius:8px}
+article blockquote{margin:16px 0;padding:10px 14px;border-left:4px solid var(--accent);background:var(--surface);border-radius:6px}
+.note{margin-top:40px;font-size:13px;color:var(--ink-3)}
+</style></head><body>
+<div class="top"><a href="../case-karsa.html">← Karsa case study</a><a href="../index.html">Daffa Zahy Khairy</a></div>
+<div class="wrap"><nav class="doc-nav" aria-label="Karsa documentation"><p>Business analysis</p><ul><li><a href="index.html">Overview</a></li><li><a href="brd.html" aria-current="page">Business requirements</a></li><li><a href="frd.html">Functional requirements</a></li><li><a href="process.html">Process models</a></li><li><a href="traceability.html">Traceability</a></li><li><a href="uat.html">UAT report</a></li><li><a href="change-request.html">Change request CR-001</a></li></ul><p>AI evaluation</p><ul><li><a href="eval-protocol.html">Evaluation protocol</a></li><li><a href="eval-results.html">Evaluation results</a></li></ul></nav>
+<article><h1>Business Requirements Document — Karsa deal desk</h1>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td>BRD-KARSA-01, version 1.0, 12 Nov 2026</td>
+</tr>
+<tr>
+<td>Product</td>
+<td>Karsa (formerly DecisionFlow AI), portfolio build</td>
+</tr>
+<tr>
+<td>Source</td>
+<td><em>DecisionFlow AI Production Specification v1.0 (DFA-PRD-002)</em>; rule IDs (BR-, AC-, FR-) are the spec's</td>
+</tr>
+<tr>
+<td>Author</td>
+<td>Daffa Zahy Khairy (business analysis); built with AI coding agents under the author's direction</td>
+</tr>
+<tr>
+<td>Status</td>
+<td>Baseline for the built product. <strong>Not signed off by a real business owner</strong> — all organisations are fictional</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Everything below describes a fictional B2B lead-generation agency ("Northstar") and synthetic data. No real client,
+employer or result is described.</p>
+</blockquote>
+<h2>1. Business problem</h2>
+<p>A B2B lead-generation agency receives campaign requests as free text: emails, chat threads, RFPs, PDFs. Today a
+deal-desk analyst reads each brief, copies the numbers into a spreadsheet, prices it from a rate card, sends it to a
+commercial manager for approval by chat, and then someone types the deal into the CRM and the project tracker.</p>
+<p>The spec identifies four failure modes in that process:
+1. <strong>Requirements get lost or invented.</strong> Numbers are retyped without a link to where they came from; ambiguous or
+   conflicting values (two budgets, a lead range) are silently resolved by whoever copies them.
+2. <strong>Pricing is inconsistent.</strong> Spreadsheet formulas differ per analyst; margin floors are checked by eye.
+3. <strong>Approval is not tied to what was approved.</strong> A manager approves "the deal", the brief changes afterwards, and
+   the CRM receives values nobody approved.
+4. <strong>Execution is fragile.</strong> A timeout while writing to the CRM leads to duplicate records or a blind retry.</p>
+<h2>2. Business objectives</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Objective</th>
+<th>How it is measured in the product</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OBJ-1</td>
+<td>Every number in a decision is traceable to its source text or to a recorded clarification</td>
+<td>100% of extracted values carry an exact quote with character offsets (AC-01)</td>
+</tr>
+<tr>
+<td>OBJ-2</td>
+<td>Pricing is the same no matter who prepares it</td>
+<td>Deterministic integer-rupiah calculation with a versioned rate card (BR-002)</td>
+</tr>
+<tr>
+<td>OBJ-3</td>
+<td>Only an approved, unchanged package can reach external systems</td>
+<td>Approval stores the package hash; execution re-verifies it and fails closed (BR-003)</td>
+</tr>
+<tr>
+<td>OBJ-4</td>
+<td>High-risk deals get more scrutiny, not less</td>
+<td>Margin below floor or an injection flag needs two different approvers (BR-006)</td>
+</tr>
+<tr>
+<td>OBJ-5</td>
+<td>Failures during execution never create duplicates or silent gaps</td>
+<td>Idempotent steps, unknown-outcome reconciliation, exception queue (BR-007, AC-05, AC-06)</td>
+</tr>
+<tr>
+<td>OBJ-6</td>
+<td>AI assistance is measured before it is trusted</td>
+<td>Evaluation Lab with a held-out split and a release gate (see <code>docs/eval/</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2>3. Scope</h2>
+<p><strong>In scope:</strong> intake of a brief (paste or file), AI-assisted requirement extraction with evidence, requirement review
+and clarification, deterministic feasibility and pricing, a frozen decision package, human approval (single or dual),
+a separate execution authorization, sandboxed CRM and tracker writes with read-back verification, exception handling,
+audit trail, evaluation of the extractor, an impact page on synthetic data.</p>
+<p><strong>Out of scope:</strong> real CRM/tracker connectors, SSO/MFA, OCR, email or Slack notifications, hosting, contract
+signature, invoicing.</p>
+<h2>4. Stakeholders and personas</h2>
+<table>
+<thead>
+<tr>
+<th>Persona</th>
+<th>Role in the process</th>
+<th>Main concern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Deal Desk / Business Analyst</td>
+<td>Turns the brief into a priced decision package</td>
+<td>Complete, sourced requirements; fewer clarification loops</td>
+</tr>
+<tr>
+<td>Commercial Manager (Approver)</td>
+<td>Approves or returns the package; authorizes execution</td>
+<td>Knowing exactly what is being approved and its risk</td>
+</tr>
+<tr>
+<td>Automation Engineer</td>
+<td>Runs and repairs the sandbox workflow</td>
+<td>No duplicates, clear recovery path</td>
+</tr>
+<tr>
+<td>AI Evaluation Analyst</td>
+<td>Measures the extractor</td>
+<td>Honest metrics on unseen data</td>
+</tr>
+<tr>
+<td>Transformation Lead</td>
+<td>Reads impact</td>
+<td>Effect size with caveats, not marketing numbers</td>
+</tr>
+<tr>
+<td>Workspace Admin</td>
+<td>Rate cards, connectors, team</td>
+<td>Control over what the system may touch</td>
+</tr>
+</tbody>
+</table>
+<h2>5. Business rules (from the spec)</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BR-001</td>
+<td>A decision package cannot be frozen while any critical requirement is unconfirmed, pricing is invalid, the rate card is outside its validity window, or the pricing target differs from the confirmed requirement</td>
+</tr>
+<tr>
+<td>BR-002</td>
+<td>Pricing: variable = target × unit cost; total = variable + fixed; margin = (fee − total) / fee; integer rupiah, half-up, basis points; a zero fee is rejected</td>
+</tr>
+<tr>
+<td>BR-003</td>
+<td>Approval binds to one exact package version and hash; a stale version or hash is refused</td>
+</tr>
+<tr>
+<td>BR-004</td>
+<td>Changing a requirement or pricing after approval supersedes the package; the old snapshot and approval record stay unchanged; the new version needs a new review</td>
+</tr>
+<tr>
+<td>BR-005</td>
+<td>Execution and each write step need an enabled connector for that action</td>
+</tr>
+<tr>
+<td>BR-006</td>
+<td>HIGH risk (margin below floor, or a prompt-injection flag) needs two different approvers; below floor also needs a written exception request</td>
+</tr>
+<tr>
+<td>BR-007</td>
+<td>Every write step has a stable idempotency key; a replay returns the existing record</td>
+</tr>
+<tr>
+<td>BR-009</td>
+<td>Extracted values carry their evidence; a value without evidence is MISSING, never invented</td>
+</tr>
+<tr>
+<td>BR-013</td>
+<td>A package priced on an expired or replaced rate card cannot be approved, authorized or executed</td>
+</tr>
+<tr>
+<td>—</td>
+<td>Segregation of duties: the package author cannot review it</td>
+</tr>
+<tr>
+<td>—</td>
+<td>Approving creates no external effect; execution needs a separate authorization</td>
+</tr>
+</tbody>
+</table>
+<h2>6. Success measures and caveats</h2>
+<p>The impact page compares an assisted cohort with a concurrent manual cohort on cycle time and clarification rounds.
+<strong>The cohort is synthetic</strong>, generated with a fixed seed; it shows how the measure is defined and displayed, not a
+real improvement. A real rollout would need a baseline measured on the agency's own deals before go-live.</p>
+<h2>7. Assumptions, constraints, risks</h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Item</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Assumption</td>
+<td>Briefs are in English or Indonesian; amounts in rupiah (foreign currency is treated as missing)</td>
+</tr>
+<tr>
+<td>Assumption</td>
+<td>The rate card is maintained by the admin and has a validity window</td>
+</tr>
+<tr>
+<td>Constraint</td>
+<td>Demo runs on SQLite and simulated connectors; no external system is ever written</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>The rule-based extractor does not generalise to new phrasing: held-out v2 pass rate 42% [29%, 56%], below the 70% gate (see <code>docs/eval/EVAL_V2_RESULTS.md</code>). Mitigation: every AI value stays a DRAFT until a human confirms it; release of AI-assisted extraction is blocked</td>
+</tr>
+<tr>
+<td>Risk</td>
+<td>Prompt injection in client briefs: regex detection caught 1 of 6 new phrasings. Mitigation: brief text never grants permissions or changes state; approval is always human</td>
+</tr>
+</tbody>
+</table><p class="note">Published from the Karsa project repository on 13 Nov 2026. Fictional organisation and synthetic data; nothing here describes a real client or result.</p></article></div>
+</body></html>

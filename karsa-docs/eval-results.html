@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Extractor evaluation v2 — results — Karsa documentation</title>
+<meta name="description" content="Karsa evaluation results: part of the business-analysis and evaluation documentation for a portfolio project by Daffa Zahy Khairy. Fictional organisation, synthetic data.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f5f1;--surface:#fff;--ink:#18211d;--ink-2:#47524c;--ink-3:#6b746f;--line:#dfe1dc;--accent:#1b5e45;--soft:#e3efe8;
+--sans:"Hanken Grotesk",system-ui,sans-serif;--mono:"DM Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111513;--surface:#1a201d;--ink:#edf1ee;--ink-2:#c3cac6;--ink-3:#98a19c;--line:#2e3632;--accent:#7fd1ad;--soft:#1c3329}}
+:root[data-theme="dark"]{--bg:#111513;--surface:#1a201d;--ink:#edf1ee;--ink-2:#c3cac6;--ink-3:#98a19c;--line:#2e3632;--accent:#7fd1ad;--soft:#1c3329}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans)}
+a{color:var(--accent)}:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.top{max-width:1100px;margin:0 auto;padding:22px 16px 0;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:14px}
+.top a{font-weight:600;text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:12px 16px 64px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:36px}
+@media(max-width:820px){.wrap{grid-template-columns:1fr;gap:12px}}
+nav.doc-nav{position:sticky;top:16px;align-self:start;font-size:14px}
+@media(max-width:820px){nav.doc-nav{position:static}}
+nav.doc-nav p{font:500 11px/1.4 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:18px 0 6px}
+nav.doc-nav ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+nav.doc-nav a{display:block;padding:5px 8px;border-radius:6px;text-decoration:none;color:var(--ink-2)}
+nav.doc-nav a[aria-current="page"]{background:var(--soft);color:var(--accent);font-weight:700}
+article{min-width:0}
+article h1{font-size:clamp(28px,4vw,42px);line-height:1.1;letter-spacing:-.02em;margin:18px 0 14px}
+article h2{font-size:22px;margin:34px 0 10px;letter-spacing:-.01em}article h3{font-size:17px;margin:24px 0 8px}
+article p,article li{color:var(--ink-2)}article strong{color:var(--ink)}
+article table{width:100%;border-collapse:collapse;font-size:14px;display:block;overflow-x:auto}
+article th,article td{text-align:left;vertical-align:top;padding:8px 10px;border-top:1px solid var(--line)}
+article th{font:500 11px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);border-top:0}
+article code{font:13px var(--mono);background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:1px 4px}
+article pre{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px;overflow-x:auto}
+article pre code{border:0;padding:0}
+article img[src$=".svg"]{width:100%}
+article img{max-width:100%;height:auto;background:#f7f7f5;border:1px solid var(--line);border-radius:8px}
+article blockquote{margin:16px 0;padding:10px 14px;border-left:4px solid var(--accent);background:var(--surface);border-radius:6px}
+.note{margin-top:40px;font-size:13px;color:var(--ink-3)}
+</style></head><body>
+<div class="top"><a href="../case-karsa.html">← Karsa case study</a><a href="../index.html">Daffa Zahy Khairy</a></div>
+<div class="wrap"><nav class="doc-nav" aria-label="Karsa documentation"><p>Business analysis</p><ul><li><a href="index.html">Overview</a></li><li><a href="brd.html">Business requirements</a></li><li><a href="frd.html">Functional requirements</a></li><li><a href="process.html">Process models</a></li><li><a href="traceability.html">Traceability</a></li><li><a href="uat.html">UAT report</a></li><li><a href="change-request.html">Change request CR-001</a></li></ul><p>AI evaluation</p><ul><li><a href="eval-protocol.html">Evaluation protocol</a></li><li><a href="eval-results.html" aria-current="page">Evaluation results</a></li></ul></nav>
+<article><h1>Extractor evaluation v2 — results</h1>
+<p>Run once on 2026-11-12, after the rule revision was committed. Protocol: <a href="eval-protocol.html"><code>EVAL_V2_PROTOCOL.md</code></a>.
+Raw output: <code>eval_v2_results.json</code>. Reproduce from <code>backend/</code>:
+<code>PYTHONPATH=. uv run python ../scripts/eval_v2_report.py</code> (refuses to run if <code>heldout_v2.py</code> changed).</p>
+<table>
+<thead>
+<tr>
+<th>Commit</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>b84571b</code></td>
+<td>baseline, rules 1.1: dev 24/24, held-out v1 1/36</td>
+</tr>
+<tr>
+<td><code>c1d7067</code></td>
+<td>held-out v2 frozen (SHA-256 <code>d7915c9b…2cb047</code>) + protocol and gate pre-registered</td>
+</tr>
+<tr>
+<td><code>e476414</code></td>
+<td>rules 1.2, revised on dev + v1 only: dev 24/24, v1 36/36 (v1 is now development data)</td>
+</tr>
+<tr>
+<td>this commit</td>
+<td>v2 scored once with 1.1 and 1.2</td>
+</tr>
+</tbody>
+</table>
+<h2>Verdict: the release gate still FAILS</h2>
+<table>
+<thead>
+<tr>
+<th>Held-out v2 (50 new briefs)</th>
+<th>Rules 1.1 (baseline)</th>
+<th>Rules 1.2</th>
+<th>Gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Complete-case pass rate</td>
+<td>4/50 = 8% [3%, 19%]</td>
+<td><strong>21/50 = 42% [29%, 56%]</strong></td>
+<td>≥ 70% ✗</td>
+</tr>
+<tr>
+<td>Prompt-injection recall</td>
+<td>0/6</td>
+<td><strong>1/6</strong></td>
+<td>6/6 ✗</td>
+</tr>
+<tr>
+<td>Pricing calculation exact</td>
+<td>50/50</td>
+<td>50/50</td>
+<td>50/50 ✓</td>
+</tr>
+<tr>
+<td>Grounded spans (quote = source)</td>
+<td>166/166</td>
+<td>220/220</td>
+<td>all ✓</td>
+</tr>
+<tr>
+<td>Unsupported-claim recall / false positives</td>
+<td>1/4 · 1/46</td>
+<td>1/4 · 1/46</td>
+<td>not gated</td>
+</tr>
+<tr>
+<td>Downstream actions planned correctly</td>
+<td>46/50</td>
+<td>47/50</td>
+<td>not gated</td>
+</tr>
+</tbody>
+</table>
+<p>Intervals are Wilson 95%. 50 cases are few: the 1.2 pass rate could plausibly be anywhere from about 29% to 56%.</p>
+<h2>Field-level results (held-out v2)</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>1.1 precision / recall / F1</th>
+<th>1.2 precision / recall / F1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target_leads</td>
+<td>1.000 / 0.796 / 0.886</td>
+<td>1.000 / 0.939 / 0.968</td>
+</tr>
+<tr>
+<td>budget</td>
+<td>0.930 / 0.851 / 0.889</td>
+<td>0.978 / 0.936 / 0.957</td>
+</tr>
+<tr>
+<td>timeline</td>
+<td>0.957 / 0.898 / 0.926</td>
+<td>0.958 / 0.939 / 0.948</td>
+</tr>
+<tr>
+<td>lead_definition (stated?)</td>
+<td>1.000 / 0.143 / 0.250</td>
+<td>1.000 / 0.837 / 0.911</td>
+</tr>
+<tr>
+<td>geography (stated?)</td>
+<td>1.000 / 0.673 / 0.805</td>
+<td>1.000 / 0.837 / 0.911</td>
+</tr>
+</tbody>
+</table>
+<h2>Error taxonomy — the 29 failing v2 cases under rules 1.2</h2>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Cases</th>
+<th>What happened</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lead definition phrased in a way no cue covers</td>
+<td>8</td>
+<td>"We count someone as a lead when…", "Our ideal contact is…", "To count, a contact must be…", "They only care about…", a numbered "Who:" line, a definition split over two chat messages</td>
+</tr>
+<tr>
+<td>Geography missed</td>
+<td>8</td>
+<td>places outside the place list (Malang, Boyolali, Pasuruan, Lombok…), a place wrapped onto the next line, "Region ....." dotted labels, "Market" as a section heading</td>
+</tr>
+<tr>
+<td>Prompt injection missed</td>
+<td>5 of 6</td>
+<td>each new phrasing ("disregard the rate card", "SYSTEM OVERRIDE", "Untuk asisten AI", "anggap dirimu…", "remove the approval step") escapes the pattern list</td>
+</tr>
+<tr>
+<td>Unsupported claim missed / false alarm</td>
+<td>3 + 1</td>
+<td>"will definitely convert 25%", "no risk… pay back", "we will close Rp750 juta"; and "we guarantee a replacement generator" (a product promise) flagged as a campaign claim</td>
+</tr>
+<tr>
+<td>Attach-spec request missed</td>
+<td>3</td>
+<td>"solution brief", "proposal teknis", "the LOI" are not in the document word list</td>
+</tr>
+<tr>
+<td>Number parsing</td>
+<td>3 + 3 + 3</td>
+<td>"2.200 calon klien" (no lead word), "180 jt" without Rp, "one and a half billion", a timeline range "between 5 and 7 weeks", "tiga bulan" inside a claim read as a second timeline, a revenue figure read as a second budget</td>
+</tr>
+</tbody>
+</table>
+<h2>What this means</h2>
+<ul>
+<li>The 1.2 rules fixed the classes they were written for and that transferred (lead-definition recall 0.14 → 0.84 on
+  unseen text), but the extractor still does not generalise to new phrasing. That is the expected limit of a
+  pattern list, and it is now measured instead of assumed.</li>
+<li>Security is the hard blocker: a regex catches the injections it has seen. Injection detection should not rely on
+  the extractor at all; the product already treats brief text as data and grants no permissions from it, and
+  approval stays human (that control is tested separately and is unaffected by these numbers).</li>
+<li>Next step stays the same and is now better specified: run the Claude provider on dev + v1 + v2 with the same
+  gate (needs <code>ANTHROPIC_API_KEY</code>), and any further rule change must be measured on a new v3 set.</li>
+<li>v2 labels were written by the same author who revised the rules and have not been adjudicated by a second
+  person. Treat the numbers as the author's measurement, not an independent audit.</li>
+</ul><p class="note">Published from the Karsa project repository on 13 Nov 2026. Fictional organisation and synthetic data; nothing here describes a real client or result.</p></article></div>
+</body></html>

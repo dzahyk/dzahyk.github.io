@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Extractor evaluation v2 — pre-registered protocol — Karsa documentation</title>
+<meta name="description" content="Karsa evaluation protocol: part of the business-analysis and evaluation documentation for a portfolio project by Daffa Zahy Khairy. Fictional organisation, synthetic data.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f5f1;--surface:#fff;--ink:#18211d;--ink-2:#47524c;--ink-3:#6b746f;--line:#dfe1dc;--accent:#1b5e45;--soft:#e3efe8;
+--sans:"Hanken Grotesk",system-ui,sans-serif;--mono:"DM Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111513;--surface:#1a201d;--ink:#edf1ee;--ink-2:#c3cac6;--ink-3:#98a19c;--line:#2e3632;--accent:#7fd1ad;--soft:#1c3329}}
+:root[data-theme="dark"]{--bg:#111513;--surface:#1a201d;--ink:#edf1ee;--ink-2:#c3cac6;--ink-3:#98a19c;--line:#2e3632;--accent:#7fd1ad;--soft:#1c3329}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans)}
+a{color:var(--accent)}:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.top{max-width:1100px;margin:0 auto;padding:22px 16px 0;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:14px}
+.top a{font-weight:600;text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:12px 16px 64px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:36px}
+@media(max-width:820px){.wrap{grid-template-columns:1fr;gap:12px}}
+nav.doc-nav{position:sticky;top:16px;align-self:start;font-size:14px}
+@media(max-width:820px){nav.doc-nav{position:static}}
+nav.doc-nav p{font:500 11px/1.4 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin:18px 0 6px}
+nav.doc-nav ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+nav.doc-nav a{display:block;padding:5px 8px;border-radius:6px;text-decoration:none;color:var(--ink-2)}
+nav.doc-nav a[aria-current="page"]{background:var(--soft);color:var(--accent);font-weight:700}
+article{min-width:0}
+article h1{font-size:clamp(28px,4vw,42px);line-height:1.1;letter-spacing:-.02em;margin:18px 0 14px}
+article h2{font-size:22px;margin:34px 0 10px;letter-spacing:-.01em}article h3{font-size:17px;margin:24px 0 8px}
+article p,article li{color:var(--ink-2)}article strong{color:var(--ink)}
+article table{width:100%;border-collapse:collapse;font-size:14px;display:block;overflow-x:auto}
+article th,article td{text-align:left;vertical-align:top;padding:8px 10px;border-top:1px solid var(--line)}
+article th{font:500 11px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);border-top:0}
+article code{font:13px var(--mono);background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:1px 4px}
+article pre{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px;overflow-x:auto}
+article pre code{border:0;padding:0}
+article img[src$=".svg"]{width:100%}
+article img{max-width:100%;height:auto;background:#f7f7f5;border:1px solid var(--line);border-radius:8px}
+article blockquote{margin:16px 0;padding:10px 14px;border-left:4px solid var(--accent);background:var(--surface);border-radius:6px}
+.note{margin-top:40px;font-size:13px;color:var(--ink-3)}
+</style></head><body>
+<div class="top"><a href="../case-karsa.html">← Karsa case study</a><a href="../index.html">Daffa Zahy Khairy</a></div>
+<div class="wrap"><nav class="doc-nav" aria-label="Karsa documentation"><p>Business analysis</p><ul><li><a href="index.html">Overview</a></li><li><a href="brd.html">Business requirements</a></li><li><a href="frd.html">Functional requirements</a></li><li><a href="process.html">Process models</a></li><li><a href="traceability.html">Traceability</a></li><li><a href="uat.html">UAT report</a></li><li><a href="change-request.html">Change request CR-001</a></li></ul><p>AI evaluation</p><ul><li><a href="eval-protocol.html" aria-current="page">Evaluation protocol</a></li><li><a href="eval-results.html">Evaluation results</a></li></ul></nav>
+<article><h1>Extractor evaluation v2 — pre-registered protocol</h1>
+<p>Written and committed on 2026-11-12, <strong>before</strong> any change to <code>backend/app/domain/extraction.py</code>.</p>
+<h2>Why a v2</h2>
+<p>Held-out v1 (36 briefs) scored 1/36 (field F1 0.779) against a rule extractor that scored 24/24 on the dev split.
+The rules only read labelled lines, so 28 briefs that state the lead definition in prose failed. That result is
+kept as the historical baseline (commit <code>b84571b</code>) and is not overwritten.</p>
+<h2>Splits</h2>
+<table>
+<thead>
+<tr>
+<th>Split</th>
+<th>Cases</th>
+<th>Role in v2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dev (<code>dataset.py</code>)</td>
+<td>24</td>
+<td>seen; used for rule changes</td>
+</tr>
+<tr>
+<td>held-out v1 (<code>heldout.py</code>)</td>
+<td>36</td>
+<td><strong>now seen</strong>; its failures are used to revise rules, so after this point it is a development set, not a held-out set</td>
+</tr>
+<tr>
+<td>held-out v2 (<code>heldout_v2.py</code>)</td>
+<td>50</td>
+<td>new; frozen below; scored once after the rule revision</td>
+</tr>
+</tbody>
+</table>
+<h2>Frozen inputs</h2>
+<ul>
+<li><code>backend/app/evaluation/heldout_v2.py</code> SHA-256 <code>d7915c9b763f7f575fedd6001e6627430dfd0b440c0a0aafb1952822ad2cb047</code></li>
+<li>extractor before revision, <code>backend/app/domain/extraction.py</code> SHA-256 <code>71c471f72b275a7a0cf32c676d5f42c5c7cb7c64cb36fd41e25b8fba3d6f67be</code></li>
+</ul>
+<h2>Release gate (unchanged from v1, applied to held-out v2)</h2>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Threshold</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Complete-case pass rate</td>
+<td>≥ 0.70</td>
+</tr>
+<tr>
+<td>Pricing calculation exact</td>
+<td>1.00</td>
+</tr>
+<tr>
+<td>Prompt-injection recall</td>
+<td>1.00</td>
+</tr>
+<tr>
+<td>Grounded spans (quote equals source text)</td>
+<td>1.00</td>
+</tr>
+</tbody>
+</table>
+<h2>What will be reported, whatever the outcome</h2>
+<ul>
+<li>Complete-case pass rate with a Wilson 95% interval, per split.</li>
+<li>Field-level precision, recall and F1 for each field (target_leads, budget, timeline, lead_definition, geography).</li>
+<li>Flag recall and false-positive rate for prompt_injection and unsupported_claim (v2 has 2 negative controls).</li>
+<li>An error taxonomy of every failing v2 case.</li>
+<li>Gate verdict. If the gate fails, the result is published as a failure and the release stays blocked.</li>
+</ul>
+<h2>Rules for the run</h2>
+<ol>
+<li>Revise the extractor using dev + held-out v1 only.</li>
+<li>Commit the revision. Record its SHA-256.</li>
+<li>Score held-out v2 once. No further rule changes are counted against v2; any later fix needs a v3 set.</li>
+</ol>
+<h2>Known limits</h2>
+<ul>
+<li>v2 was written by the same author who revises the rules (an AI coding agent), before the revision. Independence
+  comes from ordering and hashing, not from a different person. A human adjudication of v2 labels is still open.</li>
+<li>50 cases give wide intervals (±~13 points at 70%).</li>
+<li>A live LLM provider (Claude) is not evaluated here: no API key is configured on this machine.</li>
+</ul><p class="note">Published from the Karsa project repository on 13 Nov 2026. Fictional organisation and synthetic data; nothing here describes a real client or result.</p></article></div>
+</body></html>

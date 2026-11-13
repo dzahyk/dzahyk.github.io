@@ -85,7 +85,7 @@
         </tbody>
       </table></div>
       <p class="case-table-note">Synthetic data and automated tests only. The extractor is a rule-based baseline, not an LLM; the optional Claude provider is built but not yet evaluated live. For run 2, the v2 set and the gate were committed before the rules changed, the revision used only the dev split and held-out v1, and v2 was scored once. I wrote v2 myself and no second person has checked its labels yet, so read it as my own measurement, not an independent audit.</p>
-      <p><a href="demos/karsa-brief-checker/">Try the extractor yourself</a>. It runs the exact rule file that was scored, in your browser, with an example that it misses.</p>
+      <p><a href="karsa-docs/eval-results.html">Read the full evaluation report</a> (protocol, field-level F1, error taxonomy) or <a href="demos/karsa-brief-checker/">try the extractor yourself</a>. It runs the exact rule file that was scored, in your browser, with an example that it misses.</p>
     </div></section>
     <section class="case-decision-band" aria-labelledby="decisionsTitle"><div class="page-width">
       <div class="case-decision-heading"><div><span class="case-section-label">DESIGN RULES</span><h2 id="decisionsTitle">Every step can say no.</h2></div><p>Each rule stops the model, or the system, from making a business call or a silent change.</p></div>
@@ -128,7 +128,7 @@
     </div></section>
     <section class="case-check page-width" aria-labelledby="checkTitle"><div><span class="case-section-label">LIMITS</span><h2 id="checkTitle">Stale approvals get a 409. Frozen packages refuse edits.</h2></div><div>
       <p>Stale approvals return 409 and self-review 403; editing a frozen package is refused by a database trigger and, with the trigger removed, still stopped by the hash check; a crashed worker's job is re-claimed without a duplicate write; the full journey runs in a real browser against the real worker, on desktop and at 390 px.</p>
-      <ul><li><strong>Not yet:</strong> a live Claude evaluation, SSO/MFA, real CRM or tracker connectors, OCR, a hosted version of the full app, manual screen-reader testing, a second person checking the v2 labels, or real users.</li><li>Two held-out runs show a pattern list does not generalise to new phrasing, and that injection detection cannot rest on it. The next step is to run the Claude provider on dev, v1 and v2 under the same gate; any further rule change needs a new v3 set.</li><li>The business-analysis pack (BRD, 24 functional requirements with acceptance criteria, AS-IS/TO-BE BPMN, traceability, scripted UAT, a change-impact example) is in the project repository, which is not public yet.</li></ul>
+      <ul><li><strong>Not yet:</strong> a live Claude evaluation, SSO/MFA, real CRM or tracker connectors, OCR, a hosted version of the full app, manual screen-reader testing, a second person checking the v2 labels, or real users.</li><li>Two held-out runs show a pattern list does not generalise to new phrasing, and that injection detection cannot rest on it. The next step is to run the Claude provider on dev, v1 and v2 under the same gate; any further rule change needs a new v3 set.</li><li>The business-analysis pack (BRD, 24 functional requirements with acceptance criteria, AS-IS/TO-BE BPMN, traceability, scripted UAT, a change-impact example) is <a href="karsa-docs/index.html">published here</a>.</li></ul>
       <span class="case-honesty">Synthetic tenants and cases; no client, user or business result is claimed.</span>
     </div></section>
   </main>

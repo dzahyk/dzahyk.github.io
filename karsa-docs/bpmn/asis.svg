@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 550" font-family="Inter, Arial, sans-serif" font-size="12">
+<rect width="100%" height="100%" fill="#f7f7f5"/>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#52606d"/></marker></defs>
+<text x="30" y="20" font-size="14" font-weight="700" fill="#1f2933">AS-IS (assumed): manual deal desk</text>
+<rect x="30" y="30" width="1120" height="450" fill="none" stroke="#1f2933"/>
+<rect x="60" y="30" width="1090" height="150" fill="none" stroke="#9aa5b1"/>
+<text transform="translate(50,105.0) rotate(-90)" text-anchor="middle" fill="#1f2933" font-weight="600">Analyst</text>
+<rect x="60" y="180" width="1090" height="150" fill="none" stroke="#9aa5b1"/>
+<text transform="translate(50,255.0) rotate(-90)" text-anchor="middle" fill="#1f2933" font-weight="600">Manager</text>
+<rect x="60" y="330" width="1090" height="150" fill="none" stroke="#9aa5b1"/>
+<text transform="translate(50,405.0) rotate(-90)" text-anchor="middle" fill="#1f2933" font-weight="600">Ops</text>
+<path d="M163,105 L235,105" fill="none" stroke="#52606d" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M355,105 L385,105" fill="none" stroke="#52606d" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M445,137 L445,255 L535,255" fill="none" stroke="#52606d" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M595,287 L595,405 L685,405" fill="none" stroke="#52606d" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M805,405 L835,405" fill="none" stroke="#52606d" stroke-width="1.4" marker-end="url(#arr)"/>
+<path d="M955,405 L1027,405" fill="none" stroke="#52606d" stroke-width="1.4" marker-end="url(#arr)"/>
+<circle cx="145.0" cy="105.0" r="18" fill="#ffffff" stroke="#1f2933" stroke-width="1.4"/>
+<text x="145" y="138" text-anchor="middle" fill="#1f2933" font-size="11">Brief by email/chat</text>
+<rect x="235" y="73" width="120" height="64" rx="9" fill="#ffffff" stroke="#1f2933" stroke-width="1.4"/>
+<text x="295" y="102" text-anchor="middle" fill="#1f2933">Retype numbers</text>
+<text x="295" y="116" text-anchor="middle" fill="#1f2933">into a spreadsheet</text>
+<rect x="385" y="73" width="120" height="64" rx="9" fill="#ffffff" stroke="#1f2933" stroke-width="1.4"/>
+<text x="445" y="102" text-anchor="middle" fill="#1f2933">Price in own</text>
+<text x="445" y="116" text-anchor="middle" fill="#1f2933">spreadsheet</text>
+<rect x="535" y="223" width="120" height="64" rx="9" fill="#ffffff" stroke="#1f2933" stroke-width="1.4"/>
+<text x="595" y="259" text-anchor="middle" fill="#1f2933">Approve in chat</text>
+<rect x="685" y="373" width="120" height="64" rx="9" fill="#ffffff" stroke="#1f2933" stroke-width="1.4"/>
+<text x="745" y="409" text-anchor="middle" fill="#1f2933">Type deal into CRM</text>
+<rect x="835" y="373" width="120" height="64" rx="9" fill="#ffffff" stroke="#1f2933" stroke-width="1.4"/>
+<text x="895" y="402" text-anchor="middle" fill="#1f2933">Create project in</text>
+<text x="895" y="416" text-anchor="middle" fill="#1f2933">tracker</text>
+<circle cx="1045.0" cy="405.0" r="18" fill="#ffffff" stroke="#1f2933" stroke-width="3.5"/>
+<text x="1045" y="438" text-anchor="middle" fill="#1f2933" font-size="11">Deal live</text>
+<path d="M311,151 h-8 v40 h8" fill="none" stroke="#b44d12"/>
+<text x="307" y="165" fill="#b44d12" font-size="11">PP1: no source per value</text>
+<path d="M461,151 h-8 v40 h8" fill="none" stroke="#b44d12"/>
+<text x="457" y="165" fill="#b44d12" font-size="11">PP2: formulas differ</text>
+<path d="M611,301 h-8 v40 h8" fill="none" stroke="#b44d12"/>
+<text x="607" y="315" fill="#b44d12" font-size="11">PP3: approval not tied</text>
+<text x="607" y="329" fill="#b44d12" font-size="11">to values</text>
+<path d="M761,451 h-8 v40 h8" fill="none" stroke="#b44d12"/>
+<text x="757" y="465" fill="#b44d12" font-size="11">PP4: timeout → duplicate</text>
+</svg>

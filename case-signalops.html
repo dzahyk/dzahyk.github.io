@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#bce4ed">
+  <meta name="description" content="SignalOps: a data-reliability console that ingests orders, payments and activations, blocks publication when a critical check fails, and closes incidents only on fresh passing evidence. Synthetic data; tested locally; not deployed.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="SignalOps — Case study by Daffa Zahy Khairy">
+  <meta property="og:description" content="Every number carries its trust state, its source run and its definition.">
+  <meta property="og:site_name" content="Daffa Zahy Khairy">
+  <meta property="og:url" content="https://dzahyk.github.io/case-signalops.html">
+  <link rel="canonical" href="https://dzahyk.github.io/case-signalops.html">
+  <meta name="twitter:card" content="summary">
+  <title>SignalOps — Case study</title>
+  <link rel="preload" href="assets/water-caustics.jpg" as="image" fetchpriority="high">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Hanken+Grotesk:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site-b032c9cccc.css">
+  <link rel="stylesheet" href="print.css" media="print">
+  <script src="page-transitions.js"></script>
+</head>
+<body class="case-page">
+  <a class="skip-link" href="#caseMain">Skip to content</a>
+  <header class="case-header">
+    <a class="case-brand" href="index.html" data-brand>DAFFA ZAHY KHAIRY</a>
+    <nav aria-label="Case study navigation"><a href="index.html#work">All work</a><a href="index.html#skills">Skills</a><a href="contact.html">Contact</a></nav>
+  </header>
+  <main id="caseMain" tabindex="-1">
+
+    <section class="case-hero page-width" aria-labelledby="caseTitle">
+      <span class="case-kicker">Data reliability / prototype</span>
+      <div class="case-hero-row"><h1 id="caseTitle">SignalOps</h1><p>Every number carries its trust state, its source run and its definition.</p></div>
+      <div class="case-meta"><span class="case-chip">Supporting project</span><span class="case-chip">Data quality &amp; reconciliation</span><span class="case-chip">Synthetic data</span><span class="case-chip">Not deployed</span></div>
+      <dl class="case-facts">
+        <div><dt>Role</dt><dd>Solo — built from a written product spec (SIG-PRD-001); implemented with AI coding agents under my direction</dd></div>
+        <div><dt>Stack</dt><dd>FastAPI, PostgreSQL, Celery + Redis, S3-compatible storage, Keycloak (OIDC), Next.js, OpenTelemetry</dd></div>
+        <div><dt>Timeline</dt><dd>November 2026</dd></div>
+        <div><dt>Status</dt><dd>Built · tested locally · not deployed · no public repo</dd></div>
+      </dl>
+    </section>
+
+    <aside class="case-brief page-width" aria-labelledby="briefTitle"><h2 class="case-brief-label" id="briefTitle">In 30 seconds</h2><dl>
+      <div><dt>The problem</dt><dd>Orders, payments and activations come from different systems. One bad batch makes a KPI wrong everywhere it is shown.</dd></div>
+      <div><dt>What it proves</dt><dd>A failed critical check blocks publication without deleting the last good snapshot, a replayed batch does not move a KPI, and an incident closes only on fresh passing evidence.</dd></div>
+      <div><dt>Not proven yet</dt><dd>No deployment, no load test, no production secrets, TLS or alert routing.</dd></div>
+      <div><dt>Most relevant for</dt><dd>Data engineering · data quality · BI operations</dd></div>
+    </dl></aside>
+
+    <figure class="case-image page-width">
+      <div class="case-image-wrap"><img src="assets/projects/signalops-overview.webp" width="1600" height="1000" alt="Operations overview labelled Synthetic demo data: workspace trust marked Blocked, 104 active incidents of which 65 critical, and KPI tiles such as Activation Rate 100 percent marked Blocked and Completed Orders 2,445 marked Stale" decoding="async" fetchpriority="high"></div>
+      <figcaption><span>The overview after the test suite ran: the workspace is Blocked, so no KPI is shown as verified.</span><span>Supporting project</span></figcaption>
+    </figure>
+
+    <section class="case-story page-width" aria-labelledby="problemTitle"><span class="case-section-label">THE PROBLEM</span><div>
+      <h2 id="problemTitle">A dashboard that is wrong looks the same as one that is right.</h2>
+      <p>A telecom-style business takes orders, collects payments and activates services in three systems. When a payments file arrives with a broken schema, or the same batch is sent twice, the revenue KPI is quietly wrong, and nothing on the dashboard says so.</p>
+      <p>SignalOps treats trust as a state the data has to earn. Its cycle is detect → validate → investigate → resolve → verify → publish.</p>
+    </div></section>
+
+    <section class="case-decision-band" aria-labelledby="decisionsTitle"><div class="page-width">
+      <div class="case-decision-heading"><div><span class="case-section-label">WHAT WAS BUILT</span><h2 id="decisionsTitle">Four rules the data has to pass.</h2></div><p>CSV upload or REST source → raw evidence → validation → reconciliation → publication gate.</p></div>
+      <ol class="case-decisions">
+        <li><span>01</span><h3>Keep the raw file, then check it</h3><p>Every batch is stored with its SHA-256 before anything is parsed. Invalid rows go to quarantine with a reason; they never become trusted data and are never silently corrected.</p></li>
+        <li><span>02</span><h3>A replay cannot move a KPI</h3><p>Each request has an idempotency key and each event a unique source ID, so a retried or resent batch adds nothing. A changed event must carry a higher version number, or it is rejected.</p></li>
+        <li><span>03</span><h3>Blocked is not zero</h3><p>A failed critical check stops the new snapshot but keeps the last good one. Each KPI shows Verified, Warning, Stale, Blocked, Processing or Unavailable, and missing data is never shown as 0.</p></li>
+        <li><span>04</span><h3>Close incidents on evidence</h3><p>An incident can be resolved only with a reason and a passing check from a run published after the failure. A note alone is not enough.</p></li>
+      </ol>
+    </div></section>
+
+    <section class="case-story page-width" aria-labelledby="builtTitle"><span class="case-section-label">THE CONSOLE</span><div>
+      <h2 id="builtTitle">Sources, metrics, incidents.</h2>
+      <p>Sign-in goes through Keycloak; roles and tenant scope are checked on the server for every request. Ingestion and exports run in background workers, so the browser never waits on a large file.</p>
+      <div class="case-gallery">
+        <figure><img src="assets/projects/signalops-sources.webp" width="1600" height="1000" alt="Data sources and ingestion: connected CSV sources with connection health and trust states, including a source called Bad schema marked Degraded and Blocked" loading="lazy" decoding="async"><figcaption>Sources: a file with a broken schema is Blocked; the others keep their own state.</figcaption></figure>
+        <figure><img src="assets/projects/signalops-metrics.webp" width="1600" height="1000" alt="Metric explorer: governed metric dictionary with Activation Rate, Completed Orders, Net Revenue and Successful Payments, each with a trust state, an owner, an as-of time and a 15-minute SLA" loading="lazy" decoding="async"><figcaption>Metrics: each value has a versioned definition, an owner and a trust state. No free-form SQL from the UI.</figcaption></figure>
+        <figure><img src="assets/projects/signalops-incidents.webp" width="1600" height="1000" alt="Incident queue with filters by status and severity and a list of open high-severity freshness incidents" loading="lazy" decoding="async"><figcaption>Incidents: the queue is full of test fixtures left by the browser tests, not real alerts.</figcaption></figure>
+      </div>
+    </div></section>
+
+    <section class="case-check page-width" aria-labelledby="checkTitle"><div><span class="case-section-label">EVIDENCE &amp; LIMITS</span><h2 id="checkTitle">Tested on one laptop. Not production.</h2></div><div>
+      <div class="case-table-wrap"><table class="case-table">
+        <thead><tr><th scope="col">Check</th><th scope="col" class="num">Result</th></tr></thead>
+        <tbody>
+          <tr><td>Backend: unit, PostgreSQL integration and API contract tests</td><td class="num">83 passing · 13 Nov 2026</td></tr>
+          <tr><td>Frontend unit tests</td><td class="num">21 passing · 13 Nov 2026</td></tr>
+          <tr><td>Browser journeys: sign-in, CSV and REST ingestion, publication gate, tenancy, offline, detect-to-close</td><td class="num">12 / 12 · 11 Nov 2026</td></tr>
+          <tr><td>Encrypted backup and restore drill (database, identity, files)</td><td class="num">Round trip passed locally</td></tr>
+        </tbody>
+      </table></div>
+      <ul><li><strong>Not yet:</strong> a deployment, a load test (200 users and 10 million rows are targets in the spec, not results), TLS, managed secrets, alert routing to an external service, or a full accessibility audit.</li><li>Some integration tests use stand-ins for storage and the message broker; a real worker crash under load has not been tested.</li><li>The code was written with AI coding agents under my direction. The repository is not public yet.</li></ul>
+      <span class="case-honesty">Fictional business and synthetic data; no user, client, deployment or business result is claimed.</span>
+    </div></section>
+  </main>
+  <footer class="case-bottom"><div class="page-width case-bottom-inner"><div><span class="case-section-label">HIRING / NEXT</span><h2>Need an analyst<br>who builds?</h2><a href="contact.html">Get in touch ↗</a></div><div class="case-bottom-next"><span class="case-next-index">RELATED PROJECT</span><a href="case-opsdw.html">OpsDW ↗</a></div></div></footer>
+  <div class="case-page-footer page-width"><span data-brand>DAFFA ZAHY KHAIRY</span><span>Prototypes on synthetic data · © <span data-year>2026</span></span></div>
+  <script src="config.js"></script>
+  <script src="projects.js"></script>
+  <script src="case-study.js"></script>
+  <script src="water-depth.js"></script>
+  <script src="depth-ambient.js"></script>
+</body>
+</html>
