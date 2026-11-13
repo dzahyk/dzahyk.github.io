@@ -155,12 +155,16 @@ a.skill-link:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
   /* Project pills wrap at full card width so every case-study link stays whole and tappable;
      the Proof toggle takes its own full-width row underneath. */
   .skill-where{flex-wrap:wrap;gap:6px;margin:0;padding:10px 0 0;overflow:visible}
-  .skills .skill-row>.skill-where{flex:1 1 100%}
+  .skills .skill-row>.skill-where{flex:1 1 auto}
   .skill-link{min-height:36px;padding:3px 10px 3px 3px;gap:6px;white-space:nowrap}
   .skill-link img,.skill-link-mark{width:28px;height:28px}
 
-  .skill-proof{margin-top:12px}
-  .skill-proof summary{min-height:40px;padding:8px 0 0;font-size:12px}
+  /* Proof joins the end of the pill row whenever the pills leave room (six cards link one project),
+     instead of taking a full-width row of its own. Opened, it drops to its own row, toggle still on the right. */
+  .skills .skill-row>.skill-proof{flex:0 0 auto;margin:10px 0 0 auto;border-top:0}
+  .skills .skill-row>.skill-proof[open]{flex-basis:100%;margin-left:0;border-top:1px solid var(--line)}
+  .skill-proof summary{justify-content:flex-end;min-height:40px;padding:0;font-size:12px}
+  .skill-proof[open] summary{padding-top:8px}
   .skill-proof p{margin-top:8px;font-size:14.5px}
 
   .skill-tally{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px}

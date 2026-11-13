@@ -79,6 +79,13 @@
   .role-picks em{font-size:10.5px}
   .role-lanes-note{font-size:10.5px}
 }
+/* ---------- 3b. "More built work" cards: the pixel guide without its caption ----------
+   On these smaller images the captioned pill covered the product's own wordmark (RetentionOS, Tiktory),
+   and the hook line under each image already says the same thing. The guide stays as a small corner chip. */
+.project-grid--more .project-handoff{right:8px;bottom:8px;gap:0;padding:3px;border-radius:12px}
+.project-grid--more .project-handoff span{display:none}
+.project-grid--more .project-handoff img{width:24px;height:33px}
+
 /* ---------- 4. Phones: smaller projects become one swipeable row; How I work pins for less scroll ---------- */
 @media(max-width:600px){
   .more-grid{display:flex;gap:12px;margin-inline:calc(-1 * var(--gutter));padding:4px var(--gutter) 14px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);scrollbar-width:thin}
