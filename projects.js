@@ -6,7 +6,7 @@
    - demo     optional; 'pulse' shows the sample interactive dashboard in the viewer
    Write all visible text (name, label, description, details) in English: the site is lang="en". */
 window.portfolioProjects = [
-  { id: 'opsdw', label: 'Built · tested locally · synthetic data', name: 'OpsDW', caseUrl: 'case-opsdw.html', description: 'A PostgreSQL warehouse for a fictional delivery platform: incremental ETL, a data-quality gate that can fail, 18 SQL queries with known answers, and eleven KPIs reconciled cell by cell across SQL, a Power BI-ready model and a dashboard.', details: ['Role: Solo — KPI definitions, data model, SQL, data-quality rules, testing; implemented with AI coding agents under my direction', 'Stack: PostgreSQL 18, Python, pytest, Docker Compose, DAX (text only — no .pbix)', 'Status: Synthetic data · 54 tests + 43 data-quality checks passing locally · 1,848 KPI cells, 0 mismatches · not deployed, no public repo'] },
+  { id: 'opsdw', label: 'Built · tested locally · synthetic data', name: 'OpsDW', caseUrl: 'case-opsdw.html', description: 'A PostgreSQL warehouse for a fictional delivery platform: incremental ETL, a data-quality gate that can fail, 18 SQL queries with known answers, and eleven KPIs reconciled cell by cell across SQL, a Power BI-ready model and a dashboard.', details: ['Role: Solo — KPI definitions, data model, SQL, data-quality rules, testing; implemented with AI coding agents under my direction', 'Stack: PostgreSQL 18, Python, pytest, Docker Compose, DAX (text only — no .pbix)', 'Status: Synthetic data · 54 tests + 43 data-quality checks passing locally · 1,848 KPI cells, 0 mismatches · not deployed · public repo'] },
   { id: 'laras', label: 'Built · tested locally · synthetic data', name: 'LARAS', caseUrl: 'case-laras.html', description: 'An offer-ranking and experimentation platform: eligibility and budget are checked before any model ranks an offer, and rollout waits for a pre-registered randomized test that passes its validity gates and guardrails.', details: ['Role: Solo — requirements, data model, statistics, ML evaluation, UX; implemented with AI coding agents under my direction', 'Stack: FastAPI, PostgreSQL, Redis + Celery, scikit-learn, Next.js, Blender', 'Status: Synthetic data · 107 Python + 125 web unit + 88 browser tests passing locally · not deployed, no public repo'] },
   { id: 'decision-hub', label: 'Prototype · synthetic data', name: 'Decision Hub', caseUrl: 'case-decision-hub.html', description: 'A B2B deal-desk workflow: AI suggests brief fields and must quote its source, rules price the quote, and a manager approves one exact revision with a full audit trail.', details: ['Role: Solo — requirements, UX, backend, AI integration, testing', 'Stack: FastAPI, PostgreSQL, React + TypeScript, Claude API (optional)', 'Status: Synthetic data · 101 backend tests + 5 browser journeys'] },
   { id: 'decisionflow', label: 'Prototype · synthetic data', name: 'Karsa', caseUrl: 'case-karsa.html', description: 'An AI-assisted deal desk that turns unstructured requests into evidence-backed decision packages, requires human (and dual) approval, executes only what was approved, and measures its own AI on held-out data.', details: ['Role: Solo — spec review, UX, backend, AI integration, evaluation, testing', 'Stack: FastAPI, SQLAlchemy + Alembic, React + TypeScript, Playwright, Claude API (optional)', 'Status: Synthetic data · 51 backend tests + 16 browser tests'] },
@@ -18,9 +18,12 @@ window.portfolioProjects = [
 
 /* Role lanes: three case studies to read first per role (ids from the list above).
    index.html lists the same picks as static markup so they work without JavaScript; keep both in step.
-   A case page opened with ?role=<key> points its "next" link at the next project in that lane. */
+   A case page opened with ?role=<key> points its "next" link at the next project in that lane.
+   Lane picks that are not case studies (Telkomsel internship, IEEE paper, Karsa brief checker) live only in index.html. */
 window.portfolioLanes = {
-  ba: { name: 'Business analysis', projects: ['decisionflow', 'decision-hub', 'vera'] },
+  ba: { name: 'Business analysis', projects: ['decision-hub', 'decisionflow', 'vera'] },
+  ai: { name: 'AI automation', projects: ['decisionflow', 'decision-hub'] },
+  bi: { name: 'Data analyst / BI', projects: ['opsdw', 'laras'] },
   data: { name: 'Data engineering', projects: ['opsdw', 'laras', 'kinetix'] },
-  ai: { name: 'Applied AI', projects: ['decisionflow', 'laras', 'retentionos'] }
+  ds: { name: 'Data science', projects: ['laras', 'retentionos'] }
 };

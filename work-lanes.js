@@ -41,9 +41,21 @@
     }
   }
 
-  const keys = { ba: 0, data: 1, ai: 2 };
-  const requested = new URLSearchParams(location.search).get('role');
-  select(requested in keys ? keys[requested] : 0, { animate: false });
+  // Lane keys come from the tab ids (laneTab-ba, laneTab-ai, …), so adding a lane needs no change here.
+  const keys = tabs.map(tab => tab.id.replace('laneTab-', ''));
+  const requested = keys.indexOf(new URLSearchParams(location.search).get('role'));
+  select(requested >= 0 ? requested : 0, { animate: false });
+  // On phones the tab row scrolls sideways: bring a linked lane's tab into view without moving the page.
+  if (requested > 0) tabs[requested].parentElement.scrollLeft = tabs[requested].offsetLeft - 8;
+  const tabRow = tabs[0].parentElement;
+  const edge = () => tabRow.classList.toggle('at-end', tabRow.scrollLeft + tabRow.clientWidth >= tabRow.scrollWidth - 2);
+  tabRow.addEventListener('scroll', edge, { passive: true });
+  addEventListener('resize', edge, { passive: true });
+  edge();
+  tabs.forEach(tab => tab.addEventListener('click', () => {
+    const row = tab.parentElement;
+    if (row.scrollWidth > row.clientWidth) row.scrollTo({ left: tab.offsetLeft - (row.clientWidth - tab.offsetWidth) / 2, behavior: reduced.matches ? 'auto' : 'smooth' });
+  }));
 
   tabs.forEach((tab, index) => {
     tab.addEventListener('click', () => select(index));

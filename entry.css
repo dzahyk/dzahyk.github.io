@@ -46,6 +46,12 @@ html.entry-running .entry-screen{
 .entry-skip{border:1px solid rgba(24,68,80,.38);border-radius:999px;background:rgba(235,248,246,.74);color:#173947;font:500 12px/1.4 var(--mono);cursor:pointer;padding:12px 18px;display:flex;align-items:center;gap:8px;min-height:44px;box-shadow:inset 0 1px rgba(255,255,255,.7);transition:background-color 200ms ease,transform 200ms ease}
 .entry-skip:hover{background:rgba(246,251,245,.94)}.entry-skip:active{transform:scale(.96)}
 .entry-skip:focus-visible,.entry-assist:focus-visible{outline:2px solid var(--orange);outline-offset:4px}
+/* One click from the very first frame: Work, Experience and Contact end the intro and go straight there. */
+.entry-masthead-actions{display:flex;align-items:center;gap:clamp(12px,1.6vw,22px)}
+.entry-quick{display:flex;align-items:center;gap:clamp(4px,.8vw,10px)}
+.entry-quick a{display:inline-flex;align-items:center;min-height:44px;padding:0 10px;border-radius:999px;color:#173947;font:600 13px/1 var(--sans);text-decoration:none;transition:background-color 200ms ease}
+.entry-quick a:hover{background:rgba(235,248,246,.74)}
+.entry-quick a:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
 /* Three lanes share the crew baseline: title, dialogue, then the action. */
 .entry-copy{position:absolute;z-index:3;inset:auto 24px calc(100% - var(--crew-y) + var(--entry-copy-gap));text-align:center;pointer-events:none;transition:opacity 500ms ease,transform 600ms var(--ease-out)}
 .entry-eyebrow{display:block;margin-bottom:17px;font:500 12px/1.4 var(--mono);letter-spacing:.045em;text-transform:uppercase;color:#315b67;animation:entry-copy-arrive 700ms 80ms both}
@@ -258,7 +264,7 @@ html.nav-seed-wait .nav-lens::before,
   .entry-dialog{font-size:12px;padding:8px 12px}.entry-dialog--lead{right:clamp(56px,20vw,80px)}.entry-dialog--lead::after{right:16px}.entry-dialog--helper{left:clamp(56px,20vw,80px)}.entry-dialog--helper::after{left:16px}
   .entry-seal{top:calc(var(--crew-y) - 83px);width:30px;height:170px;border-radius:16px}.entry-seal span{inset:30px auto 30px 50%}
   .entry-assist{width:54px;height:54px;margin:-27px 0 0 -27px}.entry-assist span{left:18px;top:9px;width:14px;height:32px}
-  .entry-footnote{bottom:6%;font-size:11px}.entry-skip{padding:10px 12px}
+  .entry-footnote{bottom:6%;font-size:11px}.entry-skip{padding:10px 12px}.entry-masthead>[data-brand]{display:none}.entry-masthead{justify-content:flex-end}.entry-masthead-actions{gap:6px}.entry-quick{gap:0}.entry-quick a{padding:0 8px;font-size:12.5px}
 }
 @media(max-height:560px){
   html.entry-running .entry-screen{--crew-y:72%}
@@ -270,4 +276,4 @@ html.nav-seed-wait .nav-lens::before,
 @media(min-width:701px) and (max-height:560px){html.entry-running .entry-screen{--entry-copy-gap:156px;--entry-dialog-rise:128px}}
 @media(max-height:440px){.entry-eyebrow{display:none}.entry-masthead{top:16px}.entry-thought em{margin-top:8px}}
 @media(prefers-reduced-motion:reduce){.entry-screen{display:none!important}.crew-dust,.crew-effort,.crew-body,.crew-arm,.crew-free-arm,.crew-leg{animation:none!important}}
-@media(forced-colors:active){.entry-film{background:Canvas}.entry-film-material{display:none}.entry-thought,.entry-thought em,.entry-masthead,.entry-skip,.entry-eyebrow,.entry-footnote{color:CanvasText}.tether-line{stroke:CanvasText}.entry-orbit,.entry-skip,.entry-seal,.entry-assist{border-color:CanvasText}.entry-seal{background:Canvas}}
+@media(forced-colors:active){.entry-film{background:Canvas}.entry-film-material{display:none}.entry-thought,.entry-thought em,.entry-masthead,.entry-skip,.entry-quick a,.entry-eyebrow,.entry-footnote{color:CanvasText}.tether-line{stroke:CanvasText}.entry-orbit,.entry-skip,.entry-seal,.entry-assist{border-color:CanvasText}.entry-seal{background:Canvas}}

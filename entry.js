@@ -147,6 +147,8 @@
 
   const listen = (target, type, listener, options = {}) => target?.addEventListener(type, listener, { ...options, signal: events.signal });
   listen(document.getElementById('entrySkip'), 'click', () => finish(true, true));
+  // Quick links in the masthead: end the intro, then let the link do its normal navigation.
+  screen.querySelectorAll('.entry-quick a').forEach(link => listen(link, 'click', () => finish(true)));
   listen(document.getElementById('entryAssist'), 'click', () => {
     if (released || done || assisted) return;
     assisted = true;

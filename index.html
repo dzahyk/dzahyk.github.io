@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=DM+Mono:wght@400;500&amp;family=Hanken+Grotesk:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site-37b78ebed9.css">
+  <link rel="stylesheet" href="site-975ab63b96.css">
   <link rel="stylesheet" href="print.css" media="print">
   <script src="page-transitions.js"></script>
 </head>
@@ -66,7 +66,7 @@
       <svg class="entry-tether" aria-hidden="true"><path class="tether-underlay"/><path class="tether-line"/></svg><span class="entry-grip"></span>
     </div>
     <div class="entry-seal" aria-hidden="true"><span></span></div>
-    <div class="entry-masthead"><span data-brand>DAFFA ZAHY KHAIRY</span><button class="entry-skip" id="entrySkip" type="button">Skip intro <span aria-hidden="true">↗</span></button></div>
+    <div class="entry-masthead"><span data-brand>DAFFA ZAHY KHAIRY</span><div class="entry-masthead-actions"><nav class="entry-quick" aria-label="Go straight to"><a href="#work">Work</a><a href="#experience">Experience</a><a href="contact.html">Contact</a></nav><button class="entry-skip" id="entrySkip" type="button">Skip intro <span aria-hidden="true">↗</span></button></div></div>
     <div class="entry-copy" aria-hidden="true"><span class="entry-eyebrow">Two minds. One heavy door.</span><span class="entry-thought"><span>MAKE ROOM.</span><em>For ideas in motion.</em></span></div>
     <button class="entry-assist" id="entryAssist" type="button" aria-label="Help the crew open the studio" title="Give them a hand"><span aria-hidden="true"></span></button>
     <div class="entry-footnote" aria-hidden="true"><span class="entry-invitation">Tap the latch. Help them open the studio.</span><span class="entry-thanks">That helped. Watch the door move.</span></div>
@@ -127,15 +127,33 @@
           <p class="role-lanes-label" id="roleLanesLabel">Hiring for <span aria-hidden="true">→</span> three to read first</p>
           <div class="role-lane-tabs" role="tablist" aria-labelledby="roleLanesLabel">
             <button type="button" role="tab" id="laneTab-ba" aria-controls="lane-ba" aria-selected="true">Business analysis</button>
+            <button type="button" role="tab" id="laneTab-ai" aria-controls="lane-ai" aria-selected="false" tabindex="-1">AI automation</button>
+            <button type="button" role="tab" id="laneTab-bi" aria-controls="lane-bi" aria-selected="false" tabindex="-1">Data analyst / BI</button>
             <button type="button" role="tab" id="laneTab-data" aria-controls="lane-data" aria-selected="false" tabindex="-1">Data engineering</button>
-            <button type="button" role="tab" id="laneTab-ai" aria-controls="lane-ai" aria-selected="false" tabindex="-1">Applied AI</button>
+            <button type="button" role="tab" id="laneTab-ds" aria-controls="lane-ds" aria-selected="false" tabindex="-1">Data science</button>
           </div>
           <div class="role-lane-panel" id="lane-ba" role="tabpanel" aria-labelledby="laneTab-ba">
             <h3 class="role-lane-title">Business analysis</h3>
             <ol class="role-picks">
-              <li><a href="case-karsa.html?role=ba"><strong>Karsa</strong><span>Request to approval to execution: seven roles, dual approval, an exception queue.</span><em>51 backend + 16 browser tests</em></a></li>
               <li><a href="case-decision-hub.html?role=ba"><strong>Decision Hub</strong><span>A free-text brief becomes validated requirements, a rule-priced quote and one approved revision.</span><em>101 backend tests · 5 browser journeys</em></a></li>
+              <li><a href="case-karsa.html?role=ba"><strong>Karsa</strong><span>Request to approval to execution: seven roles, dual approval, an exception queue.</span><em>51 backend + 16 browser tests</em></a></li>
               <li><a href="case-vera.html?role=ba"><strong>Vera</strong><span>Purchase order, delivery note and invoice reconciled before anything is ready to pay.</span><em>13 domain tests · frontend demo</em></a></li>
+            </ol>
+          </div>
+          <div class="role-lane-panel" id="lane-ai" role="tabpanel" aria-labelledby="laneTab-ai">
+            <h3 class="role-lane-title">AI automation</h3>
+            <ol class="role-picks">
+              <li><a href="case-karsa.html?role=ai"><strong>Karsa</strong><span>Extraction measured on a held-out set; the release gate fails and the app says so.</span><em>24 / 24 dev · 1 / 36 held out</em></a></li>
+              <li><a href="case-decision-hub.html?role=ai"><strong>Decision Hub</strong><span>The model fills seven fields and has no price field; a manager approves one exact quote.</span><em>0 of 60 cases sent personal data</em></a></li>
+              <li><a href="demos/karsa-brief-checker/"><strong>Karsa brief checker</strong><span>Paste a brief and run the rule-based extractor in your browser; every value shows the words it came from.</span><em>Live demo · 21 of 50 unseen briefs fully right</em></a></li>
+            </ol>
+          </div>
+          <div class="role-lane-panel" id="lane-bi" role="tabpanel" aria-labelledby="laneTab-bi">
+            <h3 class="role-lane-title">Data analyst / BI</h3>
+            <ol class="role-picks">
+              <li><a href="case-opsdw.html?role=bi"><strong>OpsDW</strong><span>One definition per KPI, reconciled across SQL, a BI model and the dashboard.</span><em>1,848 cells · 0 mismatches</em></a></li>
+              <li><a href="#exp-telkomsel"><strong>Telkomsel internship</strong><span>Matched field-survey report data in Excel and built a monitoring dashboard for fixed-broadband demand.</span><em>Internship · Jul – Sep 2025</em></a></li>
+              <li><a href="case-laras.html?role=bi"><strong>LARAS</strong><span>Experiment readouts with intervals, validity gates and guardrails before any rollout.</span><em>Synthetic data · tested locally</em></a></li>
             </ol>
           </div>
           <div class="role-lane-panel" id="lane-data" role="tabpanel" aria-labelledby="laneTab-data">
@@ -146,15 +164,15 @@
               <li><a href="case-kinetix.html?role=data"><strong>Kinetix</strong><span>Supplier scores, stock-out risk and order splits from one purchase-order dataset.</span><em>5 backend tests + 14 model checks</em></a></li>
             </ol>
           </div>
-          <div class="role-lane-panel" id="lane-ai" role="tabpanel" aria-labelledby="laneTab-ai">
-            <h3 class="role-lane-title">Applied AI</h3>
+          <div class="role-lane-panel" id="lane-ds" role="tabpanel" aria-labelledby="laneTab-ds">
+            <h3 class="role-lane-title">Data science</h3>
             <ol class="role-picks">
-              <li><a href="case-karsa.html?role=ai"><strong>Karsa</strong><span>Extraction measured on a held-out set; the release gate fails and the app says so.</span><em>24 / 24 dev · 1 / 36 held out</em></a></li>
-              <li><a href="case-laras.html?role=ai"><strong>LARAS</strong><span>A ranker against popularity offline, with a bootstrap interval and the exposure bias stated.</span><em>NDCG@5 0.818 → 0.911</em></a></li>
-              <li><a href="case-retentionos.html?role=ai"><strong>RetentionOS</strong><span>A 60-day churn radar with per-account drivers from exact Shapley values.</span><em>85 tests · 420 synthetic accounts</em></a></li>
+              <li><a href="#paper"><strong>IEEE paper</strong><span>Heart-attack risk with CatBoost, evaluated with F1, AUROC, AUPRC and Brier score, explained with SHAP.</span><em>First author · ICICoS 2026</em></a></li>
+              <li><a href="case-laras.html?role=ds"><strong>LARAS</strong><span>A ranker against popularity offline, with a bootstrap interval and the exposure bias stated.</span><em>NDCG@5 0.818 → 0.911</em></a></li>
+              <li><a href="case-retentionos.html?role=ds"><strong>RetentionOS</strong><span>A 60-day churn radar with per-account drivers from exact Shapley values.</span><em>85 tests · 420 synthetic accounts</em></a></li>
             </ol>
           </div>
-          <p class="role-lanes-note">Synthetic or simulated data, tested locally, not deployed. Each case study says what is not proven yet.</p>
+          <p class="role-lanes-note">The projects run on synthetic or simulated data, tested locally, not deployed. Each case study says what is not proven yet.</p>
         </div>
         <p class="work-progress" aria-hidden="true"><span id="workCounter">00</span><span class="work-progress-rule"></span><span data-project-total>03</span></p>
         <div class="project-grid project-grid--flagship">
@@ -339,7 +357,7 @@
           <p>An internship in telecom analytics, three semesters of teaching, and a game I am building on my own.</p>
         </div>
         <ol class="timeline" role="list">
-          <li class="timeline-row reveal">
+          <li class="timeline-row reveal" id="exp-telkomsel">
             <figure class="timeline-photo"><div class="media-frame"><img src="assets/experience/telkomsel.webp" width="1152" height="720" alt="Final internship presentation with the Telkomsel team, in front of a screen reading Telkomsel Regular Internship Program" loading="lazy" decoding="async"></div><figcaption>Final presentation, Telkomsel</figcaption></figure>
             <div class="timeline-body"><span class="timeline-period">Jul – Sep 2025</span><div class="timeline-role"><h3>Market &amp; Demand Analysis Intern</h3><span class="timeline-org">Telkomsel · Fixed Broadband Business · South Jakarta</span></div><p class="timeline-detail">Reviewed fixed-broadband demand with field surveyors, cleaned and matched report data in Excel (XLOOKUP, INDEX-MATCH), and built a monitoring dashboard that kept field reports tied to their real-time status.</p></div>
           </li>
@@ -392,7 +410,7 @@
           <p>A published paper, a completed degree, and the courses behind the work.</p>
         </div>
         <div class="cred-grid">
-          <article class="cred-card reveal">
+          <article class="cred-card reveal" id="paper">
             <span class="profile-label">Publication · IEEE Xplore</span>
             <h3>Sensitivity Evaluation of Cardiovascular Risk Profiles for Machine Learning-Based Heart Attack Prediction</h3>
             <p>First author and presenter at ICICoS 2026, the 9th International Conference on Informatics and Computational Sciences (Universitas Diponegoro). An end-to-end pipeline with CatBoost, evaluated with F1, AUROC, AUPRC, and Brier score, and explained globally with SHAP.</p>
