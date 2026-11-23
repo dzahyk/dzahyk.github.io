@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#bce4ed">
-  <meta name="description" content="Karsa (formerly DecisionFlow AI): an AI-assisted deal desk that turns unstructured requests into evidence-backed decisions, requires human approval, executes only what was approved, and measures its own AI on held-out data.">
+  <meta name="description" content="Karsa (formerly DecisionFlow AI): an AI-assisted deal desk that turns unstructured requests into evidence-backed decisions, requires human approval, executes only what was approved, and scores its rule-based extraction step on held-out data.">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Karsa — Case study by Daffa Zahy Khairy">
   <meta property="og:description" content="What happens after the deal desk says yes: execution, recovery, and an extraction step measured on cases it never saw.">
@@ -141,7 +141,7 @@
         <figure><img src="assets/projects/decisionflow-evidence.webp" width="1600" height="1000" alt="Requirements table with Geography marked Missing and the phrase 'to be determined' highlighted in the original brief" loading="lazy" decoding="async"><figcaption>Evidence: each requirement highlights its source text.</figcaption></figure>
         <figure><img src="assets/projects/decisionflow-dual-approval.webp" width="1600" height="1000" alt="High-risk package showing two approver slots, the first filled with a note and the second waiting, plus the margin exception request" loading="lazy" decoding="async"><figcaption>Two-person rule for below-floor margins.</figcaption></figure>
         <figure><img src="assets/projects/decisionflow-execution.webp" width="1600" height="1000" alt="Execution timeline with the tracker step in unknown outcome, a check-target-system button and blind retry disabled" loading="lazy" decoding="async"><figcaption>Unknown outcome: blind retry is off until the target is checked.</figcaption></figure>
-        <figure><img src="assets/projects/decisionflow-evaluation.webp" width="1600" height="1000" alt="Evaluation lab with a failed release gate, 1 of 36 held-out cases passing, field F1 0.78 and failures by category" loading="lazy" decoding="async"><figcaption>Evaluation lab: the held-out score and why the gate fails.</figcaption></figure>
+        <figure><img src="assets/projects/decisionflow-evaluation.webp" width="1600" height="1000" alt="Evaluation lab with a failed release gate: 21 of 50 held-out cases passing (42%, needs 70%), field F1 0.94, 1 of 6 injections flagged, and failures by category" loading="lazy" decoding="async"><figcaption>Evaluation lab: the held-out score and why the gate fails.</figcaption></figure>
       </div>
       <details class="case-more"><summary>Full feature list and 5 more screens</summary>
         <p>Cases from pasted text or uploaded PDF and email, evidence-linked requirements, clarifications, deterministic pricing with capacity checks, frozen decision packages, single and dual approval, separate authorization, an asynchronous sandbox workflow with recovery, an evaluation lab, impact measurement, sign-in with tenants and roles, and an append-only audit log.</p>
