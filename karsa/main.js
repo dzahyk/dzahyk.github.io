@@ -71,7 +71,7 @@
     { x: 51.6, y: 37, w: 46.4, h: 52, title: "This is the calculation", text: "for a margin anyone can trace: Rp117,000,000 cost, 22% margin." },
     { x: 2.3, y: 28.5, w: 57.6, h: 16.4, title: "This is two-person approval", text: "for high-risk deals: one has signed, a different person must sign next." },
     { x: 36.3, y: 53.8, w: 60.4, h: 26.4, title: "This is the recovery panel", text: "for unknown outcomes: check the target system before any retry." },
-    { x: 2.3, y: 16.2, w: 72, h: 19.6, title: "This is the release gate", text: "for blocking a model that passed 1 of 36 unseen cases." },
+    { x: 2.3, y: 16.2, w: 72, h: 19.6, title: "This is the release gate", text: "for blocking an extractor that passed 1 of 36 unseen cases." },
   ];
   const howSteps = $$(".how-step");
   const screens = $$("[data-screen]");
