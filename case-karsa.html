@@ -38,12 +38,12 @@
     <section class="case-hero page-width" aria-labelledby="caseTitle">
       <span class="case-kicker">AI + workflow orchestration / prototype</span>
       <div class="case-hero-row"><h1 id="caseTitle">Karsa</h1><p>What happens after the deal desk says yes: execution, recovery, and an AI step measured on cases it never saw.</p></div>
-      <div class="case-meta"><span class="case-chip" data-case-position>04 / 08</span><span class="case-chip">B2B Deal Desk</span><span class="case-chip">Formerly DecisionFlow AI</span><span class="case-chip">Synthetic data</span><a class="case-chip" href="https://dzahyk.github.io/karsa/" style="color:inherit;text-decoration:none">Product page ↗</a></div>
+      <div class="case-meta"><span class="case-chip" data-case-position>04 / 08</span><span class="case-chip">B2B Deal Desk</span><span class="case-chip">Formerly DecisionFlow AI</span><span class="case-chip">Synthetic data</span><a class="case-chip" href="https://dzahyk.github.io/karsa/" style="color:inherit;text-decoration:none">Product page ↗</a><a class="case-chip" href="https://github.com/dzahyk/karsa" style="color:inherit;text-decoration:none">Source code ↗</a></div>
       <dl class="case-facts">
-        <div><dt>Role</dt><dd>Solo — spec review, UX, backend, AI integration, evaluation, testing</dd></div>
-        <div><dt>Stack</dt><dd>FastAPI, SQLAlchemy + Alembic, React + TypeScript, Playwright, Claude API (optional)</dd></div>
+        <div><dt>Role</dt><dd>Solo — spec review, UX, backend, AI integration, evaluation, testing; built with Claude (via Claude Code) as implementation and review assistant under my direction</dd></div>
+        <div><dt>Stack</dt><dd>FastAPI, SQLAlchemy + Alembic, React + TypeScript, Playwright, n8n (self-hosted), Claude API (optional)</dd></div>
         <div><dt>Timeline</dt><dd>November 2026</dd></div>
-        <div><dt>Status</dt><dd>Prototype · 51 backend tests + 16 browser tests</dd></div>
+        <div><dt>Status</dt><dd>Prototype · 55 backend tests + 16 browser tests</dd></div>
       </dl>
     </section>
 
@@ -85,8 +85,9 @@
         <div class="case-table-wrap"><table class="case-table">
           <thead><tr><th scope="col">Check</th><th scope="col" class="num">Result</th></tr></thead>
           <tbody>
-            <tr><td>Backend tests (pricing, approval rules, concurrency, tenancy, outbox, uploads, DB triggers)</td><td class="num">51 passing</td></tr>
+            <tr><td>Backend tests (pricing, approval rules, concurrency, tenancy, outbox, uploads, DB triggers, intake idempotency)</td><td class="num">55 passing</td></tr>
             <tr><td>Browser tests (full journey, sign-in and tenancy, mobile dual approval, keyboard-only reject)</td><td class="num">16 passing</td></tr>
+            <tr><td>n8n intake workflow (webhook secret, duplicate requests, retries with backoff, dead-letter replay, never auto-approves) · <a href="https://github.com/dzahyk/karsa/blob/main/integrations/n8n/RESULTS.md">results</a></td><td class="num">9 / 9 scenarios</td></tr>
             <tr><td>Pages scanned with axe (WCAG 2.2 A/AA), no serious issues</td><td class="num">12</td></tr>
             <tr><td>Pricing equal to hand-computed values</td><td class="num">60 / 60</td></tr>
             <tr><td>Run 1 · original rules on the dev split (used while writing them)</td><td class="num">24 / 24</td></tr>
@@ -155,7 +156,7 @@
     </div></section>
     <section class="case-check page-width" aria-labelledby="checkTitle"><div><span class="case-section-label">LIMITS</span><h2 id="checkTitle">Stale approvals get a 409. Frozen packages refuse edits.</h2></div><div>
       <p>Self-review returns 403. Without the database trigger, the hash check still blocks edits. A crashed worker's job is re-claimed, never written twice.</p>
-      <ul><li><strong>Not yet:</strong> a live Claude evaluation, SSO/MFA, real CRM or tracker connectors, OCR, a hosted full app, manual screen-reader tests, a second labeller for v2, or real users.</li><li>The business-analysis pack (BRD, 24 requirements, BPMN, traceability, UAT) is <a href="karsa-docs/index.html">published here</a>.</li></ul>
+      <ul><li><strong>Not yet:</strong> a live Claude evaluation, SSO/MFA, real CRM or tracker connectors, OCR, a hosted full app, manual screen-reader tests, a second labeller for v2, or real users.</li><li>The business-analysis pack (BRD, 24 requirements, BPMN, traceability, UAT) is <a href="karsa-docs/index.html">published here</a>.</li><li>Built with Claude (via Claude Code) under my direction. Rerun every check from the public repo: <a href="https://github.com/dzahyk/karsa">github.com/dzahyk/karsa</a>.</li></ul>
       <details class="case-more"><summary>What the two runs taught, and what is next</summary>
         <p>The full journey runs in a real browser against the real worker, on desktop and at 390 px. The BA pack has 24 functional requirements with acceptance criteria, AS-IS/TO-BE BPMN, scripted UAT and a change-impact example.</p>
         <p>Two held-out runs show a pattern list does not generalise to new phrasing, and that injection detection cannot rest on it. The next step is to run the Claude provider on dev, v1 and v2 under the same gate; any further rule change needs a new v3 set.</p>

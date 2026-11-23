@@ -101,7 +101,7 @@
         </div>
         <aside class="hero-aside" aria-label="Introduction">
           <p class="hero-identity"><span data-name>Daffa Zahy Khairy</span> /<br><span data-role>business analysis · data intelligence · applied AI</span></p>
-          <p class="hero-summary">I translate business requirements into analytical systems, reliable automation, and decisions backed by evidence.<br><small>Informatics · Telkom University · GPA 3.69</small></p>
+          <p class="hero-summary">I translate business requirements into analytical systems, reliable automation, and decisions backed by evidence.<br><small>Informatics · Telkom University</small></p>
           <button class="hero-preview" type="button" data-open="opsdw" data-cursor="View" aria-label="View OpsDW">
             <img src="assets/projects/opsdw.webp" width="1600" height="1000" alt="OpsDW delivery operations KPI dashboard" decoding="async">
             <span>Project preview <span aria-hidden="true">↗</span></span>
@@ -135,15 +135,15 @@
             <h3 class="role-lane-title">Business analysis</h3>
             <ol class="role-picks">
               <li><a href="case-decision-hub.html?role=ba"><strong>Decision Hub</strong><span>A free-text brief in; a rule-priced, approved quote out.</span><em>101 backend tests · 5 browser journeys</em></a></li>
-              <li><a href="case-karsa.html?role=ba"><strong>Karsa</strong><span>Request to approval to execution, with dual approval.</span><em>51 backend + 16 browser tests</em></a></li>
+              <li><a href="case-karsa.html?role=ba"><strong>Karsa</strong><span>Request to approval to execution, with dual approval.</span><em>55 backend + 16 browser tests</em></a></li>
               <li><a href="case-vera.html?role=ba"><strong>Vera</strong><span>Order, delivery note and invoice matched before anyone pays.</span><em>13 domain tests · frontend demo</em></a></li>
             </ol>
           </div>
           <div class="role-lane-panel" id="lane-ai" role="tabpanel" aria-labelledby="laneTab-ai">
             <h3 class="role-lane-title">AI automation</h3>
             <ol class="role-picks">
-              <li><a href="case-karsa.html?role=ai"><strong>Karsa</strong><span>Tested on unseen briefs; the app shows its gate failing.</span><em>1 / 36, then 21 / 50 held out</em></a></li>
-              <li><a href="case-decision-hub.html?role=ai"><strong>Decision Hub</strong><span>The model fills seven fields and has no price field.</span><em>0 of 60 cases sent personal data</em></a></li>
+              <li><a href="case-karsa.html?role=ai"><strong>Karsa</strong><span>Tested on unseen briefs; the app shows its gate failing.</span><em>Rules: 1 / 36, then 21 / 50 held out</em></a></li>
+              <li><a href="case-decision-hub.html?role=ai"><strong>Decision Hub</strong><span>The model fills seven fields and has no price field.</span><em>Claude: 99.8% fields right · 0% priced differently</em></a></li>
               <li><a href="demos/karsa-brief-checker/"><strong>Karsa brief checker</strong><span>Paste a brief; the rule-based extractor shows the words behind each value.</span><em>Live demo · 21 of 50 unseen briefs fully right</em></a></li>
             </ol>
           </div>
@@ -208,7 +208,7 @@
               <span class="project-caption"><span><strong>Karsa</strong><span class="project-discipline">AI workflow orchestration</span></span><span class="project-number">04</span></span>
             </button>
             <p class="project-hook"><span>Approval is where most tools stop.</span></p>
-            <p class="project-proof"><strong>AI extraction: <span data-countup>1 / 36</span>, then <span data-countup>21 / 50</span> held out · gate fails</strong><span>Synthetic data · rule-based baseline · runs locally</span></p>
+            <p class="project-proof"><strong>Rule-based extractor: <span data-countup>1 / 36</span>, then <span data-countup>21 / 50</span> held out · gate fails</strong><span>Synthetic data · rule-based baseline · runs locally</span></p>
             <a class="case-entry" href="case-karsa.html" aria-label="Read the case study: Karsa">Read the case study <span class="case-entry-arrow" aria-hidden="true">↗</span></a>
           </article>
         </div>
@@ -373,13 +373,13 @@
           <li class="skill-row reveal">
             <p class="skill-levels"><span class="visually-hidden">Level: </span><span class="level level--proto">Prototype · synthetic data</span></p>
             <h3>Applied AI with guardrails</h3>
-            <p class="skill-figure"><strong data-countup>1 / 36, then 21 / 50</strong><span>held-out cases; gate still fails</span></p>
+            <p class="skill-figure"><strong data-countup>1 / 36, then 21 / 50</strong><span>held-out cases for Karsa’s rule-based extractor; gate still fails</span></p>
             <ul class="skill-tags" role="list" aria-label="Tools and methods"><li>Claude API</li><li>FastAPI</li><li>Playwright</li></ul>
             <ul class="skill-where" role="list" aria-label="Applied in">
               <li><a class="skill-link" href="case-decision-hub.html"><img src="assets/projects/decision-hub.webp" alt="" width="32" height="20" loading="lazy" decoding="async">Decision Hub<span class="skill-link-arrow" aria-hidden="true">→</span></a></li>
               <li><a class="skill-link" href="case-karsa.html"><img src="assets/projects/karsa-landing.webp" alt="" width="32" height="20" loading="lazy" decoding="async">Karsa<span class="skill-link-arrow" aria-hidden="true">→</span></a></li>
             </ul>
-            <details class="skill-proof"><summary>Proof</summary><p>The model fills seven fields and has no price field; a person approves one exact quote. Karsa keeps a held-out set: its rule-based extractor passes 24 of 24 dev cases but 1 of 36 unseen ones, so its release gate fails. Rewritten and tested on 50 more briefs, it reaches 21 of 50, still below the gate.</p></details>
+            <details class="skill-proof"><summary>Proof</summary><p>Decision Hub: the model fills seven fields and has no price field; a person approves one exact quote. Run live with Claude on 60 synthetic briefs, it got 99.8% of fields exactly right and priced no valid brief differently (rules: 96.7% and 20.8%). Karsa keeps a held-out set: its rule-based extractor passes 24 of 24 dev cases but 1 of 36 unseen ones, so its release gate fails. Rewritten and tested on 50 more briefs, it reaches 21 of 50, still below the gate.</p></details>
           </li>
         </ol>
         <p class="skill-note reveal">Builds run locally, not deployed. Newer ones were coded with AI agents under my direction.</p>
@@ -458,7 +458,7 @@
             <span class="profile-label">Education</span>
             <h3>Telkom University</h3>
             <p>Bachelor of Informatics, School of Computing.</p>
-            <ul class="cred-meta" role="list"><li>2022 – 2026</li><li>Graduation Nov 2026</li><li>GPA 3.69 / 4.00</li><li>English test 513</li></ul>
+            <ul class="cred-meta" role="list"><li>2022 – 2026</li><li>Graduation Nov 2026</li><li>English test 513</li></ul>
           </article>
         </div>
         <div class="cred-lists">
