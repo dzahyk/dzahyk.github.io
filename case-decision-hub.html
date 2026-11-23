@@ -39,7 +39,7 @@
       <span class="case-kicker">AI + business operations / prototype</span>
       <div class="case-hero-row"><h1 id="caseTitle">Decision Hub</h1><p>A deal desk where AI reads the brief, rules set the price, and a manager signs one exact quote.</p></div>
       <div class="case-meta"><span class="case-chip" data-case-position>03 / 08</span><span class="case-chip">B2B Deal Desk</span><span class="case-chip">Synthetic data</span><a class="case-chip" href="https://dzahyk.github.io/decision-hub/" style="color:inherit;text-decoration:none">Product page ↗</a><a class="case-chip" href="https://github.com/dzahyk/decision-hub" style="color:inherit;text-decoration:none">Source code ↗</a></div>
-      <dl class="case-facts"><div><dt>Role</dt><dd>Solo — requirements, UX, backend, AI integration, testing</dd></div><div><dt>Stack</dt><dd>FastAPI, PostgreSQL, React + TypeScript, Claude API (optional)</dd></div><div><dt>Timeline</dt><dd>November 2026</dd></div><div><dt>Status</dt><dd>Prototype · 101 backend tests + 5 browser journeys</dd></div></dl>
+      <dl class="case-facts"><div><dt>Role</dt><dd>Solo — requirements, UX, backend, AI integration, testing</dd></div><div><dt>Stack</dt><dd>FastAPI, PostgreSQL, React + TypeScript, Claude API (Opus 5.5)</dd></div><div><dt>Timeline</dt><dd>November 2026</dd></div><div><dt>Status</dt><dd>Prototype · 101 backend tests + 5 browser journeys</dd></div></dl>
     </section>
     <figure class="case-image page-width">
       <div class="case-image-wrap"><img src="assets/projects/decision-hub.webp" width="1600" height="1000" alt="Decision Hub product page: the headline “The model has no price field.” beside a sample brief with four quoted phrases and the rule-priced quote built from them, $102,300 at a 41.54% margin" decoding="async" fetchpriority="high"></div>
@@ -48,14 +48,14 @@
     <section class="case-stats page-width" aria-label="Key numbers">
       <div class="case-stat"><strong data-countup>7</strong><span>fields the model may fill; none is a price</span></div>
       <div class="case-stat"><strong data-countup>0 of 60</strong><span>evaluation cases sent personal data to the model provider</span></div>
-      <div class="case-stat"><strong data-countup>96.7%</strong><span>fields exactly right (rule-based baseline)</span></div>
-      <div class="case-stat"><strong data-countup>20.8%</strong><span>valid briefs still priced differently</span></div>
+      <div class="case-stat"><strong data-countup>99.8%</strong><span>fields exactly right with Claude (rule baseline 96.7%)</span></div>
+      <div class="case-stat"><strong data-countup>0%</strong><span>valid briefs priced differently with Claude (rule baseline 20.8%)</span></div>
     </section>
 
     <aside class="case-brief page-width" aria-labelledby="briefTitle"><h2 class="case-brief-label" id="briefTitle">In 30 seconds</h2><dl>
       <div><dt>The problem</dt><dd>Free-text briefs, prices worked out by hand, approval in a chat with no record.</dd></div>
       <div><dt>What it proves</dt><dd>Code, not the model, sets the price, and a manager signs one exact quote revision.</dd></div>
-      <div><dt>Not proven yet</dt><dd>No live Claude evaluation, no hosted demo of the app, no real users.</dd></div>
+      <div><dt>Not proven yet</dt><dd>No hosted demo of the app, no real users; the 60 evaluation briefs are synthetic and labelled by me.</dd></div>
       <div><dt>Most relevant for</dt><dd>Business analysis · applied AI</dd></div>
     </dl></aside>
     <section class="case-story page-width" aria-labelledby="problemTitle"><span class="case-section-label">THE BRIEF</span><div>
@@ -108,9 +108,9 @@
       </details>
     </div></section>
     <section class="case-story page-width" aria-labelledby="resultsTitle"><span class="case-section-label">TESTS &amp; EVALUATION</span><div>
-      <h2 id="resultsTitle">96.7% of fields right, 20.8% of briefs still priced wrong.</h2>
+      <h2 id="resultsTitle">Claude: 99.8% of fields right, no pricing gap. Rules: 96.7% and 20.8%.</h2>
       <p>Scored on 60 labelled synthetic briefs. A high field score can hide a pricing gap, so the evaluation reports business impact, not just accuracy.</p>
-      <p class="case-table-note">The baseline is a free rule-based extractor, not an LLM. The Claude run is built, not yet measured.</p>
+      <p class="case-table-note">Same 60 briefs for both. The first live run failed before the model answered: the output schema had 22 nullable fields and the API allows 16. After the fix, one value was still invented (an audience the brief never named), so analyst review stays mandatory.</p>
       <details class="case-more"><summary>All test and evaluation results</summary>
         <div class="case-table-wrap"><table class="case-table">
           <thead><tr><th scope="col">Check</th><th scope="col" class="num">Result</th></tr></thead>
@@ -119,7 +119,7 @@
             <tr><td>Browser journeys with WCAG 2.2 AA scans</td><td class="num">5 / 5, 3 runs</td></tr>
             <tr><td>Labelled synthetic briefs in the evaluation set</td><td class="num">60</td></tr>
             <tr><td>Rule-based baseline: field-level exact match</td><td class="num">96.7%</td></tr>
-            <tr><td>Rule-based baseline: valid briefs that would be priced differently</td><td class="num">20.8%</td></tr>
+            <tr><td>Rule-based baseline: valid briefs that would be priced differently</td><td class="num">20.8%</td></tr><tr><td>Claude Opus 5.5: field-level exact match</td><td class="num">99.8%</td></tr><tr><td>Claude Opus 5.5: valid briefs that would be priced differently</td><td class="num">0.0%</td></tr><tr><td>Claude Opus 5.5: invented values</td><td class="num">1 of 60 briefs</td></tr><tr><td>Claude Opus 5.5: median time and total cost for 60 briefs</td><td class="num">6.6 s · $1.56</td></tr>
             <tr><td>Personal data reaching the extraction provider</td><td class="num">0 of 60 cases</td></tr>
             <tr><td>Pricing time, p95 over 1,000 quotes</td><td class="num">0.014 ms</td></tr>
             <tr><td>Lighthouse accessibility, desktop and mobile</td><td class="num">100</td></tr>
@@ -129,7 +129,7 @@
     </div></section>
     <section class="case-check page-width" aria-labelledby="checkTitle"><div><span class="case-section-label">LIMITS</span><h2 id="checkTitle">Six finalize clicks, one proposal.</h2></div><div>
       <p>Prices match hand-calculated values. Self-approval, stale approvals and six simultaneous finalize clicks are tested; breaking a rule on purpose fails its test.</p>
-      <ul><li><strong>Not yet:</strong> a live Claude evaluation, a hosted interactive demo (the product page is public; the app runs locally with Docker), or real users.</li><li>Name redaction only catches names after cues such as “Contact:”.</li></ul>
+      <ul><li><strong>Not yet:</strong> a hosted interactive demo (the product page is public; the app runs locally with Docker), real users, or an evaluation set written and labelled by someone else.</li><li>Name redaction only catches names after cues such as “Contact:”.</li></ul>
       <details class="case-more"><summary>More on testing and the evaluation set</summary>
         <p>Notification retries are fault-injected, and the dashboard is reconciled against raw audit events. CI runs all tests, the browser journeys and the Docker build on every push.</p>
         <p>The generated half of the evaluation set shares phrasing patterns, so the 12 hand-written hard cases are what separate good extractors from weak ones.</p>
