@@ -22,7 +22,8 @@ window.portfolioProjects = [
    A case page opened with ?role=<key> points its "next" link at the next project in that lane.
    Lane picks that are not case studies (Telkomsel internship, IEEE paper, Karsa brief checker) live only in index.html. */
 window.portfolioLanes = {
-  ba: { name: 'Business analysis', projects: ['decision-hub', 'decisionflow', 'vera', 'sa-pack'] },
+  ba: { name: 'Business analysis', projects: ['decision-hub', 'decisionflow', 'vera'] },
+  sa: { name: 'System analyst', projects: ['sa-pack', 'decisionflow', 'decision-hub'] },
   ai: { name: 'AI automation', projects: ['decisionflow', 'decision-hub'] },
   bi: { name: 'Data analyst / BI', projects: ['opsdw', 'laras'] },
   data: { name: 'Data engineering', projects: ['opsdw', 'laras', 'kinetix'] },

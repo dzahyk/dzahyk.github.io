@@ -126,6 +126,7 @@
           
           <div class="role-lane-tabs" role="tablist" aria-label="Projects by role">
             <button type="button" role="tab" id="laneTab-ba" aria-controls="lane-ba" aria-selected="true">Business analysis</button>
+            <button type="button" role="tab" id="laneTab-sa" aria-controls="lane-sa" aria-selected="false" tabindex="-1">System analyst</button>
             <button type="button" role="tab" id="laneTab-ai" aria-controls="lane-ai" aria-selected="false" tabindex="-1">AI automation</button>
             <button type="button" role="tab" id="laneTab-bi" aria-controls="lane-bi" aria-selected="false" tabindex="-1">Data analyst / BI</button>
             <button type="button" role="tab" id="laneTab-data" aria-controls="lane-data" aria-selected="false" tabindex="-1">Data engineering</button>
@@ -137,7 +138,14 @@
               <li><a href="case-decision-hub.html?role=ba"><strong>Decision Hub</strong><span>A free-text brief in; a rule-priced, approved quote out.</span><em>101 backend tests · 5 browser journeys</em></a></li>
               <li><a href="case-karsa.html?role=ba"><strong>Karsa</strong><span>Request to approval to execution, with dual approval.</span><em>55 backend + 16 browser tests</em></a></li>
               <li><a href="case-vera.html?role=ba"><strong>Vera</strong><span>Order, delivery note and invoice matched before anyone pays.</span><em>13 domain tests · frontend demo</em></a></li>
-              <li><a href="case-sa-pack.html?role=ba"><strong>SA Pack</strong><span>Brief, FSD, SRS and API contract, then tested by AI.</span><em>98 test cases · 17 defects · fictional client</em></a></li>
+            </ol>
+          </div>
+          <div class="role-lane-panel" id="lane-sa" role="tabpanel" aria-labelledby="laneTab-sa">
+            <h3 class="role-lane-title">System analyst</h3>
+            <ol class="role-picks">
+              <li><a href="case-sa-pack.html?role=sa"><strong>SA Pack</strong><span>Brief, FSD, SRS, OpenAPI and ADRs, then tested by AI.</span><em>98 test cases · 17 defects · fictional client</em></a></li>
+              <li><a href="case-karsa.html?role=sa"><strong>Karsa</strong><span>BRD, FRD, BPMN, traceability, UAT scripts and a change request.</span><em>Scripted acceptance · no real business user</em></a></li>
+              <li><a href="case-decision-hub.html?role=sa"><strong>Decision Hub</strong><span>Requirements traced to the code and the test that prove them.</span><em>Traceability matrix · 101 backend tests</em></a></li>
             </ol>
           </div>
           <div class="role-lane-panel" id="lane-ai" role="tabpanel" aria-labelledby="laneTab-ai">
