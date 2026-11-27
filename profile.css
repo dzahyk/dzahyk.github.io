@@ -158,3 +158,8 @@
 body:not(.chapter-scroll-active) .process-lede{color:var(--muted)}
 
 [data-cv-link][hidden]{display:none!important}
+
+/* More built work: five cards in one row on wide screens, 3 + 2 on medium screens; the last odd card keeps card size instead of the centred half-width used by two-column grids. */
+@media(min-width:1200px){#work .project-grid--more{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(min-width:901px) and (max-width:1199px){#work .project-grid--more{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:901px){#work .project-grid--more .project-card:last-child:nth-child(odd){grid-column:auto;justify-self:stretch;width:auto}}
